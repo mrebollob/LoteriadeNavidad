@@ -11,9 +11,5 @@ import dagger.Module;
 )
 public class InteractorsModule {
 
-//    @Provides
-//    @Singleton GetContactsInteractor provideGetContactsInteractor(
-//            ContactsRepository repository) {
-//        return new GetContactsInteractor(repository);
-//    }
+
 }

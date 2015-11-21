@@ -33,7 +33,7 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    LotteryNetworkDataSource provideContactsNetworkDataSource(
+    LotteryNetworkDataSource provideLotteryNetworkDataSource(
             LotteryApiService apiService) {
         return new LotteryNetworkDataSourceImp(apiService);
     }
@@ -69,7 +69,7 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    ErrorHandler provideContactsApiErrorHandler() {
+    ErrorHandler provideApiErrorHandler() {
         return new ErrorHandler() {
             @Override
             public Throwable handleError(RetrofitError cause) {
