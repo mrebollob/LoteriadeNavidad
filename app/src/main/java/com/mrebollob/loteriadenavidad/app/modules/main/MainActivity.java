@@ -1,12 +1,14 @@
-package com.mrebollob.loteriadenavidad;
+package com.mrebollob.loteriadenavidad.app.modules.main;
 
+import android.content.Context;
+import android.content.res.Resources.Theme;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.ThemedSpinnerAdapter;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,22 +18,28 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.content.Context;
-import android.support.v7.widget.ThemedSpinnerAdapter;
-import android.content.res.Resources.Theme;
-
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.mrebollob.loteriadenavidad.R;
+import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
+
+import java.util.Arrays;
+import java.util.List;
+
+import butterknife.Bind;
+
+public class MainActivity extends BaseActivity {
+
+
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        initToolbar();
 
         // Setup spinner
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -69,6 +77,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public int onCreateViewId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected List<Object> getModules() {
+        return Arrays.<Object>asList(new MainModule());
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(toolbar);
+        final ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -161,7 +187,8 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(getString(R.string.section_format,
+                    getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
