@@ -1,10 +1,13 @@
 package com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets;
 
+import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.executor.InteractorExecutor;
 import com.mrebollob.loteriadenavidad.domain.executor.MainThread;
 import com.mrebollob.loteriadenavidad.domain.interactors.Interactor;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.GetLotteryTicketsException;
 import com.mrebollob.loteriadenavidad.domain.repository.LotteryRepository;
+
+import java.util.List;
 
 /**
  * @author mrebollob
@@ -30,8 +33,7 @@ public class GetLotteryTicketsInteractor implements Interactor {
     @Override
     public void run() {
         try {
-            lotteryRepository.getLotteryTickets();
-            notifySuccess();
+            notifySuccess(lotteryRepository.getLotteryTickets());
         } catch (GetLotteryTicketsException e) {
             notifyError(e);
         }
@@ -42,11 +44,11 @@ public class GetLotteryTicketsInteractor implements Interactor {
         interactorExecutor.run(this);
     }
 
-    private void notifySuccess() {
+    private void notifySuccess(final List<LotteryTicket> lotteryTickets) {
         mainThread.execute(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSuccess();
+                mCallback.onSuccess(lotteryTickets);
             }
         });
     }
@@ -62,7 +64,7 @@ public class GetLotteryTicketsInteractor implements Interactor {
 
     public interface Callback {
 
-        void onSuccess();
+        void onSuccess(List<LotteryTicket> lotteryTickets);
 
         void onError(Throwable error);
     }
