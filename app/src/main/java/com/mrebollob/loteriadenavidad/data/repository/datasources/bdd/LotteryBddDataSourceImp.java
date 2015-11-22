@@ -35,9 +35,11 @@ public class LotteryBddDataSourceImp implements LotteryBddDataSource {
     }
 
     @Override
-    public void createLotteryTicket(LotteryTicket lotteryTicket) throws CreateBddLotteryTicketException {
+    public void createLotteryTicket(LotteryTicket lotteryTicket)
+            throws CreateBddLotteryTicketException {
         try {
-            BddLotteryTicket bddLotteryTicket = BDD_LOTTERY_TICKET_MAPPER.modelToData(lotteryTicket);
+            BddLotteryTicket bddLotteryTicket =
+                    BDD_LOTTERY_TICKET_MAPPER.modelToData(lotteryTicket);
             persistor.create(bddLotteryTicket);
         } catch (Throwable e) {
             throw new CreateBddLotteryTicketException();
@@ -55,9 +57,11 @@ public class LotteryBddDataSourceImp implements LotteryBddDataSource {
     }
 
     @Override
-    public void updateLotteryTicket(LotteryTicket lotteryTicket) throws UpdateBddLotteryTicketException {
+    public void updateLotteryTicket(LotteryTicket lotteryTicket)
+            throws UpdateBddLotteryTicketException {
         try {
-            BddLotteryTicket bddLotteryTicket = BDD_LOTTERY_TICKET_MAPPER.modelToData(lotteryTicket);
+            BddLotteryTicket bddLotteryTicket =
+                    BDD_LOTTERY_TICKET_MAPPER.modelToData(lotteryTicket);
             persistor.update(bddLotteryTicket);
         } catch (Throwable e) {
             throw new UpdateBddLotteryTicketException();
@@ -67,7 +71,8 @@ public class LotteryBddDataSourceImp implements LotteryBddDataSource {
     @Override
     public void deleteLotteryTicket(int lotteryTicketId) throws DeleteBddLotteryTicketException {
         try {
-            DeleteBuilder<BddLotteryTicket, Integer> deleteBuilder = daoLotteryTickets.deleteBuilder();
+            DeleteBuilder<BddLotteryTicket, Integer> deleteBuilder =
+                    daoLotteryTickets.deleteBuilder();
             deleteBuilder.where().in(BddLotteryTicket.FIELD_ID, lotteryTicketId);
             deleteBuilder.delete();
         } catch (Throwable e) {

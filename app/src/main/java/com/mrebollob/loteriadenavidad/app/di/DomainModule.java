@@ -8,7 +8,7 @@ import dagger.Module;
 
 @Module(
         includes = {
-                InteractorsModule.class, RepositoryModule.class
+                InteractorsModule.class, ExecutorModule.class, RepositoryModule.class
         },
         complete = false,
         library = true)
