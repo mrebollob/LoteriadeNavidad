@@ -16,6 +16,10 @@ public class PresentationLotteryTicket implements Parcelable {
     public PresentationLotteryTicket() {
     }
 
+    public PresentationLotteryTicket(int number) {
+        this.number = number;
+    }
+
     public int getId() {
         return id;
     }

@@ -17,16 +17,16 @@ public class MainPresenter extends Presenter {
     private final GetLotteryTicketsInteractor getLotteryTicketsInteractor;
     private final DeleteLotteryTicketInteractor deleteLotteryTicketInteractor;
     private final MainView view;
-    private final ListMapper<LotteryTicket, PresentationLotteryTicket> LotteryTicketsListMapper;
+    private final ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper;
 
     public MainPresenter(GetLotteryTicketsInteractor getLotteryTicketsInteractor,
                          DeleteLotteryTicketInteractor deleteLotteryTicketInteractor,
                          MainView view,
-                         ListMapper<LotteryTicket, PresentationLotteryTicket> LotteryTicketsListMapper) {
+                         ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper) {
         this.getLotteryTicketsInteractor = getLotteryTicketsInteractor;
         this.deleteLotteryTicketInteractor = deleteLotteryTicketInteractor;
         this.view = view;
-        this.LotteryTicketsListMapper = LotteryTicketsListMapper;
+        this.lotteryTicketsListMapper = lotteryTicketsListMapper;
     }
 
     @Override
@@ -55,7 +55,17 @@ public class MainPresenter extends Presenter {
 
                 @Override
                 public void onSuccess(List<LotteryTicket> lotteryTickets) {
-                    view.refreshLotteryTicketsList(LotteryTicketsListMapper.modelToData(lotteryTickets));
+
+
+                    LotteryTicket lotteryTicket = new LotteryTicket();
+                    lotteryTicket.setNumber(2134);
+
+
+                    lotteryTickets.add(lotteryTicket);
+
+
+                    view.refreshLotteryTicketsList(lotteryTicketsListMapper.modelToData(lotteryTickets));
+
                 }
 
                 @Override
