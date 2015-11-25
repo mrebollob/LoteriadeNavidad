@@ -18,6 +18,7 @@ public class PresentationLotteryTicketMapper implements Mapper<LotteryTicket, Pr
 
         PresentationLotteryTicket lotteryTicket = new PresentationLotteryTicket();
         lotteryTicket.setId(model.getId());
+        lotteryTicket.setLabel(model.getLabel());
         lotteryTicket.setNumber(model.getNumber());
         lotteryTicket.setBet(model.getBet());
         lotteryTicket.setPrize(model.getPrize());
@@ -33,6 +34,7 @@ public class PresentationLotteryTicketMapper implements Mapper<LotteryTicket, Pr
 
         LotteryTicket lotteryTicket = new LotteryTicket();
         lotteryTicket.setId(data.getId());
+        lotteryTicket.setLabel(data.getLabel());
         lotteryTicket.setNumber(data.getNumber());
         lotteryTicket.setBet(data.getBet());
         lotteryTicket.setPrize(data.getPrize());

@@ -9,6 +9,7 @@ import android.os.Parcelable;
 public class PresentationLotteryTicket implements Parcelable {
 
     private int id;
+    private String label;
     private int number;
     private int bet;
     private int prize;
@@ -26,6 +27,14 @@ public class PresentationLotteryTicket implements Parcelable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public int getNumber() {

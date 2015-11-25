@@ -55,15 +55,6 @@ public class MainPresenter extends Presenter {
 
                 @Override
                 public void onSuccess(List<LotteryTicket> lotteryTickets) {
-
-
-                    LotteryTicket lotteryTicket = new LotteryTicket();
-                    lotteryTicket.setNumber(2134);
-
-
-                    lotteryTickets.add(lotteryTicket);
-
-
                     view.refreshLotteryTicketsList(lotteryTicketsListMapper.modelToData(lotteryTickets));
 
                 }

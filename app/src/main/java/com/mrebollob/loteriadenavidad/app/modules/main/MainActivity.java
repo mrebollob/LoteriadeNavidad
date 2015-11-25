@@ -1,8 +1,6 @@
 package com.mrebollob.loteriadenavidad.app.modules.main;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +14,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
 
 import com.mrebollob.loteriadenavidad.R;
+import com.mrebollob.loteriadenavidad.app.modules.lotteryticketform.LotteryTicketFormActionCommand;
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.DrawSpinnerAdapter;
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.LotteryTicketsListAdapter;
 import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
@@ -29,6 +28,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements MainView, SwipeRefreshLayout.OnRefreshListener {
 
@@ -39,9 +39,6 @@ public class MainActivity extends BaseActivity implements MainView, SwipeRefresh
     protected Toolbar toolbar;
     @Bind(R.id.spinner)
     protected Spinner spinner;
-
-    @Bind(R.id.fab)
-    protected FloatingActionButton fab;
 
     @Bind(R.id.swipeRefreshLayout)
     protected SwipeRefreshLayout swipeRefreshLayout;
@@ -61,7 +58,6 @@ public class MainActivity extends BaseActivity implements MainView, SwipeRefresh
     private void initUi() {
         initToolbar();
         initSpinner();
-        initFab();
         initRecyclerView();
         initRefreshLayout();
     }
@@ -106,14 +102,10 @@ public class MainActivity extends BaseActivity implements MainView, SwipeRefresh
         });
     }
 
-    private void initFab() {
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    @OnClick(R.id.fab)
+    public void onAddButtonClick(View view) {
+        LotteryTicketFormActionCommand lotteryTicketFormActionCommand = new LotteryTicketFormActionCommand(this);
+        lotteryTicketFormActionCommand.execute();
     }
 
     private void initRecyclerView() {

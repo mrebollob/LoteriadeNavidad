@@ -13,6 +13,9 @@ public class BddLotteryTicket {
     private int id;
 
     @DatabaseField
+    private String label;
+
+    @DatabaseField
     private int number;
 
     @DatabaseField
@@ -27,6 +30,14 @@ public class BddLotteryTicket {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public int getNumber() {

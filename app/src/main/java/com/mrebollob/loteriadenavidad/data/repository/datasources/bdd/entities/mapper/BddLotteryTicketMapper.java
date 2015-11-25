@@ -18,6 +18,7 @@ public class BddLotteryTicketMapper implements Mapper<LotteryTicket, BddLotteryT
 
         BddLotteryTicket lotteryTicket = new BddLotteryTicket();
         lotteryTicket.setId(model.getId());
+        lotteryTicket.setLabel(model.getLabel());
         lotteryTicket.setNumber(model.getNumber());
         lotteryTicket.setBet(model.getBet());
         lotteryTicket.setPrize(model.getPrize());
@@ -33,6 +34,7 @@ public class BddLotteryTicketMapper implements Mapper<LotteryTicket, BddLotteryT
 
         LotteryTicket lotteryTicket = new LotteryTicket();
         lotteryTicket.setId(data.getId());
+        lotteryTicket.setLabel(data.getLabel());
         lotteryTicket.setNumber(data.getNumber());
         lotteryTicket.setBet(data.getBet());
         lotteryTicket.setPrize(data.getPrize());
