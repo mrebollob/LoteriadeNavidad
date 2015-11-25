@@ -1,5 +1,6 @@
 package com.mrebollob.loteriadenavidad.app.modules.main.adapter;
 
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +19,22 @@ import butterknife.ButterKnife;
 /**
  * @author mrebollob
  */
-public class LotteryTicketsListAdapter extends RecyclerView.Adapter<LotteryTicketsListAdapter.ViewHolder> {
+public class LotteryTicketsListAdapter extends RecyclerView.Adapter<LotteryTicketsListAdapter.ViewHolder>
+        implements View.OnClickListener {
 
     private List<PresentationLotteryTicket> lotteryTickets = Collections.emptyList();
+    private OnItemClickListener onItemClickListener;
 
     @Override
     public LotteryTicketsListAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.lottery_ticket_item,
                 viewGroup, false);
+        view.setOnClickListener(this);
         return new ViewHolder(view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -42,7 +50,11 @@ public class LotteryTicketsListAdapter extends RecyclerView.Adapter<LotteryTicke
 
     private void renderLotteryTicket(PresentationLotteryTicket lotteryTicket, ViewHolder viewHolder) {
 
-        viewHolder.text.setText("" + lotteryTicket.getNumber());
+        viewHolder.tvLabel.setText(lotteryTicket.getLabel());
+        viewHolder.tvNumber.setText("" + lotteryTicket.getNumber());
+        viewHolder.tvBet.setText("" + lotteryTicket.getBet());
+        viewHolder.tvPrize.setText("" + lotteryTicket.getPrize());
+        viewHolder.itemView.setTag(lotteryTicket);
     }
 
     public void updateLotteryTickets(List<PresentationLotteryTicket> lotteryTickets) {
@@ -50,14 +62,36 @@ public class LotteryTicketsListAdapter extends RecyclerView.Adapter<LotteryTicke
         notifyDataSetChanged();
     }
 
+    @Override
+    public void onClick(final View v) {
+        if (onItemClickListener != null) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onItemClickListener.onItemClick(v, (PresentationLotteryTicket) v.getTag());
+                }
+            }, 200);
+        }
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.text)
-        protected TextView text;
+        @Bind(R.id.tv_label)
+        protected TextView tvLabel;
+        @Bind(R.id.tv_number)
+        protected TextView tvNumber;
+        @Bind(R.id.tv_bet)
+        protected TextView tvBet;
+        @Bind(R.id.tv_prize)
+        protected TextView tvPrize;
 
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, PresentationLotteryTicket lotteryTicket);
     }
 }

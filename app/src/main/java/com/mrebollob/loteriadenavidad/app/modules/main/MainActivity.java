@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.mrebollob.loteriadenavidad.R;
 import com.mrebollob.loteriadenavidad.app.modules.lotteryticketform.LotteryTicketFormActionCommand;
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.DrawSpinnerAdapter;
@@ -30,7 +33,8 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements MainView, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends BaseActivity implements MainView, LotteryTicketsListAdapter.OnItemClickListener,
+        SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     MainPresenter presenter;
@@ -111,6 +115,7 @@ public class MainActivity extends BaseActivity implements MainView, SwipeRefresh
     private void initRecyclerView() {
         list.setLayoutManager(new LinearLayoutManager(this));
         lotteryTicketsListAdapter = new LotteryTicketsListAdapter();
+        lotteryTicketsListAdapter.setOnItemClickListener(this);
         list.setAdapter(lotteryTicketsListAdapter);
     }
 
@@ -181,5 +186,48 @@ public class MainActivity extends BaseActivity implements MainView, SwipeRefresh
     @Override
     public void showDeleteLotteryTicketError() {
 
+    }
+
+    @Override
+    public void onItemClick(View view, final PresentationLotteryTicket lotteryTicket) {
+        String[] options = {"Editar", "Eliminar"};
+
+        new MaterialDialog.Builder(this)
+                .title(lotteryTicket.getLabel())
+                .items(options)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        switch (which) {
+                            case 0:
+                                LotteryTicketFormActionCommand lotteryTicketFormActionCommand =
+                                        new LotteryTicketFormActionCommand(MainActivity.this, lotteryTicket);
+                                lotteryTicketFormActionCommand.execute();
+                                break;
+                            case 1:
+                                comfirmDelete(lotteryTicket);
+                                break;
+                            default:
+                                Log.wtf("TAG", "Nunca deberia ver esto");
+                                break;
+                        }
+                    }
+                })
+                .show();
+    }
+
+    private void comfirmDelete(final PresentationLotteryTicket lotteryTicket) {
+        new MaterialDialog.Builder(this)
+                .title("Eliminar numero")
+                .content("Seguro que quieres eliminar el numero 213213")
+                .positiveText("Eliminar")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(MaterialDialog dialog, DialogAction which) {
+                        if (presenter != null) presenter.deleteLotteryTicket(lotteryTicket.getId());
+                    }
+                })
+                .negativeText("Cancelar")
+                .show();
     }
 }

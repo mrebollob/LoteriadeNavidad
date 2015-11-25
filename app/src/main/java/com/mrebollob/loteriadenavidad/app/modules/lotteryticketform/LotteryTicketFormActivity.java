@@ -68,6 +68,7 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
 
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 
