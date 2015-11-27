@@ -1,7 +1,9 @@
 package com.mrebollob.loteriadenavidad.presentation.model.mapper;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
+import com.mrebollob.loteriadenavidad.domain.entities.LotteryType;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
+import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
 import com.mrebollob.loteriadenavidad.presentation.model.mapper.base.Mapper;
 
 /**
@@ -22,6 +24,7 @@ public class PresentationLotteryTicketMapper implements Mapper<LotteryTicket, Pr
         lotteryTicket.setNumber(model.getNumber());
         lotteryTicket.setBet(model.getBet());
         lotteryTicket.setPrize(model.getPrize());
+        lotteryTicket.setLotteryType(PresentationLotteryType.valueOf(model.getLotteryType().toString()));
 
         return lotteryTicket;
     }
@@ -38,6 +41,7 @@ public class PresentationLotteryTicketMapper implements Mapper<LotteryTicket, Pr
         lotteryTicket.setNumber(data.getNumber());
         lotteryTicket.setBet(data.getBet());
         lotteryTicket.setPrize(data.getPrize());
+        lotteryTicket.setLotteryType(LotteryType.valueOf(data.getLotteryType().toString()));
 
         return lotteryTicket;
     }

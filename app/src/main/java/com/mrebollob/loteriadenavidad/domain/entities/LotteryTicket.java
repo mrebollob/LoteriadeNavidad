@@ -10,6 +10,7 @@ public class LotteryTicket {
     private int number;
     private int bet;
     private int prize;
+    private LotteryType lotteryType;
 
     public int getId() {
         return id;
@@ -49,5 +50,13 @@ public class LotteryTicket {
 
     public void setPrize(int prize) {
         this.prize = prize;
+    }
+
+    public LotteryType getLotteryType() {
+        return lotteryType;
+    }
+
+    public void setLotteryType(LotteryType lotteryType) {
+        this.lotteryType = lotteryType;
     }
 }

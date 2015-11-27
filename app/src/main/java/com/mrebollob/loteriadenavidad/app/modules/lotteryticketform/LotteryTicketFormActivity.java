@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.mrebollob.loteriadenavidad.R;
 import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
+import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
 import com.mrebollob.loteriadenavidad.presentation.modules.lotteryticketform.LotteryTicketFormPresenter;
 import com.mrebollob.loteriadenavidad.presentation.modules.lotteryticketform.LotteryTicketFormView;
 
@@ -141,6 +142,7 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
             mLotteryTicket.setLabel(label);
             mLotteryTicket.setNumber(Integer.parseInt(number));
             mLotteryTicket.setBet(Integer.parseInt(bet));
+            mLotteryTicket.setLotteryType(PresentationLotteryType.CHRISTMAS);
 
             presenter.createLotteryTicket(mLotteryTicket);
         }

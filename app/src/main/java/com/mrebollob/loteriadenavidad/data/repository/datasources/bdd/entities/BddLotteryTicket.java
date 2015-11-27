@@ -24,6 +24,9 @@ public class BddLotteryTicket {
     @DatabaseField
     private int prize;
 
+    @DatabaseField
+    private BddLotteryType lotteryType;
+
     public int getId() {
         return id;
     }
@@ -62,5 +65,13 @@ public class BddLotteryTicket {
 
     public void setPrize(int prize) {
         this.prize = prize;
+    }
+
+    public BddLotteryType getLotteryType() {
+        return lotteryType;
+    }
+
+    public void setLotteryType(BddLotteryType lotteryType) {
+        this.lotteryType = lotteryType;
     }
 }

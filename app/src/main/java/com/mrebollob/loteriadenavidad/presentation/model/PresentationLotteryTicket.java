@@ -8,11 +8,13 @@ import android.os.Parcelable;
  */
 public class PresentationLotteryTicket implements Parcelable {
 
+
     private int id;
     private String label;
     private int number;
     private int bet;
     private int prize;
+    private PresentationLotteryType lotteryType;
 
     public PresentationLotteryTicket() {
     }
@@ -61,6 +63,14 @@ public class PresentationLotteryTicket implements Parcelable {
         this.prize = prize;
     }
 
+    public PresentationLotteryType getLotteryType() {
+        return lotteryType;
+    }
+
+    public void setLotteryType(PresentationLotteryType lotteryType) {
+        this.lotteryType = lotteryType;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -72,6 +82,7 @@ public class PresentationLotteryTicket implements Parcelable {
         out.writeInt(number);
         out.writeInt(bet);
         out.writeInt(prize);
+        out.writeSerializable(lotteryType);
     }
 
     public static final Parcelable.Creator<PresentationLotteryTicket> CREATOR
@@ -90,5 +101,6 @@ public class PresentationLotteryTicket implements Parcelable {
         number = in.readInt();
         bet = in.readInt();
         prize = in.readInt();
+        lotteryType = (PresentationLotteryType) in.readSerializable();
     }
 }
