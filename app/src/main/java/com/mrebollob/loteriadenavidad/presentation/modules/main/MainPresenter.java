@@ -1,8 +1,6 @@
 package com.mrebollob.loteriadenavidad.presentation.modules.main;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
-import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.DeleteLotteryTicketInteractor;
-import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTicketsInteractor;
 import com.mrebollob.loteriadenavidad.presentation.Presenter;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.mapper.base.ListMapper;

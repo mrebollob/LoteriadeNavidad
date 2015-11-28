@@ -1,7 +1,5 @@
 package com.mrebollob.loteriadenavidad.presentation.modules.lotteryticketform;
 
-import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CreateLotteryTicketInteractor;
-import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.UpdateLotteryTicketInteractor;
 import com.mrebollob.loteriadenavidad.presentation.Presenter;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.mapper.PresentationLotteryTicketMapper;

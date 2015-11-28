@@ -1,31 +1,35 @@
 package com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets;
 
+import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
+import com.mrebollob.loteriadenavidad.domain.entities.LotteryType;
 import com.mrebollob.loteriadenavidad.domain.executor.InteractorExecutor;
 import com.mrebollob.loteriadenavidad.domain.executor.MainThread;
 import com.mrebollob.loteriadenavidad.domain.interactors.Interactor;
-import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.DeleteLotteryTicketException;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.GetLotteryTicketsException;
 import com.mrebollob.loteriadenavidad.domain.repository.LotteryRepository;
+
+import java.util.List;
 
 /**
  * @author mrebollob
  */
-public class DeleteLotteryTicketInteractor implements Interactor {
+public class GetLotteryTicketsByType implements Interactor {
 
     private final InteractorExecutor interactorExecutor;
     private final MainThread mainThread;
     private final LotteryRepository lotteryRepository;
     private Callback mCallback;
-    private int mLotteryTicketId;
+    private LotteryType mLotteryType;
 
-    public DeleteLotteryTicketInteractor(InteractorExecutor interactorExecutor, MainThread mainThread,
-                                         LotteryRepository lotteryRepository) {
+    public GetLotteryTicketsByType(InteractorExecutor interactorExecutor, MainThread mainThread,
+                                       LotteryRepository lotteryRepository) {
         this.interactorExecutor = interactorExecutor;
         this.mainThread = mainThread;
         this.lotteryRepository = lotteryRepository;
     }
 
-    public void setData(int lotteryTicketId) {
-        this.mLotteryTicketId = lotteryTicketId;
+    public void setData(LotteryType lotteryType) {
+        this.mLotteryType = lotteryType;
     }
 
     public void setCallback(Callback callback) {
@@ -35,9 +39,10 @@ public class DeleteLotteryTicketInteractor implements Interactor {
     @Override
     public void run() {
         try {
-            lotteryRepository.deleteLotteryTicket(mLotteryTicketId);
-            notifySuccess();
-        } catch (DeleteLotteryTicketException e) {
+
+            //TODO obtener por sorteo
+            notifySuccess(lotteryRepository.getLotteryTickets());
+        } catch (GetLotteryTicketsException e) {
             notifyError(e);
         }
     }
@@ -47,11 +52,11 @@ public class DeleteLotteryTicketInteractor implements Interactor {
         interactorExecutor.run(this);
     }
 
-    private void notifySuccess() {
+    private void notifySuccess(final List<LotteryTicket> lotteryTickets) {
         mainThread.execute(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSuccess();
+                mCallback.onSuccess(lotteryTickets);
             }
         });
     }
@@ -67,7 +72,7 @@ public class DeleteLotteryTicketInteractor implements Interactor {
 
     public interface Callback {
 
-        void onSuccess();
+        void onSuccess(List<LotteryTicket> lotteryTickets);
 
         void onError(Throwable error);
     }

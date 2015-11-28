@@ -1,34 +1,34 @@
 package com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets;
 
-
+import com.mrebollob.loteriadenavidad.domain.comparator.LotteryTicketLabelComparator;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.executor.InteractorExecutor;
 import com.mrebollob.loteriadenavidad.domain.executor.MainThread;
 import com.mrebollob.loteriadenavidad.domain.interactors.Interactor;
-import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.CreateLotteryTicketException;
-import com.mrebollob.loteriadenavidad.domain.repository.LotteryRepository;
 
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author mrebollob
  */
-public class CreateLotteryTicketInteractor implements Interactor {
+public class SortLotteryTicketsListByLabel implements Interactor {
 
     private final InteractorExecutor interactorExecutor;
     private final MainThread mainThread;
-    private final LotteryRepository lotteryRepository;
+    private final LotteryTicketLabelComparator lotteryTicketLabelComparator;
     private Callback mCallback;
-    private LotteryTicket mLotteryTicket;
+    private List<LotteryTicket> mLotteryTickets;
 
-    public CreateLotteryTicketInteractor(InteractorExecutor interactorExecutor, MainThread mainThread,
-                                         LotteryRepository lotteryRepository) {
+    public SortLotteryTicketsListByLabel(InteractorExecutor interactorExecutor, MainThread mainThread,
+                                         LotteryTicketLabelComparator lotteryTicketLabelComparator) {
         this.interactorExecutor = interactorExecutor;
         this.mainThread = mainThread;
-        this.lotteryRepository = lotteryRepository;
+        this.lotteryTicketLabelComparator = lotteryTicketLabelComparator;
     }
 
-    public void setData(LotteryTicket lotteryTicket) {
-        this.mLotteryTicket = lotteryTicket;
+    public void setData(List<LotteryTicket> lotteryTickets) {
+        this.mLotteryTickets = lotteryTickets;
     }
 
     public void setCallback(Callback callback) {
@@ -38,9 +38,9 @@ public class CreateLotteryTicketInteractor implements Interactor {
     @Override
     public void run() {
         try {
-            lotteryRepository.createLotteryTicket(mLotteryTicket);
-            notifySuccess();
-        } catch (CreateLotteryTicketException e) {
+            Collections.sort(mLotteryTickets, lotteryTicketLabelComparator);
+            notifySuccess(mLotteryTickets);
+        } catch (Exception e) {
             notifyError(e);
         }
     }
@@ -50,11 +50,11 @@ public class CreateLotteryTicketInteractor implements Interactor {
         interactorExecutor.run(this);
     }
 
-    private void notifySuccess() {
+    private void notifySuccess(final List<LotteryTicket> lotteryTickets) {
         mainThread.execute(new Runnable() {
             @Override
             public void run() {
-                mCallback.onSuccess();
+                mCallback.onSuccess(lotteryTickets);
             }
         });
     }
@@ -70,7 +70,7 @@ public class CreateLotteryTicketInteractor implements Interactor {
 
     public interface Callback {
 
-        void onSuccess();
+        void onSuccess(List<LotteryTicket> lotteryTickets);
 
         void onError(Throwable error);
     }
