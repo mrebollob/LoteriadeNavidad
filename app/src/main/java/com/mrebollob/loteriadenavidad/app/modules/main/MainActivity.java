@@ -22,6 +22,7 @@ import com.mrebollob.loteriadenavidad.app.modules.main.adapter.DrawSpinnerAdapte
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.LotteryTicketsListAdapter;
 import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
+import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
 import com.mrebollob.loteriadenavidad.presentation.modules.main.MainPresenter;
 import com.mrebollob.loteriadenavidad.presentation.modules.main.MainView;
 
@@ -86,18 +87,25 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     }
 
     private void initSpinner() {
-        spinner.setAdapter(new DrawSpinnerAdapter(
-                toolbar.getContext(),
-                new String[]{
-                        "Section 1",
-                        "Section 2",
-                        "Section 3",
-                }));
+
+        String[] draws = getResources().getStringArray(R.array.draws);
+
+        spinner.setAdapter(new DrawSpinnerAdapter(toolbar.getContext(), draws));
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //TODO Aqui aplico el filtro por sorteo
+                switch (position) {
+                    case 0:
+                        presenter.onRefresh();
+                        break;
+                    case 1:
+                        presenter.onRefresh(PresentationLotteryType.CHRISTMAS);
+                        break;
+                    case 2:
+                        presenter.onRefresh(PresentationLotteryType.CHILD);
+                        break;
+                }
             }
 
             @Override

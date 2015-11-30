@@ -17,4 +17,11 @@
 
     <string name="save">Guardar</string>
     <string name="error_field_required">Campo requerido</string>
+
+    <string-array
+        name="draws">
+        <item>Todos los sorteos</item>
+        <item>Lotería de navidad</item>
+        <item>Lotería del niño</item>
+    </string-array>
 </resources>

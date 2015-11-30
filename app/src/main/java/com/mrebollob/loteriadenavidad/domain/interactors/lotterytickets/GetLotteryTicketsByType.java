@@ -28,7 +28,7 @@ public class GetLotteryTicketsByType implements Interactor {
         this.lotteryRepository = lotteryRepository;
     }
 
-    public void setData(LotteryType lotteryType) {
+    public void setType(LotteryType lotteryType) {
         this.mLotteryType = lotteryType;
     }
 

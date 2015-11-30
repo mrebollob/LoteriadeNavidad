@@ -4,6 +4,7 @@ import com.mrebollob.loteriadenavidad.app.di.ActivityModule;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.DeleteLotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTickets;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTicketsByType;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.mapper.base.ListMapper;
 import com.mrebollob.loteriadenavidad.presentation.modules.main.MainPresenter;
@@ -31,9 +32,10 @@ public class MainModule {
     @Provides
     @Singleton
     MainPresenter provideMainPresenter(GetLotteryTickets getLotteryTickets,
+                                       GetLotteryTicketsByType getLotteryTicketsByType,
                                        DeleteLotteryTicket deleteLotteryTicket,
                                        ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper) {
-        return new MainPresenter(getLotteryTickets, deleteLotteryTicket,
+        return new MainPresenter(getLotteryTickets, getLotteryTicketsByType, deleteLotteryTicket,
                 view, lotteryTicketsListMapper);
     }
 }
