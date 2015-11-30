@@ -56,6 +56,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.j256.ormlite:ormlite-android:4.48'
 
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile('com.github.afollestad.material-dialogs:core:0.8.5.1@aar') {
         transitive = true
     }

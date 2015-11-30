@@ -19,10 +19,10 @@ public class BddLotteryTicket {
     private int number;
 
     @DatabaseField
-    private int bet;
+    private float bet;
 
     @DatabaseField
-    private int prize;
+    private float prize;
 
     @DatabaseField
     private BddLotteryType lotteryType;
@@ -51,19 +51,19 @@ public class BddLotteryTicket {
         this.number = number;
     }
 
-    public int getBet() {
+    public float getBet() {
         return bet;
     }
 
-    public void setBet(int bet) {
+    public void setBet(float bet) {
         this.bet = bet;
     }
 
-    public int getPrize() {
+    public float getPrize() {
         return prize;
     }
 
-    public void setPrize(int prize) {
+    public void setPrize(float prize) {
         this.prize = prize;
     }
 

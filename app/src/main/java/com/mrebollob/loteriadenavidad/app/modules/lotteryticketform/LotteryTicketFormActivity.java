@@ -1,8 +1,10 @@
 package com.mrebollob.loteriadenavidad.app.modules.lotteryticketform;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 
 import com.mrebollob.loteriadenavidad.R;
 import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
+import com.mrebollob.loteriadenavidad.app.util.DecimalDigitsInputFilter;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
 import com.mrebollob.loteriadenavidad.presentation.modules.lotteryticketform.LotteryTicketFormPresenter;
@@ -45,12 +48,13 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        parseArguments();
         initUi();
     }
 
     private void initUi() {
         initToolbar();
+        initForm();
     }
 
     @Override
@@ -63,6 +67,10 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
         return Arrays.<Object>asList(new LotteryTicketFormModule(this));
     }
 
+    private void parseArguments() {
+        mLotteryTicket = getIntent().getParcelableExtra(LOTTERY_TICKET_EXTRA);
+    }
+
     private void initToolbar() {
         setSupportActionBar(toolbar);
         final ActionBar actionBar = getSupportActionBar();
@@ -70,6 +78,22 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private void initForm() {
+
+        etBet.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
+
+        if (mLotteryTicket != null) {
+            Resources res = getResources();
+            etLabel.setText(mLotteryTicket.getLabel());
+
+            String numberText = String.format(res.getString(R.string.number_format), mLotteryTicket.getNumber());
+            etNumber.setText(numberText);
+
+            String numberBet = "" + mLotteryTicket.getBet();
+            etBet.setText(numberBet);
         }
     }
 
@@ -141,10 +165,13 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
 
             mLotteryTicket.setLabel(label);
             mLotteryTicket.setNumber(Integer.parseInt(number));
-            mLotteryTicket.setBet(Integer.parseInt(bet));
+            mLotteryTicket.setBet(Float.parseFloat(bet));
             mLotteryTicket.setLotteryType(PresentationLotteryType.CHRISTMAS);
 
-            presenter.createLotteryTicket(mLotteryTicket);
+            if (mLotteryTicket.getId() == 0)
+                presenter.createLotteryTicket(mLotteryTicket);
+            else
+                presenter.updateLotteryTicket(mLotteryTicket);
         }
     }
 

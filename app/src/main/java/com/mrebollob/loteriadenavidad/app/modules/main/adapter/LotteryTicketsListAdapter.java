@@ -1,5 +1,7 @@
 package com.mrebollob.loteriadenavidad.app.modules.main.adapter;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ public class LotteryTicketsListAdapter extends RecyclerView.Adapter<LotteryTicke
 
     private List<PresentationLotteryTicket> lotteryTickets = Collections.emptyList();
     private OnItemClickListener onItemClickListener;
+    private Context mContext;
 
     @Override
     public LotteryTicketsListAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -31,6 +34,10 @@ public class LotteryTicketsListAdapter extends RecyclerView.Adapter<LotteryTicke
                 viewGroup, false);
         view.setOnClickListener(this);
         return new ViewHolder(view);
+    }
+
+    public LotteryTicketsListAdapter(Context mContext) {
+        this.mContext = mContext;
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -50,10 +57,18 @@ public class LotteryTicketsListAdapter extends RecyclerView.Adapter<LotteryTicke
 
     private void renderLotteryTicket(PresentationLotteryTicket lotteryTicket, ViewHolder viewHolder) {
 
+        Resources res = mContext.getResources();
+
         viewHolder.tvLabel.setText(lotteryTicket.getLabel());
-        viewHolder.tvNumber.setText("" + lotteryTicket.getNumber());
-        viewHolder.tvBet.setText("" + lotteryTicket.getBet());
-        viewHolder.tvPrize.setText("" + lotteryTicket.getPrize());
+
+        String numberText = String.format(res.getString(R.string.number_format), lotteryTicket.getNumber());
+        viewHolder.tvNumber.setText(numberText);
+
+        String betText = String.format(res.getString(R.string.money_format), lotteryTicket.getBet());
+        viewHolder.tvBet.setText(betText);
+
+        String prizeText = String.format(res.getString(R.string.money_format), lotteryTicket.getPrize());
+        viewHolder.tvPrize.setText(prizeText);
         viewHolder.itemView.setTag(lotteryTicket);
     }
 

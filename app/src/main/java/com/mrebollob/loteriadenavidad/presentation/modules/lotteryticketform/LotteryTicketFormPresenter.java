@@ -1,5 +1,7 @@
 package com.mrebollob.loteriadenavidad.presentation.modules.lotteryticketform;
 
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CreateLotteryTicket;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.UpdateLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.Presenter;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.mapper.PresentationLotteryTicketMapper;
@@ -9,19 +11,19 @@ import com.mrebollob.loteriadenavidad.presentation.model.mapper.PresentationLott
  */
 public class LotteryTicketFormPresenter extends Presenter {
 
-    private final CreateLotteryTicketInteractor createLotteryTicketInteractor;
-    private final UpdateLotteryTicketInteractor updateLotteryTicketInteractor;
+    private final CreateLotteryTicket createLotteryTicket;
+    private final UpdateLotteryTicket updateLotteryTicket;
     private final LotteryTicketFormView view;
-    private final PresentationLotteryTicketMapper lotteryTicketMapper;
+    private final PresentationLotteryTicketMapper LotteryTicketMapper;
 
-    public LotteryTicketFormPresenter(CreateLotteryTicketInteractor createLotteryTicketInteractor,
-                                      UpdateLotteryTicketInteractor updateLotteryTicketInteractor,
-                                      LotteryTicketFormView view,
-                                      PresentationLotteryTicketMapper lotteryTicketMapper) {
-        this.createLotteryTicketInteractor = createLotteryTicketInteractor;
-        this.updateLotteryTicketInteractor = updateLotteryTicketInteractor;
+    public LotteryTicketFormPresenter(CreateLotteryTicket createLotteryTicket,
+                                     UpdateLotteryTicket updateLotteryTicket,
+                                     LotteryTicketFormView view,
+                                     PresentationLotteryTicketMapper LotteryTicketMapper) {
+        this.createLotteryTicket = createLotteryTicket;
+        this.updateLotteryTicket = updateLotteryTicket;
         this.view = view;
-        this.lotteryTicketMapper = lotteryTicketMapper;
+        this.LotteryTicketMapper = LotteryTicketMapper;
     }
 
     @Override
@@ -32,20 +34,20 @@ public class LotteryTicketFormPresenter extends Presenter {
     public void onPause() {
     }
 
-    public void createLotteryTicket(PresentationLotteryTicket lotteryTicket) {
-        createLotteryTicketInteractor.setData(lotteryTicketMapper.dataToModel(lotteryTicket));
-        createLotteryTicketInteractor.setCallback(createLotteryTicketCallback);
-        createLotteryTicketInteractor.execute();
+    public void createLotteryTicket(PresentationLotteryTicket LotteryTicket) {
+        createLotteryTicket.setData(LotteryTicketMapper.dataToModel(LotteryTicket));
+        createLotteryTicket.setCallback(createLotteryTicketCallback);
+        createLotteryTicket.execute();
     }
 
-    public void updateLotteryTicket(PresentationLotteryTicket lotteryTicket) {
-        updateLotteryTicketInteractor.setData(lotteryTicketMapper.dataToModel(lotteryTicket));
-        updateLotteryTicketInteractor.setCallback(updateLotteryTicketCallback);
-        updateLotteryTicketInteractor.execute();
+    public void updateLotteryTicket(PresentationLotteryTicket LotteryTicket) {
+        updateLotteryTicket.setData(LotteryTicketMapper.dataToModel(LotteryTicket));
+        updateLotteryTicket.setCallback(updateLotteryTicketCallback);
+        updateLotteryTicket.execute();
     }
 
-    private final CreateLotteryTicketInteractor.Callback createLotteryTicketCallback =
-            new CreateLotteryTicketInteractor.Callback() {
+    private final CreateLotteryTicket.Callback createLotteryTicketCallback =
+            new CreateLotteryTicket.Callback() {
 
                 @Override
                 public void onSuccess() {
@@ -58,8 +60,8 @@ public class LotteryTicketFormPresenter extends Presenter {
                 }
             };
 
-    private final UpdateLotteryTicketInteractor.Callback updateLotteryTicketCallback =
-            new UpdateLotteryTicketInteractor.Callback() {
+    private final UpdateLotteryTicket.Callback updateLotteryTicketCallback =
+            new UpdateLotteryTicket.Callback() {
 
                 @Override
                 public void onSuccess() {

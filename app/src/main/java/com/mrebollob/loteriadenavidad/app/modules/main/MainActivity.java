@@ -114,7 +114,7 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     private void initRecyclerView() {
         list.setLayoutManager(new LinearLayoutManager(this));
-        lotteryTicketsListAdapter = new LotteryTicketsListAdapter();
+        lotteryTicketsListAdapter = new LotteryTicketsListAdapter(this);
         lotteryTicketsListAdapter.setOnItemClickListener(this);
         list.setAdapter(lotteryTicketsListAdapter);
     }

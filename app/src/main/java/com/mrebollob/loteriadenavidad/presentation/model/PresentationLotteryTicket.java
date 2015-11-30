@@ -12,8 +12,8 @@ public class PresentationLotteryTicket implements Parcelable {
     private int id;
     private String label;
     private int number;
-    private int bet;
-    private int prize;
+    private float bet;
+    private float prize;
     private PresentationLotteryType lotteryType;
 
     public PresentationLotteryTicket() {
@@ -47,19 +47,19 @@ public class PresentationLotteryTicket implements Parcelable {
         this.number = number;
     }
 
-    public int getBet() {
+    public float getBet() {
         return bet;
     }
 
-    public void setBet(int bet) {
+    public void setBet(float bet) {
         this.bet = bet;
     }
 
-    public int getPrize() {
+    public float getPrize() {
         return prize;
     }
 
-    public void setPrize(int prize) {
+    public void setPrize(float prize) {
         this.prize = prize;
     }
 
@@ -79,9 +79,10 @@ public class PresentationLotteryTicket implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         out.writeInt(id);
+        out.writeString(label);
         out.writeInt(number);
-        out.writeInt(bet);
-        out.writeInt(prize);
+        out.writeFloat(bet);
+        out.writeFloat(prize);
         out.writeSerializable(lotteryType);
     }
 
@@ -98,9 +99,10 @@ public class PresentationLotteryTicket implements Parcelable {
 
     private PresentationLotteryTicket(Parcel in) {
         id = in.readInt();
+        label = in.readString();
         number = in.readInt();
-        bet = in.readInt();
-        prize = in.readInt();
+        bet = in.readFloat();
+        prize = in.readFloat();
         lotteryType = (PresentationLotteryType) in.readSerializable();
     }
 }

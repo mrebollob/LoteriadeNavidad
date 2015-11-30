@@ -8,8 +8,8 @@ public class LotteryTicket {
     private int id;
     private String label;
     private int number;
-    private int bet;
-    private int prize;
+    private float bet;
+    private float prize;
     private LotteryType lotteryType;
 
     public int getId() {
@@ -36,19 +36,19 @@ public class LotteryTicket {
         this.number = number;
     }
 
-    public int getBet() {
+    public float getBet() {
         return bet;
     }
 
-    public void setBet(int bet) {
+    public void setBet(float bet) {
         this.bet = bet;
     }
 
-    public int getPrize() {
+    public float getPrize() {
         return prize;
     }
 
-    public void setPrize(int prize) {
+    public void setPrize(float prize) {
         this.prize = prize;
     }
 
