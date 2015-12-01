@@ -18,6 +18,9 @@
     <string name="save">Guardar</string>
     <string name="error_field_required">Campo requerido</string>
 
+    <string name="christmas_lottery">Lotería de navidad</string>
+    <string name="child_lottery">Lotería del niño</string>
+
     <string-array
         name="draws">
         <item>Todos los sorteos</item>

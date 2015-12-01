@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.mrebollob.loteriadenavidad.R;
 import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
@@ -42,6 +43,8 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
     protected EditText etNumber;
     @Bind(R.id.et_bet)
     protected EditText etBet;
+    @Bind(R.id.rg_lottery)
+    protected RadioGroup rgLottery;
 
     private PresentationLotteryTicket mLotteryTicket;
 
@@ -166,7 +169,11 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
             mLotteryTicket.setLabel(label);
             mLotteryTicket.setNumber(Integer.parseInt(number));
             mLotteryTicket.setBet(Float.parseFloat(bet));
-            mLotteryTicket.setLotteryType(PresentationLotteryType.CHRISTMAS);
+
+            if (rgLottery.getCheckedRadioButtonId() == R.id.rb_christmas_lottery)
+                mLotteryTicket.setLotteryType(PresentationLotteryType.CHRISTMAS);
+            else if (rgLottery.getCheckedRadioButtonId() == R.id.rb_child_lottery)
+                mLotteryTicket.setLotteryType(PresentationLotteryType.CHILD);
 
             if (mLotteryTicket.getId() == 0)
                 presenter.createLotteryTicket(mLotteryTicket);
