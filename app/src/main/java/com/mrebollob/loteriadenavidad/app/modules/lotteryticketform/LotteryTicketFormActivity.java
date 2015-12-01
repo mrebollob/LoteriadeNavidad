@@ -97,6 +97,15 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
 
             String numberBet = "" + mLotteryTicket.getBet();
             etBet.setText(numberBet);
+
+            switch (mLotteryTicket.getLotteryType()) {
+                case CHRISTMAS:
+                    rgLottery.check(R.id.rb_christmas_lottery);
+                    break;
+                case CHILD:
+                    rgLottery.check(R.id.rb_child_lottery);
+                    break;
+            }
         }
     }
 

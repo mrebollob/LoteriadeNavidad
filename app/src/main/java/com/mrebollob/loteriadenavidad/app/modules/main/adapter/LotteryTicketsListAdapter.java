@@ -3,6 +3,7 @@ package com.mrebollob.loteriadenavidad.app.modules.main.adapter;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Handler;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +71,17 @@ public class LotteryTicketsListAdapter extends RecyclerView.Adapter<LotteryTicke
         String prizeText = String.format(res.getString(R.string.money_format), lotteryTicket.getPrize());
         viewHolder.tvPrize.setText(prizeText);
         viewHolder.itemView.setTag(lotteryTicket);
+        
+        int color;
+        switch (lotteryTicket.getLotteryType()) {
+            case CHILD:
+                color = mContext.getResources().getColor(R.color.child_lottery);
+                break;
+            default:
+                color = mContext.getResources().getColor(R.color.christmas_lottery);
+                break;
+        }
+        viewHolder.cvTicket.setCardBackgroundColor(color);
     }
 
     public void updateLotteryTickets(List<PresentationLotteryTicket> lotteryTickets) {
@@ -91,6 +103,8 @@ public class LotteryTicketsListAdapter extends RecyclerView.Adapter<LotteryTicke
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        @Bind(R.id.cv_ticket)
+        protected CardView cvTicket;
         @Bind(R.id.tv_label)
         protected TextView tvLabel;
         @Bind(R.id.tv_number)
