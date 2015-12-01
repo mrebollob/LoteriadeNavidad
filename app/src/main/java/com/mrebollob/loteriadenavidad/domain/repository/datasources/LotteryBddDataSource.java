@@ -17,6 +17,10 @@ public interface LotteryBddDataSource {
 
     List<LotteryTicket> getLotteryTickets() throws GetBddLotteryTicketsException;
 
+    List<LotteryTicket> getChristmasLotteryTickets() throws GetBddLotteryTicketsException;
+
+    List<LotteryTicket> getChildLotteryTickets() throws GetBddLotteryTicketsException;
+
     void updateLotteryTicket(LotteryTicket lotteryTicket) throws UpdateBddLotteryTicketException;
 
     void deleteLotteryTicket(int lotteryTicketId) throws DeleteBddLotteryTicketException;

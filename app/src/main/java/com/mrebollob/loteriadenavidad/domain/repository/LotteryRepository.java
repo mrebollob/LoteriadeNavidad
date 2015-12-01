@@ -17,6 +17,10 @@ public interface LotteryRepository {
 
     List<LotteryTicket> getLotteryTickets() throws GetLotteryTicketsException;
 
+    List<LotteryTicket> getChristmasLotteryTickets() throws GetLotteryTicketsException;
+
+    List<LotteryTicket> getChildLotteryTickets() throws GetLotteryTicketsException;
+
     void updateLotteryTicket(LotteryTicket lotteryTicket) throws UpdateLotteryTicketException;
 
     void deleteLotteryTicket(int lotteryTicketId) throws DeleteLotteryTicketException;

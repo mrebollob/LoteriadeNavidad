@@ -22,7 +22,7 @@ public class GetLotteryTicketsByType implements Interactor {
     private LotteryType mLotteryType;
 
     public GetLotteryTicketsByType(InteractorExecutor interactorExecutor, MainThread mainThread,
-                                       LotteryRepository lotteryRepository) {
+                                   LotteryRepository lotteryRepository) {
         this.interactorExecutor = interactorExecutor;
         this.mainThread = mainThread;
         this.lotteryRepository = lotteryRepository;
@@ -39,9 +39,14 @@ public class GetLotteryTicketsByType implements Interactor {
     @Override
     public void run() {
         try {
-
-            //TODO obtener por sorteo
-            notifySuccess(lotteryRepository.getLotteryTickets());
+            switch (mLotteryType) {
+                case CHRISTMAS:
+                    notifySuccess(lotteryRepository.getChristmasLotteryTickets());
+                    break;
+                case CHILD:
+                    notifySuccess(lotteryRepository.getChildLotteryTickets());
+                    break;
+            }
         } catch (GetLotteryTicketsException e) {
             notifyError(e);
         }

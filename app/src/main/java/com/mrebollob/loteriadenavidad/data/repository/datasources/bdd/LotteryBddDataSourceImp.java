@@ -3,6 +3,7 @@ package com.mrebollob.loteriadenavidad.data.repository.datasources.bdd;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.mrebollob.loteriadenavidad.data.repository.datasources.bdd.entities.BddLotteryTicket;
+import com.mrebollob.loteriadenavidad.data.repository.datasources.bdd.entities.BddLotteryType;
 import com.mrebollob.loteriadenavidad.data.repository.datasources.bdd.entities.mapper.BddLotteryTicketMapper;
 import com.mrebollob.loteriadenavidad.data.repository.datasources.bdd.entities.mapper.base.ListMapper;
 import com.mrebollob.loteriadenavidad.data.repository.datasources.bdd.persistors.Persistor;
@@ -50,6 +51,28 @@ public class LotteryBddDataSourceImp implements LotteryBddDataSource {
     public List<LotteryTicket> getLotteryTickets() throws GetBddLotteryTicketsException {
         try {
             List<BddLotteryTicket> lotteryTickets = daoLotteryTickets.queryForAll();
+            return BDD_LOTTERY_TICKET_LIST_MAPPER.dataToModel(lotteryTickets);
+        } catch (Throwable e) {
+            throw new GetBddLotteryTicketsException();
+        }
+    }
+
+    @Override
+    public List<LotteryTicket> getChristmasLotteryTickets() throws GetBddLotteryTicketsException {
+        try {
+            List<BddLotteryTicket> lotteryTickets =
+                    daoLotteryTickets.queryForEq(BddLotteryTicket.FIELD_TYPE, BddLotteryType.CHRISTMAS);
+            return BDD_LOTTERY_TICKET_LIST_MAPPER.dataToModel(lotteryTickets);
+        } catch (Throwable e) {
+            throw new GetBddLotteryTicketsException();
+        }
+    }
+
+    @Override
+    public List<LotteryTicket> getChildLotteryTickets() throws GetBddLotteryTicketsException {
+        try {
+            List<BddLotteryTicket> lotteryTickets =
+                    daoLotteryTickets.queryForEq(BddLotteryTicket.FIELD_TYPE, BddLotteryType.CHILD);
             return BDD_LOTTERY_TICKET_LIST_MAPPER.dataToModel(lotteryTickets);
         } catch (Throwable e) {
             throw new GetBddLotteryTicketsException();

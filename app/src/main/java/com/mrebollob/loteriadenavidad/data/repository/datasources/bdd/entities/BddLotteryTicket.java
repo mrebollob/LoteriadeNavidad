@@ -8,6 +8,7 @@ import com.j256.ormlite.field.DatabaseField;
 public class BddLotteryTicket {
 
     public static final String FIELD_ID = "id";
+    public static final String FIELD_TYPE = "type";
 
     @DatabaseField(generatedId = true, columnName = FIELD_ID)
     private int id;
@@ -24,7 +25,7 @@ public class BddLotteryTicket {
     @DatabaseField
     private float prize;
 
-    @DatabaseField
+    @DatabaseField(columnName = FIELD_TYPE)
     private BddLotteryType lotteryType;
 
     public int getId() {

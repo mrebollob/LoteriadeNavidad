@@ -49,6 +49,28 @@ public class LotteryRepositoryImp implements LotteryRepository {
     }
 
     @Override
+    public List<LotteryTicket> getChristmasLotteryTickets() throws GetLotteryTicketsException {
+        List<LotteryTicket> lotteryTickets = null;
+        try {
+            lotteryTickets = bddDataSource.getChristmasLotteryTickets();
+        } catch (GetBddLotteryTicketsException e) {
+            throw new GetLotteryTicketsException();
+        }
+        return lotteryTickets;
+    }
+
+    @Override
+    public List<LotteryTicket> getChildLotteryTickets() throws GetLotteryTicketsException {
+        List<LotteryTicket> lotteryTickets = null;
+        try {
+            lotteryTickets = bddDataSource.getChildLotteryTickets();
+        } catch (GetBddLotteryTicketsException e) {
+            throw new GetLotteryTicketsException();
+        }
+        return lotteryTickets;
+    }
+
+    @Override
     public void updateLotteryTicket(LotteryTicket lotteryTicket) throws UpdateLotteryTicketException {
         try {
             bddDataSource.updateLotteryTicket(lotteryTicket);
