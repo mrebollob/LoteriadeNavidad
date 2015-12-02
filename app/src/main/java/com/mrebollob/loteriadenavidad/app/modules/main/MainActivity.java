@@ -21,6 +21,7 @@ import com.mrebollob.loteriadenavidad.app.modules.lotteryticketform.LotteryTicke
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.DrawSpinnerAdapter;
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.LotteryTicketsListAdapter;
 import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
+import com.mrebollob.loteriadenavidad.app.util.FeedbackUtils;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
 import com.mrebollob.loteriadenavidad.presentation.modules.main.MainPresenter;
@@ -151,7 +152,10 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_feedback:
+                FeedbackUtils.askForFeedback(this);
+                return true;
+            case R.id.action_about:
                 return true;
             case R.id.action_sort:
                 presenter.sortLotteryTickets();
