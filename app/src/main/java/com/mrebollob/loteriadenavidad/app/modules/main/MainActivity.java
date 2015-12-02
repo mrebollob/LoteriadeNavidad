@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.mrebollob.loteriadenavidad.R;
+import com.mrebollob.loteriadenavidad.app.modules.about.AboutActionCommand;
 import com.mrebollob.loteriadenavidad.app.modules.lotteryticketform.LotteryTicketFormActionCommand;
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.DrawSpinnerAdapter;
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.LotteryTicketsListAdapter;
@@ -156,6 +157,8 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
                 FeedbackUtils.askForFeedback(this);
                 return true;
             case R.id.action_about:
+                AboutActionCommand aboutActionCommand = new AboutActionCommand(this);
+                aboutActionCommand.execute();
                 return true;
             case R.id.action_sort:
                 presenter.sortLotteryTickets();

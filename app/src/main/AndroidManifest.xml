@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.mrebollob.loteriadenavidad"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.mrebollob.loteriadenavidad"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -25,6 +26,15 @@
         <activity
             android:name=".app.modules.lotteryticketform.LotteryTicketFormActivity"
             android:label="@string/title_activity_lottery_ticket_form"
+            android:parentActivityName=".app.modules.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mrebollob.loteriadenavidad.app.modules.main.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".app.modules.about.AboutActivity"
+            android:label="@string/title_activity_about"
             android:parentActivityName=".app.modules.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
