@@ -153,6 +153,9 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
         switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;
+            case R.id.action_sort:
+                presenter.sortLotteryTickets();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -193,6 +196,11 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     @Override
     public void showDeleteLotteryTicketError() {
+
+    }
+
+    @Override
+    public void showSortLotteryTicketsError() {
 
     }
 

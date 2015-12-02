@@ -71,7 +71,7 @@ public class LotteryTicketsListAdapter extends RecyclerView.Adapter<LotteryTicke
         String prizeText = String.format(res.getString(R.string.money_format), lotteryTicket.getPrize());
         viewHolder.tvPrize.setText(prizeText);
         viewHolder.itemView.setTag(lotteryTicket);
-        
+
         int color;
         switch (lotteryTicket.getLotteryType()) {
             case CHILD:

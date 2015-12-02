@@ -5,6 +5,8 @@ import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.DeleteLotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTickets;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTicketsByType;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByLabel;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByNumber;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.mapper.base.ListMapper;
 import com.mrebollob.loteriadenavidad.presentation.modules.main.MainPresenter;
@@ -34,8 +36,10 @@ public class MainModule {
     MainPresenter provideMainPresenter(GetLotteryTickets getLotteryTickets,
                                        GetLotteryTicketsByType getLotteryTicketsByType,
                                        DeleteLotteryTicket deleteLotteryTicket,
+                                       SortLotteryTicketsListByLabel sortLotteryTicketsListByLabel,
+                                       SortLotteryTicketsListByNumber sortLotteryTicketsListByNumber,
                                        ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper) {
         return new MainPresenter(getLotteryTickets, getLotteryTicketsByType, deleteLotteryTicket,
-                view, lotteryTicketsListMapper);
+                sortLotteryTicketsListByLabel, sortLotteryTicketsListByNumber, view, lotteryTicketsListMapper);
     }
 }

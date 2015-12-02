@@ -16,4 +16,6 @@ public interface MainView {
     void showGetLotteryTicketsError();
 
     void showDeleteLotteryTicketError();
+
+    void showSortLotteryTicketsError();
 }
