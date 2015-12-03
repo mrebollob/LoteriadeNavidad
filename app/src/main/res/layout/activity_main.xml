@@ -67,6 +67,14 @@
                     android:text="@string/profit"
                     android:textColor="@color/primary_white_text"
                     android:textSize="@dimen/text_size_large"/>
+
+                <TextView
+                    android:id="@+id/tv_last_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/last_update"
+                    android:textColor="@color/primary_white_text"
+                    android:textSize="@dimen/text_size_medium"/>
             </LinearLayout>
 
             <android.support.v7.widget.Toolbar

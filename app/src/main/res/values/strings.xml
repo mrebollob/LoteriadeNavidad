@@ -21,6 +21,7 @@
     <string name="total_bet">Jugado: %.2f €</string>
     <string name="total_win">Ganado: %.2f €</string>
     <string name="profit">Beneficios: %.2f €</string>
+    <string name="last_update">Sorteo sin comenzar</string>
 
     <string name="error_field_required">Campo requerido</string>
 

@@ -54,6 +54,8 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     protected TextView tvTotalWin;
     @Bind(R.id.tv_profit)
     protected TextView tvProfit;
+    @Bind(R.id.tv_last_update)
+    protected TextView tvLastUpdate;
 
     @Bind(R.id.swipeRefreshLayout)
     protected SwipeRefreshLayout swipeRefreshLayout;
@@ -72,7 +74,7 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     private void initUi() {
         initToolbar();
-        initStatisticsTable();
+        initInfoTable();
         initSpinner();
         initRecyclerView();
         initRefreshLayout();
@@ -88,10 +90,11 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
         return Arrays.<Object>asList(new MainModule(this));
     }
 
-    private void initStatisticsTable() {
+    private void initInfoTable() {
         tvTotalBet.setText(getString(R.string.total_bet, 0f));
         tvTotalWin.setText(getString(R.string.total_win, 0f));
         tvProfit.setText(getString(R.string.profit, 0f));
+//        tvLastUpdate.setText(getString(R.string.last_update, "El sorteo no ha empezado"));
     }
 
     private void initToolbar() {
