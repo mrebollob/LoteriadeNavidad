@@ -18,6 +18,9 @@
     <string name="money_format">%.2f €</string>
     <string name="number_format">%05d</string>
 
+    <string name="total_bet">Jugado: %.2f €</string>
+    <string name="total_win">Ganado: %.2f €</string>
+    <string name="profit">Beneficios: %.2f €</string>
 
     <string name="error_field_required">Campo requerido</string>
 
@@ -33,4 +36,5 @@
         <item>Lotería del niño</item>
     </string-array>
     <string name="title_activity_about">Sobre nosotros</string>
+    <string name="action_settings">Settings</string>
 </resources>

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -47,6 +48,13 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     @Bind(R.id.spinner)
     protected Spinner spinner;
 
+    @Bind(R.id.tv_total_bet)
+    protected TextView tvTotalBet;
+    @Bind(R.id.tv_total_win)
+    protected TextView tvTotalWin;
+    @Bind(R.id.tv_profit)
+    protected TextView tvProfit;
+
     @Bind(R.id.swipeRefreshLayout)
     protected SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.list)
@@ -64,6 +72,7 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     private void initUi() {
         initToolbar();
+        initStatisticsTable();
         initSpinner();
         initRecyclerView();
         initRefreshLayout();
@@ -77,6 +86,12 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     @Override
     protected List<Object> getModules() {
         return Arrays.<Object>asList(new MainModule(this));
+    }
+
+    private void initStatisticsTable() {
+        tvTotalBet.setText(getString(R.string.total_bet, 0f));
+        tvTotalWin.setText(getString(R.string.total_win, 0f));
+        tvProfit.setText(getString(R.string.profit, 0f));
     }
 
     private void initToolbar() {
@@ -187,6 +202,19 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     @Override
     public void refreshLotteryTicketsList(List<PresentationLotteryTicket> lotteryTickets) {
+
+        float totalbet = 0f;
+        float totalwin = 0f;
+
+        for (PresentationLotteryTicket lotteryTicket : lotteryTickets) {
+            totalbet += lotteryTicket.getBet();
+            totalwin += lotteryTicket.getPrize();
+        }
+
+        tvTotalBet.setText(getString(R.string.total_bet, totalbet));
+        tvTotalWin.setText(getString(R.string.total_win, totalwin));
+        tvProfit.setText(getString(R.string.profit, totalwin - totalbet));
+
         lotteryTicketsListAdapter.updateLotteryTickets(lotteryTickets);
         swipeRefreshLayout.setRefreshing(false);
     }
