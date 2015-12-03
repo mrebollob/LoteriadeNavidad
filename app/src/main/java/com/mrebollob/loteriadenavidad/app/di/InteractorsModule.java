@@ -7,7 +7,6 @@ import com.mrebollob.loteriadenavidad.domain.executor.MainThread;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CreateLotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.DeleteLotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTickets;
-import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTicketsByType;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByLabel;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByNumber;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.UpdateLotteryTicket;
@@ -57,14 +56,6 @@ public class InteractorsModule {
                                                              MainThread mainThread,
                                                              LotteryRepository lotteryRepository) {
         return new DeleteLotteryTicket(interactorExecutor, mainThread, lotteryRepository);
-    }
-
-    @Provides
-    @Singleton
-    GetLotteryTicketsByType provideGetLotteryTicketsByTypeInteractor(InteractorExecutor interactorExecutor,
-                                                                     MainThread mainThread,
-                                                                     LotteryRepository lotteryRepository) {
-        return new GetLotteryTicketsByType(interactorExecutor, mainThread, lotteryRepository);
     }
 
     @Provides

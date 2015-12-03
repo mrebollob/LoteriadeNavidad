@@ -1,6 +1,7 @@
 package com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
+import com.mrebollob.loteriadenavidad.domain.entities.LotteryType;
 import com.mrebollob.loteriadenavidad.domain.executor.InteractorExecutor;
 import com.mrebollob.loteriadenavidad.domain.executor.MainThread;
 import com.mrebollob.loteriadenavidad.domain.interactors.Interactor;
@@ -18,6 +19,7 @@ public class GetLotteryTickets implements Interactor {
     private final MainThread mainThread;
     private final LotteryRepository lotteryRepository;
     private Callback mCallback;
+    private LotteryType mLotteryType;
 
     public GetLotteryTickets(InteractorExecutor interactorExecutor, MainThread mainThread,
                              LotteryRepository lotteryRepository) {
@@ -30,10 +32,24 @@ public class GetLotteryTickets implements Interactor {
         this.mCallback = callback;
     }
 
+    public void setType(LotteryType lotteryType) {
+        this.mLotteryType = lotteryType;
+    }
+
     @Override
     public void run() {
         try {
-            notifySuccess(lotteryRepository.getLotteryTickets());
+            switch (mLotteryType) {
+                case CHRISTMAS:
+                    notifySuccess(lotteryRepository.getChristmasLotteryTickets());
+                    break;
+                case CHILD:
+                    notifySuccess(lotteryRepository.getChildLotteryTickets());
+                    break;
+                default:
+                    notifySuccess(lotteryRepository.getLotteryTickets());
+                    break;
+            }
         } catch (GetLotteryTicketsException e) {
             notifyError(e);
         }
