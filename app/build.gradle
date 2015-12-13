@@ -15,7 +15,7 @@ android {
         versionCode 23
         versionName "4.0"
 
-        buildConfigField STRING, "API_URL", '"http://api.randomuser.me/"'
+        buildConfigField STRING, "API_URL", 'http://api.elpais.com/ws'
     }
     buildTypes {
         debug {

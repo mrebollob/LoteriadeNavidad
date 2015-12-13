@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mrebollob.loteriadenavidad.app.di.qualifiers.data.RetrofitLog;
 import com.mrebollob.loteriadenavidad.app.di.qualifiers.data.UserAgent;
-import com.mrebollob.loteriadenavidad.data.repository.datasources.api.ApiNetworkError;
 import com.mrebollob.loteriadenavidad.data.repository.datasources.api.LotteryApiService;
 import com.mrebollob.loteriadenavidad.data.repository.datasources.api.LotteryNetworkDataSourceImp;
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.LotteryNetworkDataSource;
