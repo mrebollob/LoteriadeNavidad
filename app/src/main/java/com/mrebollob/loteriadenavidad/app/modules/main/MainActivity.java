@@ -1,6 +1,7 @@
 package com.mrebollob.loteriadenavidad.app.modules.main;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,8 @@ import com.mrebollob.loteriadenavidad.app.modules.lotteryticketform.LotteryTicke
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.DrawSpinnerAdapter;
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.LotteryTicketsListAdapter;
 import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
+import com.mrebollob.loteriadenavidad.app.ui.errors.ErrorManager;
+import com.mrebollob.loteriadenavidad.app.ui.errors.SnackbarErrorManagerImp;
 import com.mrebollob.loteriadenavidad.app.util.FeedbackUtils;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
@@ -43,6 +46,10 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     @Inject
     MainPresenter presenter;
 
+    ErrorManager errorManager;
+
+    @Bind(R.id.coordinator_layout)
+    protected CoordinatorLayout coordinatorLayout;
     @Bind(R.id.toolbar)
     protected Toolbar toolbar;
     @Bind(R.id.spinner)
@@ -68,6 +75,7 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        errorManager = new SnackbarErrorManagerImp(coordinatorLayout);
 
         initUi();
     }
@@ -230,21 +238,25 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     @Override
     public void showGetLotteryTicketsError() {
         swipeRefreshLayout.setRefreshing(false);
+        errorManager.showError(getString(R.string.error_get_lottery_tickets));
     }
 
     @Override
     public void showDeleteLotteryTicketError() {
         swipeRefreshLayout.setRefreshing(false);
+        errorManager.showError(getString(R.string.error_delete_lottery_ticket));
     }
 
     @Override
     public void showSortLotteryTicketsError() {
         swipeRefreshLayout.setRefreshing(false);
+        errorManager.showError(getString(R.string.error_sort_lottery_tickets));
     }
 
     @Override
     public void showUpdatePrizesError() {
         swipeRefreshLayout.setRefreshing(false);
+        errorManager.showError(getString(R.string.error_update_prizes));
     }
 
     @Override

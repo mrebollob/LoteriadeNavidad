@@ -2,6 +2,7 @@ package com.mrebollob.loteriadenavidad.app.modules.lotteryticketform;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
@@ -14,6 +15,8 @@ import android.widget.RadioGroup;
 
 import com.mrebollob.loteriadenavidad.R;
 import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
+import com.mrebollob.loteriadenavidad.app.ui.errors.ErrorManager;
+import com.mrebollob.loteriadenavidad.app.ui.errors.SnackbarErrorManagerImp;
 import com.mrebollob.loteriadenavidad.app.util.DecimalDigitsInputFilter;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
@@ -34,6 +37,10 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
     @Inject
     LotteryTicketFormPresenter presenter;
 
+    ErrorManager errorManager;
+
+    @Bind(R.id.coordinator_layout)
+    protected CoordinatorLayout coordinatorLayout;
     @Bind(R.id.toolbar)
     protected Toolbar toolbar;
 
@@ -52,6 +59,7 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         parseArguments();
+        errorManager = new SnackbarErrorManagerImp(coordinatorLayout);
         initUi();
     }
 
@@ -198,11 +206,11 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
 
     @Override
     public void showCreateLotteryTicketError() {
-
+        errorManager.showError(getString(R.string.error_create_lottery_ticket));
     }
 
     @Override
     public void showUpdateLotteryTicketError() {
-
+        errorManager.showError(getString(R.string.error_update_lottery_ticket));
     }
 }
