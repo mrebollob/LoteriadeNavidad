@@ -18,4 +18,6 @@ public interface MainView {
     void showDeleteLotteryTicketError();
 
     void showSortLotteryTicketsError();
+
+    void showUpdatePrizesError();
 }

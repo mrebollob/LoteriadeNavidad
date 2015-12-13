@@ -1,4 +1,4 @@
-package com.mrebollob.loteriadenavidad.domain.model;
+package com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions;
 
 /**
  * @author mrebollob

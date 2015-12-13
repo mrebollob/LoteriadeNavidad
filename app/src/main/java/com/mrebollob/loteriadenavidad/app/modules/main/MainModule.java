@@ -2,6 +2,7 @@ package com.mrebollob.loteriadenavidad.app.modules.main;
 
 import com.mrebollob.loteriadenavidad.app.di.ActivityModule;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CheckLotteryTicketsPrize;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.DeleteLotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTickets;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByLabel;
@@ -36,8 +37,10 @@ public class MainModule {
                                        DeleteLotteryTicket deleteLotteryTicket,
                                        SortLotteryTicketsListByLabel sortLotteryTicketsListByLabel,
                                        SortLotteryTicketsListByNumber sortLotteryTicketsListByNumber,
+                                       CheckLotteryTicketsPrize checkLotteryTicketsPrize,
                                        ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper) {
         return new MainPresenter(getLotteryTickets, deleteLotteryTicket,
-                sortLotteryTicketsListByLabel, sortLotteryTicketsListByNumber, view, lotteryTicketsListMapper);
+                sortLotteryTicketsListByLabel, sortLotteryTicketsListByNumber,
+                checkLotteryTicketsPrize, view, lotteryTicketsListMapper);
     }
 }

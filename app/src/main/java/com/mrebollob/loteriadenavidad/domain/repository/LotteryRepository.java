@@ -5,6 +5,7 @@ import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptio
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.DeleteLotteryTicketException;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.GetLotteryTicketsException;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.UpdateLotteryTicketException;
+import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.NetworkException;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface LotteryRepository {
     void updateLotteryTicket(LotteryTicket lotteryTicket) throws UpdateLotteryTicketException;
 
     void deleteLotteryTicket(int lotteryTicketId) throws DeleteLotteryTicketException;
+
+    LotteryTicket checkLotteryTicketPrize(LotteryTicket lotteryTicket) throws NetworkException;
 }

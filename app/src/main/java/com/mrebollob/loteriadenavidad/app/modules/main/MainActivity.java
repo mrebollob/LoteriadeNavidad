@@ -117,13 +117,13 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        presenter.onRefresh();
+                        presenter.onSelectLotteryType(PresentationLotteryType.ALL);
                         break;
                     case 1:
-                        presenter.onRefresh(PresentationLotteryType.CHRISTMAS);
+                        presenter.onSelectLotteryType(PresentationLotteryType.CHRISTMAS);
                         break;
                     case 2:
-                        presenter.onRefresh(PresentationLotteryType.CHILD);
+                        presenter.onSelectLotteryType(PresentationLotteryType.CHILD);
                         break;
                 }
             }
@@ -229,17 +229,22 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     @Override
     public void showGetLotteryTicketsError() {
-
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void showDeleteLotteryTicketError() {
-
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void showSortLotteryTicketsError() {
+        swipeRefreshLayout.setRefreshing(false);
+    }
 
+    @Override
+    public void showUpdatePrizesError() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.mrebollob.loteriadenavidad.domain.repository;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
+import com.mrebollob.loteriadenavidad.domain.entities.LotteryType;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.CreateLotteryTicketException;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.DeleteLotteryTicketException;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.GetLotteryTicketsException;
@@ -10,6 +11,7 @@ import com.mrebollob.loteriadenavidad.domain.repository.datasources.LotteryNetwo
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.CreateBddLotteryTicketException;
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.DeleteBddLotteryTicketException;
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.GetBddLotteryTicketsException;
+import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.NetworkException;
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.UpdateBddLotteryTicketException;
 
 import java.util.List;
@@ -86,5 +88,24 @@ public class LotteryRepositoryImp implements LotteryRepository {
         } catch (DeleteBddLotteryTicketException e) {
             throw new DeleteLotteryTicketException();
         }
+    }
+
+    @Override
+    public LotteryTicket checkLotteryTicketPrize(LotteryTicket lotteryTicket) throws NetworkException {
+
+        LotteryTicket updatedLotteryTicket = null;
+
+        try {
+            if (lotteryTicket.getLotteryType() == LotteryType.CHRISTMAS) {
+                updatedLotteryTicket = networkDataSource.checkChristmasLotteryTicketPrize(lotteryTicket);
+            } else {
+                updatedLotteryTicket = networkDataSource.checkChildLotteryTicketPrize(lotteryTicket);
+            }
+            bddDataSource.updateLotteryTicket(updatedLotteryTicket);
+        } catch (UpdateBddLotteryTicketException e) {
+            e.printStackTrace();
+        }
+
+        return updatedLotteryTicket;
     }
 }

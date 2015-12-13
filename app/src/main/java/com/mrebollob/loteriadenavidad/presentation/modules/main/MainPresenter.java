@@ -2,6 +2,7 @@ package com.mrebollob.loteriadenavidad.presentation.modules.main;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryType;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CheckLotteryTicketsPrize;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.DeleteLotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTickets;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByLabel;
@@ -22,6 +23,7 @@ public class MainPresenter extends Presenter {
     private final DeleteLotteryTicket deleteLotteryTicket;
     private final SortLotteryTicketsListByLabel sortLotteryTicketsListByLabel;
     private final SortLotteryTicketsListByNumber sortLotteryTicketsListByNumber;
+    private final CheckLotteryTicketsPrize checkLotteryTicketsPrize;
     private final MainView view;
     private final ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper;
 
@@ -33,30 +35,39 @@ public class MainPresenter extends Presenter {
                          DeleteLotteryTicket deleteLotteryTicket,
                          SortLotteryTicketsListByLabel sortLotteryTicketsListByLabel,
                          SortLotteryTicketsListByNumber sortLotteryTicketsListByNumber,
+                         CheckLotteryTicketsPrize checkLotteryTicketsPrize,
                          MainView view,
                          ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper) {
         this.getLotteryTickets = getLotteryTickets;
         this.deleteLotteryTicket = deleteLotteryTicket;
         this.sortLotteryTicketsListByLabel = sortLotteryTicketsListByLabel;
         this.sortLotteryTicketsListByNumber = sortLotteryTicketsListByNumber;
+        this.checkLotteryTicketsPrize = checkLotteryTicketsPrize;
         this.view = view;
         this.lotteryTicketsListMapper = lotteryTicketsListMapper;
     }
 
     @Override
     public void onResume() {
-        if (mLotteryType == null)
-            onRefresh();
-        else
-            onRefresh(mLotteryType);
+        view.refreshUi();
+        getLotteryTickets.setCallback(getLotteryTicketsCallback);
+        getLotteryTickets.setType(LotteryType.ALL);
+        getLotteryTickets.execute();
     }
 
     @Override
     public void onPause() {
     }
 
-    public void sortLotteryTickets() {
+    public void onSelectLotteryType(PresentationLotteryType lotteryType) {
+        view.refreshUi();
+        this.mLotteryType = lotteryType;
+        getLotteryTickets.setCallback(getLotteryTicketsCallback);
+        getLotteryTickets.setType(LotteryType.valueOf(mLotteryType.toString()));
+        getLotteryTickets.execute();
+    }
 
+    public void sortLotteryTickets() {
         if (sortType == 0) {
             sortLotteryTicketsListByLabel.setData(mLotteryTickets);
             sortLotteryTicketsListByLabel.setCallback(sortLotteryTicketsListByLabelCallback);
@@ -70,18 +81,9 @@ public class MainPresenter extends Presenter {
 
     public void onRefresh() {
         view.refreshUi();
-        this.mLotteryType = null;
-        getLotteryTickets.setCallback(getLotteryTicketsCallback);
-        getLotteryTickets.setType(LotteryType.ALL);
-        getLotteryTickets.execute();
-    }
-
-    public void onRefresh(PresentationLotteryType lotteryType) {
-        view.refreshUi();
-        this.mLotteryType = lotteryType;
-        getLotteryTickets.setCallback(getLotteryTicketsCallback);
-        getLotteryTickets.setType(LotteryType.valueOf(lotteryType.toString()));
-        getLotteryTickets.execute();
+        checkLotteryTicketsPrize.setData(mLotteryTickets);
+        checkLotteryTicketsPrize.setCallback(checkLotteryTicketsPrizeCallback);
+        checkLotteryTicketsPrize.execute();
     }
 
     public void deleteLotteryTicket(int lotteryTicketId) {
@@ -111,7 +113,9 @@ public class MainPresenter extends Presenter {
 
                 @Override
                 public void onSuccess() {
-                    onRefresh();
+                    getLotteryTickets.setCallback(getLotteryTicketsCallback);
+                    getLotteryTickets.setType(LotteryType.valueOf(mLotteryType.toString()));
+                    getLotteryTickets.execute();
                 }
 
                 @Override
@@ -147,6 +151,20 @@ public class MainPresenter extends Presenter {
                 @Override
                 public void onError(Throwable error) {
                     view.showSortLotteryTicketsError();
+                }
+            };
+
+    private final CheckLotteryTicketsPrize.Callback checkLotteryTicketsPrizeCallback =
+            new CheckLotteryTicketsPrize.Callback() {
+                @Override
+                public void onSuccess(List<LotteryTicket> lotteryTickets) {
+                    mLotteryTickets = lotteryTickets;
+                    view.refreshLotteryTicketsList(lotteryTicketsListMapper.modelToData(lotteryTickets));
+                }
+
+                @Override
+                public void onError(Throwable error) {
+                    view.showUpdatePrizesError();
                 }
             };
 }
