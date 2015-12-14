@@ -18,6 +18,9 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.mrebollob.loteriadenavidad.R;
 import com.mrebollob.loteriadenavidad.app.modules.about.AboutActionCommand;
 import com.mrebollob.loteriadenavidad.app.modules.lotteryticketform.LotteryTicketFormActionCommand;
@@ -70,12 +73,25 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     protected RecyclerView list;
 
     private LotteryTicketsListAdapter lotteryTicketsListAdapter;
+    private InterstitialAd mInterstitialAd;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         errorManager = new SnackbarErrorManagerImp(coordinatorLayout);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+                LotteryTicketFormActionCommand lotteryTicketFormActionCommand =
+                        new LotteryTicketFormActionCommand(MainActivity.this);
+                lotteryTicketFormActionCommand.execute();
+            }
+        });
 
         initUi();
     }
@@ -144,8 +160,13 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     @OnClick(R.id.fab)
     public void onAddButtonClick(View view) {
-        LotteryTicketFormActionCommand lotteryTicketFormActionCommand = new LotteryTicketFormActionCommand(this);
-        lotteryTicketFormActionCommand.execute();
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            LotteryTicketFormActionCommand lotteryTicketFormActionCommand =
+                    new LotteryTicketFormActionCommand(this);
+            lotteryTicketFormActionCommand.execute();
+        }
     }
 
     private void initRecyclerView() {
@@ -198,6 +219,9 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     protected void onResume() {
         super.onResume();
         presenter.onResume();
+        if (!mInterstitialAd.isLoaded()) {
+            requestNewInterstitial();
+        }
     }
 
     @Override
@@ -300,5 +324,13 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
                 })
                 .negativeText("Cancelar")
                 .show();
+    }
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("9F9ECDD1FE8FF910D411658471E3B73E")
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
     }
 }
