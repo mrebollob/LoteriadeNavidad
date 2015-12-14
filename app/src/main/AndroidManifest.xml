@@ -41,6 +41,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mrebollob.loteriadenavidad.app.modules.main.MainActivity"/>
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="74191977ac775d9e34de7cdabf2a5840cb9a3ab1" />
     </application>
 
 </manifest>
