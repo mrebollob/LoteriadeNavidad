@@ -46,6 +46,4 @@
     <string name="error_create_lottery_ticket">Error al crear el número</string>
     <string name="error_update_lottery_ticket">Error al actualizar el número</string>
 
-    <string name="banner_ad_unit_id">ca-app-pub-3873681166299170/7557186444</string>
-
 </resources>

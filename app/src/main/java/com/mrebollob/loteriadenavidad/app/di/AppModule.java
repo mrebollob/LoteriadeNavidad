@@ -5,6 +5,7 @@ import android.os.Build;
 
 import com.mrebollob.loteriadenavidad.app.LoteriaDeNavidadApp;
 import com.mrebollob.loteriadenavidad.app.di.qualifiers.ApiLevel;
+import com.mrebollob.loteriadenavidad.app.util.AnalyticsManager;
 
 import javax.inject.Singleton;
 
@@ -30,11 +31,19 @@ public class AppModule {
     }
 
     @Provides
-    @Singleton Application provideApplication() {
+    @Singleton
+    Application provideApplication() {
         return app;
     }
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
+    AnalyticsManager provideAnalyticsManager() {
+        return new AnalyticsManager(app);
+    }
+
+    @Provides
+    @Singleton
     @ApiLevel
     int provideApiLevel() {
         return Build.VERSION.SDK_INT;
