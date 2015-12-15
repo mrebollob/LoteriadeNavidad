@@ -11,4 +11,6 @@ public interface LotteryNetworkDataSource {
     LotteryTicket checkChristmasLotteryTicketPrize(LotteryTicket lotteryTicket)throws NetworkException;
 
     LotteryTicket checkChildLotteryTicketPrize(LotteryTicket lotteryTicket)throws NetworkException;
+
+    int checkLotteryStatus() throws NetworkException;
 }

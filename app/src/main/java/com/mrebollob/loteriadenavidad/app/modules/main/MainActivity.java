@@ -36,7 +36,9 @@ import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType
 import com.mrebollob.loteriadenavidad.presentation.modules.main.MainPresenter;
 import com.mrebollob.loteriadenavidad.presentation.modules.main.MainView;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -67,6 +69,8 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     protected TextView tvTotalWin;
     @Bind(R.id.tv_profit)
     protected TextView tvProfit;
+    @Bind(R.id.tv_lottery_status)
+    protected TextView tvLotteryStatus;
     @Bind(R.id.tv_last_update)
     protected TextView tvLastUpdate;
 
@@ -264,6 +268,32 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
         analyticsManager.sendEvent("Statistics", "refreshLotteryTicketsList", "total numbers", lotteryTickets.size());
         analyticsManager.sendEvent("Statistics", "refreshLotteryTicketsList", "total bet", (long) totalbet);
         analyticsManager.sendEvent("Statistics", "refreshLotteryTicketsList", "total win", (long) totalwin);
+    }
+
+    @Override
+    public void showLastUpdate(Date lastUpdate) {
+        String lastUpdateText = new SimpleDateFormat("HH:mm dd/MM/yyyy").format(lastUpdate);
+
+        tvLastUpdate.setText(getString(R.string.last_update, lastUpdateText));
+    }
+
+    @Override
+    public void showLotteryStatus(int status) {
+        String lotteryStatusText;
+
+        switch (status) {
+            case 0:
+                lotteryStatusText = getString(R.string.the_draw_has_not_begun);
+                break;
+            case 1:
+                lotteryStatusText = getString(R.string.the_draw_has_begun);
+                break;
+            default:
+                lotteryStatusText = getString(R.string.the_draw_is_over);
+                break;
+        }
+
+        tvLotteryStatus.setText(lotteryStatusText);
     }
 
     @Override

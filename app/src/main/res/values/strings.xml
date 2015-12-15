@@ -21,19 +21,25 @@
     <string name="total_bet">Jugado: %.2f €</string>
     <string name="total_win">Ganado: %.2f €</string>
     <string name="profit">Beneficios: %.2f €</string>
-    <string name="last_update">Sorteo sin comenzar</string>
+    <string name="void_text">--</string>
 
     <string name="about_text">Esta aplicación esta en desarrollo. En los próximos días la iremos actualizando para que este lista para el sorteo. \n\nATENCIÓN:\nLos resultados obtenidos por esta aplicación son meramente informativos y no vinculantes. Es posible que puedan aparecer errores en los resultados. Ante esta situación, tanto el desarrollador como el proveedor de datos (El País) no se hacen responsables de los perjuicios que puedan causar estos errores.\n\nEs altamente recomendable confirmar los resultados mediante las listas oficiales del sorteo una vez haya concluido el mismo.</string>
 
     <string name="christmas_lottery">Lotería de navidad</string>
     <string name="child_lottery">Lotería del niño</string>
 
-    <string-array
-        name="draws">
+    <string-array name="draws">
         <item>Todos los sorteos</item>
         <item>Lotería de navidad</item>
         <item>Lotería del niño</item>
     </string-array>
+
+    <string name="last_update">Actualizado: %s</string>
+
+    <string name="the_draw_has_not_begun">El sorteo no ha comenzado</string>
+    <string name="the_draw_has_begun">El sorteo ha empezado</string>
+    <string name="the_draw_is_over">El sorteo ha terminado</string>
+
     <string name="title_activity_about">Sobre nosotros</string>
     <string name="action_settings">Settings</string>
 

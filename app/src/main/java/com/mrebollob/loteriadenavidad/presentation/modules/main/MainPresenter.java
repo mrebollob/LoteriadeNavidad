@@ -2,8 +2,10 @@ package com.mrebollob.loteriadenavidad.presentation.modules.main;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryType;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CheckLotteryStatus;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CheckLotteryTicketsPrize;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.DeleteLotteryTicket;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLastUpdatedTime;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTickets;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByLabel;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByNumber;
@@ -12,6 +14,7 @@ import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTick
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
 import com.mrebollob.loteriadenavidad.presentation.model.mapper.base.ListMapper;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +27,8 @@ public class MainPresenter extends Presenter {
     private final SortLotteryTicketsListByLabel sortLotteryTicketsListByLabel;
     private final SortLotteryTicketsListByNumber sortLotteryTicketsListByNumber;
     private final CheckLotteryTicketsPrize checkLotteryTicketsPrize;
+    private final GetLastUpdatedTime getLastUpdatedTime;
+    private final CheckLotteryStatus checkLotteryStatus;
     private final MainView view;
     private final ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper;
 
@@ -36,6 +41,8 @@ public class MainPresenter extends Presenter {
                          SortLotteryTicketsListByLabel sortLotteryTicketsListByLabel,
                          SortLotteryTicketsListByNumber sortLotteryTicketsListByNumber,
                          CheckLotteryTicketsPrize checkLotteryTicketsPrize,
+                         GetLastUpdatedTime getLastUpdatedTime,
+                         CheckLotteryStatus checkLotteryStatus,
                          MainView view,
                          ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper) {
         this.getLotteryTickets = getLotteryTickets;
@@ -43,6 +50,8 @@ public class MainPresenter extends Presenter {
         this.sortLotteryTicketsListByLabel = sortLotteryTicketsListByLabel;
         this.sortLotteryTicketsListByNumber = sortLotteryTicketsListByNumber;
         this.checkLotteryTicketsPrize = checkLotteryTicketsPrize;
+        this.getLastUpdatedTime = getLastUpdatedTime;
+        this.checkLotteryStatus = checkLotteryStatus;
         this.view = view;
         this.lotteryTicketsListMapper = lotteryTicketsListMapper;
     }
@@ -53,6 +62,9 @@ public class MainPresenter extends Presenter {
         getLotteryTickets.setCallback(getLotteryTicketsCallback);
         getLotteryTickets.setType(LotteryType.ALL);
         getLotteryTickets.execute();
+
+        getLastUpdatedTime.setCallback(getLastUpdatedTimeCallback);
+        getLastUpdatedTime.execute();
     }
 
     @Override
@@ -81,9 +93,9 @@ public class MainPresenter extends Presenter {
 
     public void onRefresh() {
         view.refreshUi();
-        checkLotteryTicketsPrize.setData(mLotteryTickets);
-        checkLotteryTicketsPrize.setCallback(checkLotteryTicketsPrizeCallback);
-        checkLotteryTicketsPrize.execute();
+
+        checkLotteryStatus.setCallback(checkLotteryStatusCallback);
+        checkLotteryStatus.execute();
     }
 
     public void deleteLotteryTicket(int lotteryTicketId) {
@@ -156,10 +168,45 @@ public class MainPresenter extends Presenter {
 
     private final CheckLotteryTicketsPrize.Callback checkLotteryTicketsPrizeCallback =
             new CheckLotteryTicketsPrize.Callback() {
+
                 @Override
                 public void onSuccess(List<LotteryTicket> lotteryTickets) {
                     mLotteryTickets = lotteryTickets;
-                    view.refreshLotteryTicketsList(lotteryTicketsListMapper.modelToData(lotteryTickets));
+                    view.refreshLotteryTicketsList(lotteryTicketsListMapper.modelToData(mLotteryTickets));
+                    getLastUpdatedTime.setCallback(getLastUpdatedTimeCallback);
+                    getLastUpdatedTime.execute();
+                }
+
+                @Override
+                public void onError(Throwable error) {
+                    view.showUpdatePrizesError();
+                }
+            };
+
+    private final GetLastUpdatedTime.Callback getLastUpdatedTimeCallback =
+            new GetLastUpdatedTime.Callback() {
+                @Override
+                public void onSuccess(Date updateTime) {
+                    view.showLastUpdate(updateTime);
+                }
+
+                @Override
+                public void onError(Throwable error) {
+                }
+            };
+
+    private final CheckLotteryStatus.Callback checkLotteryStatusCallback =
+            new CheckLotteryStatus.Callback() {
+
+                @Override
+                public void onSuccess(int lotteryStatus) {
+                    view.showLotteryStatus(lotteryStatus);
+
+                    if (lotteryStatus > 0) {
+                        checkLotteryTicketsPrize.setData(mLotteryTickets);
+                        checkLotteryTicketsPrize.setCallback(checkLotteryTicketsPrizeCallback);
+                        checkLotteryTicketsPrize.execute();
+                    }
                 }
 
                 @Override

@@ -62,4 +62,21 @@ public class LotteryNetworkDataSourceImp implements LotteryNetworkDataSource {
             throw new NetworkException();
         }
     }
+
+    @Override
+    public int checkLotteryStatus() throws NetworkException {
+        try {
+            String apiResponse =
+                    apiService.checkChildLotteryTicket(7);
+
+            apiResponse = apiResponse.replace("busqueda=", "");
+
+            ApiLotteryTicketResponse apiLotteryTicketResponse =
+                    gson.fromJson(apiResponse, ApiLotteryTicketResponse.class);
+
+            return apiLotteryTicketResponse.getStatus();
+        } catch (Throwable e) {
+            throw new NetworkException();
+        }
+    }
 }

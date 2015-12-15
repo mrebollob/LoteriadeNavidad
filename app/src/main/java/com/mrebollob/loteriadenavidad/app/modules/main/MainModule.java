@@ -2,8 +2,10 @@ package com.mrebollob.loteriadenavidad.app.modules.main;
 
 import com.mrebollob.loteriadenavidad.app.di.ActivityModule;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CheckLotteryStatus;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CheckLotteryTicketsPrize;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.DeleteLotteryTicket;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLastUpdatedTime;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTickets;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByLabel;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByNumber;
@@ -38,9 +40,11 @@ public class MainModule {
                                        SortLotteryTicketsListByLabel sortLotteryTicketsListByLabel,
                                        SortLotteryTicketsListByNumber sortLotteryTicketsListByNumber,
                                        CheckLotteryTicketsPrize checkLotteryTicketsPrize,
+                                       GetLastUpdatedTime getLastUpdatedTime,
+                                       CheckLotteryStatus checkLotteryStatus,
                                        ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper) {
         return new MainPresenter(getLotteryTickets, deleteLotteryTicket,
                 sortLotteryTicketsListByLabel, sortLotteryTicketsListByNumber,
-                checkLotteryTicketsPrize, view, lotteryTicketsListMapper);
+                checkLotteryTicketsPrize, getLastUpdatedTime, checkLotteryStatus, view, lotteryTicketsListMapper);
     }
 }

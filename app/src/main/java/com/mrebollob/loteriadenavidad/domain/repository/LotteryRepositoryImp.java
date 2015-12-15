@@ -4,16 +4,21 @@ import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryType;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.CreateLotteryTicketException;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.DeleteLotteryTicketException;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.GetLastUpdatedException;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.GetLotteryTicketsException;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.UpdateLotteryTicketException;
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.LotteryBddDataSource;
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.LotteryNetworkDataSource;
+import com.mrebollob.loteriadenavidad.domain.repository.datasources.LotterySPDataSource;
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.CreateBddLotteryTicketException;
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.DeleteBddLotteryTicketException;
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.GetBddLotteryTicketsException;
+import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.GetSPUpdatedTimeException;
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.NetworkException;
+import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.SetSPUpdatedTimeException;
 import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.UpdateBddLotteryTicketException;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,11 +28,14 @@ public class LotteryRepositoryImp implements LotteryRepository {
 
     private final LotteryNetworkDataSource networkDataSource;
     private final LotteryBddDataSource bddDataSource;
+    private final LotterySPDataSource spDataSource;
 
     public LotteryRepositoryImp(LotteryNetworkDataSource networkDataSource,
-                                LotteryBddDataSource bddDataSource) {
+                                LotteryBddDataSource bddDataSource,
+                                LotterySPDataSource spDataSource) {
         this.networkDataSource = networkDataSource;
         this.bddDataSource = bddDataSource;
+        this.spDataSource = spDataSource;
     }
 
     @Override
@@ -106,6 +114,26 @@ public class LotteryRepositoryImp implements LotteryRepository {
             e.printStackTrace();
         }
 
+        try {
+            spDataSource.setLastUpdatedTime(new Date());
+        } catch (SetSPUpdatedTimeException e) {
+            e.printStackTrace();
+        }
+
         return updatedLotteryTicket;
+    }
+
+    @Override
+    public Date getLastUpdatedTime() throws GetLastUpdatedException {
+        try {
+            return spDataSource.getLastUpdatedTime();
+        } catch (GetSPUpdatedTimeException e) {
+            throw new GetLastUpdatedException();
+        }
+    }
+
+    @Override
+    public int checkLotteryStatus() throws NetworkException {
+        return networkDataSource.checkLotteryStatus();
     }
 }
