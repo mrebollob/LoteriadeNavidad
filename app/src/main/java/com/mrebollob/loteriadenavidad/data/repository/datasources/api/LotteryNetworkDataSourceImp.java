@@ -67,7 +67,7 @@ public class LotteryNetworkDataSourceImp implements LotteryNetworkDataSource {
     public int checkLotteryStatus() throws NetworkException {
         try {
             String apiResponse =
-                    apiService.checkChildLotteryTicket(7);
+                    apiService.checkChristmasLotteryTicket(7);
 
             apiResponse = apiResponse.replace("busqueda=", "");
 

@@ -14,6 +14,7 @@ import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTick
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
 import com.mrebollob.loteriadenavidad.presentation.model.mapper.base.ListMapper;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class MainPresenter extends Presenter {
     private final ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper;
 
     private PresentationLotteryType mLotteryType;
-    private List<LotteryTicket> mLotteryTickets;
+    private List<LotteryTicket> mLotteryTickets = new ArrayList<>();
     private int sortType;
 
     public MainPresenter(GetLotteryTickets getLotteryTickets,
@@ -93,9 +94,12 @@ public class MainPresenter extends Presenter {
 
     public void onRefresh() {
         view.refreshUi();
-
-        checkLotteryStatus.setCallback(checkLotteryStatusCallback);
-        checkLotteryStatus.execute();
+        if (mLotteryTickets.isEmpty()) {
+            view.showNoNumbersError();
+        } else {
+            checkLotteryStatus.setCallback(checkLotteryStatusCallback);
+            checkLotteryStatus.execute();
+        }
     }
 
     public void deleteLotteryTicket(int lotteryTicketId) {
@@ -206,12 +210,14 @@ public class MainPresenter extends Presenter {
                         checkLotteryTicketsPrize.setData(mLotteryTickets);
                         checkLotteryTicketsPrize.setCallback(checkLotteryTicketsPrizeCallback);
                         checkLotteryTicketsPrize.execute();
+                    } else {
+                        view.showLotteryNotStarted();
                     }
                 }
 
                 @Override
                 public void onError(Throwable error) {
-                    view.showUpdatePrizesError();
+                    view.showLotteryStatusError();
                 }
             };
 }

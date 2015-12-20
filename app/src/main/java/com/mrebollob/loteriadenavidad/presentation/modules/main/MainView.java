@@ -16,13 +16,19 @@ public interface MainView {
 
     void showLotteryStatus(int status);
 
+    void showLotteryNotStarted();
+
     void refreshUi();
 
     void showGetLotteryTicketsError();
+
+    void showNoNumbersError();
 
     void showDeleteLotteryTicketError();
 
     void showSortLotteryTicketsError();
 
     void showUpdatePrizesError();
+
+    void showLotteryStatusError();
 }

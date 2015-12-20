@@ -297,6 +297,12 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     }
 
     @Override
+    public void showLotteryNotStarted() {
+        swipeRefreshLayout.setRefreshing(false);
+        errorManager.showError(getString(R.string.the_draw_has_not_begun));
+    }
+
+    @Override
     public void refreshUi() {
         swipeRefreshLayout.setRefreshing(true);
     }
@@ -305,6 +311,12 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     public void showGetLotteryTicketsError() {
         swipeRefreshLayout.setRefreshing(false);
         errorManager.showError(getString(R.string.error_get_lottery_tickets));
+    }
+
+    @Override
+    public void showNoNumbersError() {
+        swipeRefreshLayout.setRefreshing(false);
+        errorManager.showError(getString(R.string.error_no_numbers));
     }
 
     @Override
@@ -321,6 +333,12 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     @Override
     public void showUpdatePrizesError() {
+        swipeRefreshLayout.setRefreshing(false);
+        errorManager.showError(getString(R.string.error_update_prizes));
+    }
+
+    @Override
+    public void showLotteryStatusError() {
         swipeRefreshLayout.setRefreshing(false);
         errorManager.showError(getString(R.string.error_update_prizes));
     }
