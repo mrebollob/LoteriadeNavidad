@@ -68,7 +68,10 @@ public class LotteryTicketsListAdapter extends RecyclerView.Adapter<LotteryTicke
         String betText = String.format(res.getString(R.string.money_format), lotteryTicket.getBet());
         viewHolder.tvBet.setText(betText);
 
-        String prizeText = String.format(res.getString(R.string.money_format), lotteryTicket.getPrize());
+        float mPrize = lotteryTicket.getBet()*lotteryTicket.getPrize()/20;
+
+        String prizeText = String.format(res.getString(R.string.money_format), mPrize);
+
         viewHolder.tvPrize.setText(prizeText);
         viewHolder.itemView.setTag(lotteryTicket);
 

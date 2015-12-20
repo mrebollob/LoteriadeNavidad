@@ -14,16 +14,16 @@ public class LotteryTicketFormPresenter extends Presenter {
     private final CreateLotteryTicket createLotteryTicket;
     private final UpdateLotteryTicket updateLotteryTicket;
     private final LotteryTicketFormView view;
-    private final PresentationLotteryTicketMapper LotteryTicketMapper;
+    private final PresentationLotteryTicketMapper lotteryTicketMapper;
 
     public LotteryTicketFormPresenter(CreateLotteryTicket createLotteryTicket,
                                      UpdateLotteryTicket updateLotteryTicket,
                                      LotteryTicketFormView view,
-                                     PresentationLotteryTicketMapper LotteryTicketMapper) {
+                                     PresentationLotteryTicketMapper lotteryTicketMapper) {
         this.createLotteryTicket = createLotteryTicket;
         this.updateLotteryTicket = updateLotteryTicket;
         this.view = view;
-        this.LotteryTicketMapper = LotteryTicketMapper;
+        this.lotteryTicketMapper = lotteryTicketMapper;
     }
 
     @Override
@@ -35,13 +35,13 @@ public class LotteryTicketFormPresenter extends Presenter {
     }
 
     public void createLotteryTicket(PresentationLotteryTicket LotteryTicket) {
-        createLotteryTicket.setData(LotteryTicketMapper.dataToModel(LotteryTicket));
+        createLotteryTicket.setData(lotteryTicketMapper.dataToModel(LotteryTicket));
         createLotteryTicket.setCallback(createLotteryTicketCallback);
         createLotteryTicket.execute();
     }
 
     public void updateLotteryTicket(PresentationLotteryTicket LotteryTicket) {
-        updateLotteryTicket.setData(LotteryTicketMapper.dataToModel(LotteryTicket));
+        updateLotteryTicket.setData(lotteryTicketMapper.dataToModel(LotteryTicket));
         updateLotteryTicket.setCallback(updateLotteryTicketCallback);
         updateLotteryTicket.execute();
     }

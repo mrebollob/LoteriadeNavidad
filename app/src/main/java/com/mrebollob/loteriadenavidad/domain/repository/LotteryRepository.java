@@ -3,9 +3,12 @@ package com.mrebollob.loteriadenavidad.domain.repository;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.CreateLotteryTicketException;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.DeleteLotteryTicketException;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.GetLastUpdatedException;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.GetLotteryTicketsException;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.exceptions.UpdateLotteryTicketException;
+import com.mrebollob.loteriadenavidad.domain.repository.datasources.exceptions.NetworkException;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,4 +27,10 @@ public interface LotteryRepository {
     void updateLotteryTicket(LotteryTicket lotteryTicket) throws UpdateLotteryTicketException;
 
     void deleteLotteryTicket(int lotteryTicketId) throws DeleteLotteryTicketException;
+
+    LotteryTicket checkLotteryTicketPrize(LotteryTicket lotteryTicket) throws NetworkException;
+
+    Date getLastUpdatedTime() throws GetLastUpdatedException;
+
+    int checkLotteryStatus() throws NetworkException;
 }

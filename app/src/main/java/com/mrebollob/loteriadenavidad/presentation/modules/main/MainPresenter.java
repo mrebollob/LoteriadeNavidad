@@ -2,7 +2,10 @@ package com.mrebollob.loteriadenavidad.presentation.modules.main;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryType;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CheckLotteryStatus;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CheckLotteryTicketsPrize;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.DeleteLotteryTicket;
+import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLastUpdatedTime;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTickets;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByLabel;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByNumber;
@@ -11,6 +14,8 @@ import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTick
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
 import com.mrebollob.loteriadenavidad.presentation.model.mapper.base.ListMapper;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,41 +27,61 @@ public class MainPresenter extends Presenter {
     private final DeleteLotteryTicket deleteLotteryTicket;
     private final SortLotteryTicketsListByLabel sortLotteryTicketsListByLabel;
     private final SortLotteryTicketsListByNumber sortLotteryTicketsListByNumber;
+    private final CheckLotteryTicketsPrize checkLotteryTicketsPrize;
+    private final GetLastUpdatedTime getLastUpdatedTime;
+    private final CheckLotteryStatus checkLotteryStatus;
     private final MainView view;
     private final ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper;
 
     private PresentationLotteryType mLotteryType;
-    private List<LotteryTicket> mLotteryTickets;
+    private List<LotteryTicket> mLotteryTickets = new ArrayList<>();
     private int sortType;
+    private int numberOfChecks = 0;
 
     public MainPresenter(GetLotteryTickets getLotteryTickets,
                          DeleteLotteryTicket deleteLotteryTicket,
                          SortLotteryTicketsListByLabel sortLotteryTicketsListByLabel,
                          SortLotteryTicketsListByNumber sortLotteryTicketsListByNumber,
+                         CheckLotteryTicketsPrize checkLotteryTicketsPrize,
+                         GetLastUpdatedTime getLastUpdatedTime,
+                         CheckLotteryStatus checkLotteryStatus,
                          MainView view,
                          ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper) {
         this.getLotteryTickets = getLotteryTickets;
         this.deleteLotteryTicket = deleteLotteryTicket;
         this.sortLotteryTicketsListByLabel = sortLotteryTicketsListByLabel;
         this.sortLotteryTicketsListByNumber = sortLotteryTicketsListByNumber;
+        this.checkLotteryTicketsPrize = checkLotteryTicketsPrize;
+        this.getLastUpdatedTime = getLastUpdatedTime;
+        this.checkLotteryStatus = checkLotteryStatus;
         this.view = view;
         this.lotteryTicketsListMapper = lotteryTicketsListMapper;
     }
 
     @Override
     public void onResume() {
-        if (mLotteryType == null)
-            onRefresh();
-        else
-            onRefresh(mLotteryType);
+        view.refreshUi();
+        getLotteryTickets.setCallback(getLotteryTicketsCallback);
+        getLotteryTickets.setType(LotteryType.ALL);
+        getLotteryTickets.execute();
+
+        getLastUpdatedTime.setCallback(getLastUpdatedTimeCallback);
+        getLastUpdatedTime.execute();
     }
 
     @Override
     public void onPause() {
     }
 
-    public void sortLotteryTickets() {
+    public void onSelectLotteryType(PresentationLotteryType lotteryType) {
+        view.refreshUi();
+        this.mLotteryType = lotteryType;
+        getLotteryTickets.setCallback(getLotteryTicketsCallback);
+        getLotteryTickets.setType(LotteryType.valueOf(mLotteryType.toString()));
+        getLotteryTickets.execute();
+    }
 
+    public void sortLotteryTickets() {
         if (sortType == 0) {
             sortLotteryTicketsListByLabel.setData(mLotteryTickets);
             sortLotteryTicketsListByLabel.setCallback(sortLotteryTicketsListByLabelCallback);
@@ -70,18 +95,12 @@ public class MainPresenter extends Presenter {
 
     public void onRefresh() {
         view.refreshUi();
-        this.mLotteryType = null;
-        getLotteryTickets.setCallback(getLotteryTicketsCallback);
-        getLotteryTickets.setType(LotteryType.ALL);
-        getLotteryTickets.execute();
-    }
-
-    public void onRefresh(PresentationLotteryType lotteryType) {
-        view.refreshUi();
-        this.mLotteryType = lotteryType;
-        getLotteryTickets.setCallback(getLotteryTicketsCallback);
-        getLotteryTickets.setType(LotteryType.valueOf(lotteryType.toString()));
-        getLotteryTickets.execute();
+        if (mLotteryTickets.isEmpty()) {
+            view.showNoNumbersError();
+        } else {
+            checkLotteryStatus.setCallback(checkLotteryStatusCallback);
+            checkLotteryStatus.execute();
+        }
     }
 
     public void deleteLotteryTicket(int lotteryTicketId) {
@@ -111,7 +130,9 @@ public class MainPresenter extends Presenter {
 
                 @Override
                 public void onSuccess() {
-                    onRefresh();
+                    getLotteryTickets.setCallback(getLotteryTicketsCallback);
+                    getLotteryTickets.setType(LotteryType.valueOf(mLotteryType.toString()));
+                    getLotteryTickets.execute();
                 }
 
                 @Override
@@ -149,4 +170,65 @@ public class MainPresenter extends Presenter {
                     view.showSortLotteryTicketsError();
                 }
             };
+
+    private final CheckLotteryTicketsPrize.Callback checkLotteryTicketsPrizeCallback =
+            new CheckLotteryTicketsPrize.Callback() {
+
+                @Override
+                public void onSuccess(List<LotteryTicket> lotteryTickets) {
+                    mLotteryTickets = lotteryTickets;
+                    view.refreshLotteryTicketsList(lotteryTicketsListMapper.modelToData(mLotteryTickets));
+                    getLastUpdatedTime.setCallback(getLastUpdatedTimeCallback);
+                    getLastUpdatedTime.execute();
+
+                    numberOfChecks += 1;
+
+                    if (shouldSeeAd(numberOfChecks))
+                        view.showAd();
+                }
+
+                @Override
+                public void onError(Throwable error) {
+                    view.showUpdatePrizesError();
+                }
+            };
+
+    private final GetLastUpdatedTime.Callback getLastUpdatedTimeCallback =
+            new GetLastUpdatedTime.Callback() {
+                @Override
+                public void onSuccess(Date updateTime) {
+                    view.showLastUpdate(updateTime);
+                }
+
+                @Override
+                public void onError(Throwable error) {
+                }
+            };
+
+    private final CheckLotteryStatus.Callback checkLotteryStatusCallback =
+            new CheckLotteryStatus.Callback() {
+
+                @Override
+                public void onSuccess(int lotteryStatus) {
+                    view.showLotteryStatus(lotteryStatus);
+                    numberOfChecks += 1;
+
+                    if (lotteryStatus > 0) {
+                        checkLotteryTicketsPrize.setData(mLotteryTickets);
+                        checkLotteryTicketsPrize.setCallback(checkLotteryTicketsPrizeCallback);
+                        checkLotteryTicketsPrize.execute();
+                    } else {
+                        view.showLotteryNotStarted();
+                    }
+                }
+
+                @Override
+                public void onError(Throwable error) {
+                    view.showLotteryStatusError();
+                }
+            };
+
+    private boolean shouldSeeAd(int numberOfChecks) {
+        return numberOfChecks % 2 == 0;
+    }
 }
