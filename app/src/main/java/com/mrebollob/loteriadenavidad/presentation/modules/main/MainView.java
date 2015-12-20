@@ -18,6 +18,8 @@ public interface MainView {
 
     void showLotteryNotStarted();
 
+    void showAd();
+
     void refreshUi();
 
     void showGetLotteryTicketsError();

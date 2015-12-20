@@ -81,6 +81,7 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     private LotteryTicketsListAdapter lotteryTicketsListAdapter;
     private InterstitialAd mInterstitialAd;
+    private boolean isAdFromRefresh;
 
 
     @Override
@@ -108,9 +109,11 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
             @Override
             public void onAdClosed() {
                 requestNewInterstitial();
-                LotteryTicketFormActionCommand lotteryTicketFormActionCommand =
-                        new LotteryTicketFormActionCommand(MainActivity.this);
-                lotteryTicketFormActionCommand.execute();
+                if (!isAdFromRefresh) {
+                    LotteryTicketFormActionCommand lotteryTicketFormActionCommand =
+                            new LotteryTicketFormActionCommand(MainActivity.this);
+                    lotteryTicketFormActionCommand.execute();
+                }
             }
         });
     }
@@ -173,6 +176,8 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     public void onAddButtonClick(View view) {
         analyticsManager.sendEvent("Functions", "AddButton Click", "AddButton Click");
         if (mInterstitialAd.isLoaded()) {
+            analyticsManager.sendEvent("Ad", "Show Ad", "Add lottery tickets");
+            isAdFromRefresh = false;
             mInterstitialAd.show();
         } else {
             LotteryTicketFormActionCommand lotteryTicketFormActionCommand =
@@ -300,6 +305,15 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     public void showLotteryNotStarted() {
         swipeRefreshLayout.setRefreshing(false);
         errorManager.showError(getString(R.string.the_draw_has_not_begun));
+    }
+
+    @Override
+    public void showAd() {
+        if (mInterstitialAd.isLoaded()) {
+            analyticsManager.sendEvent("Ad", "Show Ad", "Check lottery tickets prize");
+            isAdFromRefresh = true;
+            mInterstitialAd.show();
+        }
     }
 
     @Override

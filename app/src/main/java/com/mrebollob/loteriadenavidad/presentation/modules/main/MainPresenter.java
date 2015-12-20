@@ -36,6 +36,7 @@ public class MainPresenter extends Presenter {
     private PresentationLotteryType mLotteryType;
     private List<LotteryTicket> mLotteryTickets = new ArrayList<>();
     private int sortType;
+    private int numberOfChecks = 0;
 
     public MainPresenter(GetLotteryTickets getLotteryTickets,
                          DeleteLotteryTicket deleteLotteryTicket,
@@ -179,6 +180,11 @@ public class MainPresenter extends Presenter {
                     view.refreshLotteryTicketsList(lotteryTicketsListMapper.modelToData(mLotteryTickets));
                     getLastUpdatedTime.setCallback(getLastUpdatedTimeCallback);
                     getLastUpdatedTime.execute();
+
+                    numberOfChecks += 1;
+
+                    if (shouldSeeAd(numberOfChecks))
+                        view.showAd();
                 }
 
                 @Override
@@ -205,6 +211,7 @@ public class MainPresenter extends Presenter {
                 @Override
                 public void onSuccess(int lotteryStatus) {
                     view.showLotteryStatus(lotteryStatus);
+                    numberOfChecks += 1;
 
                     if (lotteryStatus > 0) {
                         checkLotteryTicketsPrize.setData(mLotteryTickets);
@@ -220,4 +227,8 @@ public class MainPresenter extends Presenter {
                     view.showLotteryStatusError();
                 }
             };
+
+    private boolean shouldSeeAd(int numberOfChecks) {
+        return numberOfChecks % 2 == 0;
+    }
 }
