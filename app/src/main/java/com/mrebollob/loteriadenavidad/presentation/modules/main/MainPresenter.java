@@ -37,6 +37,7 @@ public class MainPresenter extends Presenter {
     private List<LotteryTicket> mLotteryTickets = new ArrayList<>();
     private int sortType;
     private int numberOfChecks = 0;
+    private boolean isFirstTime = true;
 
     public MainPresenter(GetLotteryTickets getLotteryTickets,
                          DeleteLotteryTicket deleteLotteryTicket,
@@ -117,6 +118,10 @@ public class MainPresenter extends Presenter {
                     mLotteryTickets = lotteryTickets;
                     view.refreshLotteryTicketsList(lotteryTicketsListMapper.modelToData(lotteryTickets));
 
+                    if (isFirstTime) {
+                        isFirstTime = false;
+                        onRefresh();
+                    }
                 }
 
                 @Override
