@@ -40,7 +40,7 @@ public class MainPresenter extends Presenter {
     private final ListMapper<LotteryTicket, PresentationLotteryTicket> lotteryTicketsListMapper;
 
     private List<LotteryTicket> lotteryTickets = new ArrayList<>();
-    PresentationLotteryType lotteryType = PresentationLotteryType.ALL;
+    private PresentationLotteryType lotteryType = PresentationLotteryType.ALL;
     private int numberOfChecks = 0;
 
     public MainPresenter(Navigator navigator, GetLotteryTickets getLotteryTickets,
@@ -159,7 +159,9 @@ public class MainPresenter extends Presenter {
                     view.hideLoading();
                     setlotteryTickets(lotteryTickets);
                     updateLotteryTicketsView();
-                    checkLotteryStatusAndTicketsPrizes();
+                    if (numberOfChecks == 0) {
+                        checkLotteryStatusAndTicketsPrizes();
+                    }
                 }
 
                 @Override
@@ -192,9 +194,14 @@ public class MainPresenter extends Presenter {
                 @Override
                 public void onSuccess(List<LotteryTicket> lotteryTickets) {
                     view.hideLoading();
+                    numberOfChecks += 1;
                     setlotteryTickets(lotteryTickets);
                     updateLotteryTicketsView();
                     getLastUpdatedTime();
+
+                    if (shouldSeeAd()) {
+                        view.showAd();
+                    }
                 }
 
                 @Override
@@ -239,7 +246,7 @@ public class MainPresenter extends Presenter {
                 }
             };
 
-    private boolean shouldSeeAd(int numberOfChecks) {
-        return numberOfChecks % 2 == 0;
+    private boolean shouldSeeAd() {
+        return numberOfChecks % 3 == 0;
     }
 }
