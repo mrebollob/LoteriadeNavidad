@@ -13,6 +13,7 @@ import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.DeleteLo
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLastUpdatedTime;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTickets;
 import com.mrebollob.loteriadenavidad.presentation.Presenter;
+import com.mrebollob.loteriadenavidad.presentation.model.LotterySummary;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
 import com.mrebollob.loteriadenavidad.presentation.model.mapper.base.ListMapper;
@@ -72,6 +73,10 @@ public class MainPresenter extends Presenter {
 
     private void updateLotteryTicketsView() {
         view.showLotteryTicketList(lotteryTicketsListMapper.modelToData(lotteryTickets));
+
+        LotterySummary lotterySummary = new LotterySummary(lotteryTickets);
+        view.showLotterySummary(lotterySummary.getTotalBet(),
+                lotterySummary.getTotalWin(), lotterySummary.getProfit());
     }
 
     private void getLastUpdatedTime() {

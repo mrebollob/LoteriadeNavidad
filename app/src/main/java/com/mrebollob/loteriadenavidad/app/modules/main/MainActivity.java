@@ -128,7 +128,6 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
         tvTotalBet.setText(getString(R.string.total_bet, 0f));
         tvTotalWin.setText(getString(R.string.total_win, 0f));
         tvProfit.setText(getString(R.string.profit, 0f));
-//        tvLastUpdate.setText(getString(R.string.last_update, "El sorteo no ha empezado"));
     }
 
     private void initToolbar() {
@@ -254,6 +253,13 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     @Override
     public void showLotteryTicketList(List<PresentationLotteryTicket> lotteryTickets) {
         lotteryTicketsListAdapter.updateLotteryTickets(lotteryTickets);
+    }
+
+    @Override
+    public void showLotterySummary(float totalBet, float totalWin, float profit) {
+        tvTotalBet.setText(getString(R.string.total_bet, totalBet));
+        tvTotalWin.setText(getString(R.string.total_win, totalWin));
+        tvProfit.setText(getString(R.string.profit, profit));
     }
 
     @Override

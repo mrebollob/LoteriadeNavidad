@@ -12,6 +12,17 @@ public class LotteryTicket {
     private float prize;
     private LotteryType lotteryType;
 
+    public LotteryTicket() {
+    }
+
+    public LotteryTicket(String label, int number, float bet, float prize, LotteryType lotteryType) {
+        this.label = label;
+        this.number = number;
+        this.bet = bet;
+        this.prize = prize;
+        this.lotteryType = lotteryType;
+    }
+
     public int getId() {
         return id;
     }

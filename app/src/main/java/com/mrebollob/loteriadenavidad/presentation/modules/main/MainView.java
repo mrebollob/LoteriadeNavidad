@@ -16,6 +16,8 @@ public interface MainView {
 
     void showLotteryTicketList(List<PresentationLotteryTicket> lotteryTickets);
 
+    void showLotterySummary(float totalBet, float totalWin, float profit);
+
     void showLastUpdate(Date lastUpdate);
 
     void showLotteryStatus(int status);

@@ -24,9 +24,9 @@ public class LotteryTicketFormPresenter extends Presenter {
 
     public LotteryTicketFormPresenter(Navigator navigator,
                                       CreateLotteryTicket createLotteryTicket,
-                                     UpdateLotteryTicket updateLotteryTicket,
-                                     LotteryTicketFormView view,
-                                     PresentationLotteryTicketMapper lotteryTicketMapper) {
+                                      UpdateLotteryTicket updateLotteryTicket,
+                                      LotteryTicketFormView view,
+                                      PresentationLotteryTicketMapper lotteryTicketMapper) {
         this.navigator = navigator;
         this.createLotteryTicket = createLotteryTicket;
         this.updateLotteryTicket = updateLotteryTicket;
