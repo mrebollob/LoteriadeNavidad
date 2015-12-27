@@ -6,9 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.mrebollob.loteriadenavidad.R;
-import com.mrebollob.loteriadenavidad.app.util.AnalyticsManager;
-
-import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,8 +14,6 @@ public class AboutActivity extends AppCompatActivity {
 
     @Bind(R.id.toolbar)
     protected Toolbar toolbar;
-    @Inject
-    AnalyticsManager analyticsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

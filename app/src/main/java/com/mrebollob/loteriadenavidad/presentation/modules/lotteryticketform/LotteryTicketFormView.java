@@ -5,7 +5,9 @@ package com.mrebollob.loteriadenavidad.presentation.modules.lotteryticketform;
  */
 public interface LotteryTicketFormView {
 
-    void showCreateOrUpdateLotteryTicketSuccess();
+    void showLoading();
+
+    void hideLoading();
 
     void showCreateLotteryTicketError();
 

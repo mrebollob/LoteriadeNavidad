@@ -1,6 +1,7 @@
 package com.mrebollob.loteriadenavidad.app.modules.lotteryticketform;
 
 import com.mrebollob.loteriadenavidad.app.di.ActivityModule;
+import com.mrebollob.loteriadenavidad.app.navigator.Navigator;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CreateLotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.UpdateLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.mapper.PresentationLotteryTicketMapper;
@@ -28,11 +29,11 @@ public class LotteryTicketFormModule {
 
     @Provides
     @Singleton
-    LotteryTicketFormPresenter provideLotteryTicketFormPresenter(
-            CreateLotteryTicket createLotteryTicket,
-            UpdateLotteryTicket updateLotteryTicket,
-            PresentationLotteryTicketMapper lotteryTicketMapper) {
-        return new LotteryTicketFormPresenter(createLotteryTicket, updateLotteryTicket,
+    LotteryTicketFormPresenter provideLotteryTicketFormPresenter(Navigator navigator,
+                                                                 CreateLotteryTicket createLotteryTicket,
+                                                                 UpdateLotteryTicket updateLotteryTicket,
+                                                                 PresentationLotteryTicketMapper lotteryTicketMapper) {
+        return new LotteryTicketFormPresenter(navigator, createLotteryTicket, updateLotteryTicket,
                 view, lotteryTicketMapper);
     }
 }

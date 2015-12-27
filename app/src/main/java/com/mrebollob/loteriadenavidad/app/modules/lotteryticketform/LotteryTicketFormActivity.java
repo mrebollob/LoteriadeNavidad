@@ -93,6 +93,12 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationOnClickListener(new android.view.View.OnClickListener() {
+                @Override
+                public void onClick(android.view.View v) {
+                    presenter.onBackPressed();
+                }
+            });
         }
     }
 
@@ -136,6 +142,12 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
     }
 
     @Override
@@ -204,8 +216,13 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
     }
 
     @Override
-    public void showCreateOrUpdateLotteryTicketSuccess() {
-        finish();
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
     }
 
     @Override

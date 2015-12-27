@@ -5,9 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mrebollob.loteriadenavidad.app.LoteriaDeNavidadApp;
 import com.mrebollob.loteriadenavidad.app.di.ActivityModule;
+import com.mrebollob.loteriadenavidad.app.navigator.Navigator;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import dagger.ObjectGraph;
@@ -17,12 +20,16 @@ import dagger.ObjectGraph;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    @Inject
+    protected Navigator navigator;
     private ObjectGraph activityGraph;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         activityGraph = new ActivityInjector(this).createGraph(getModules());
         super.onCreate(savedInstanceState);
+
+        navigator.setActivity(this);
 
         int layoutId = onCreateViewId();
         if (layoutId != 0) {

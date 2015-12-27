@@ -1,7 +1,5 @@
 package com.mrebollob.loteriadenavidad.app.di;
 
-import com.mrebollob.loteriadenavidad.domain.comparator.LotteryTicketLabelComparator;
-import com.mrebollob.loteriadenavidad.domain.comparator.LotteryTicketNumberComparator;
 import com.mrebollob.loteriadenavidad.domain.executor.InteractorExecutor;
 import com.mrebollob.loteriadenavidad.domain.executor.MainThread;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CheckLotteryStatus;
@@ -10,8 +8,6 @@ import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CreateLo
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.DeleteLotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLastUpdatedTime;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.GetLotteryTickets;
-import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByLabel;
-import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.SortLotteryTicketsListByNumber;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.UpdateLotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.repository.LotteryRepository;
 
@@ -59,24 +55,6 @@ public class InteractorsModule {
                                                              MainThread mainThread,
                                                              LotteryRepository lotteryRepository) {
         return new DeleteLotteryTicket(interactorExecutor, mainThread, lotteryRepository);
-    }
-
-    @Provides
-    @Singleton
-    SortLotteryTicketsListByLabel provideSortLotterryTicketsListByLabelInteractor(
-            InteractorExecutor interactorExecutor,
-            MainThread mainThread,
-            LotteryTicketLabelComparator lotteryTicketLabelComparator) {
-        return new SortLotteryTicketsListByLabel(interactorExecutor, mainThread, lotteryTicketLabelComparator);
-    }
-
-    @Provides
-    @Singleton
-    SortLotteryTicketsListByNumber provideSortLotteryTicketsListByNumberInteractor(
-            InteractorExecutor interactorExecutor,
-            MainThread mainThread,
-            LotteryTicketNumberComparator lotteryTicketNumberComparator) {
-        return new SortLotteryTicketsListByNumber(interactorExecutor, mainThread, lotteryTicketNumberComparator);
     }
 
     @Provides

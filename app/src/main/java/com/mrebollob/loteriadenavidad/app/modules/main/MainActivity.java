@@ -1,6 +1,7 @@
 package com.mrebollob.loteriadenavidad.app.modules.main;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -22,8 +23,6 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.mrebollob.loteriadenavidad.R;
-import com.mrebollob.loteriadenavidad.app.modules.about.AboutActionCommand;
-import com.mrebollob.loteriadenavidad.app.modules.lotteryticketform.LotteryTicketFormActionCommand;
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.DrawSpinnerAdapter;
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.LotteryTicketsListAdapter;
 import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
@@ -48,6 +47,8 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements MainView, LotteryTicketsListAdapter.OnItemClickListener,
         SwipeRefreshLayout.OnRefreshListener {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Inject
     MainPresenter presenter;
@@ -81,7 +82,6 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     private LotteryTicketsListAdapter lotteryTicketsListAdapter;
     private InterstitialAd mInterstitialAd;
-    private boolean isAdFromRefresh;
 
 
     @Override
@@ -109,11 +109,7 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
             @Override
             public void onAdClosed() {
                 requestNewInterstitial();
-                if (!isAdFromRefresh) {
-                    LotteryTicketFormActionCommand lotteryTicketFormActionCommand =
-                            new LotteryTicketFormActionCommand(MainActivity.this);
-                    lotteryTicketFormActionCommand.execute();
-                }
+                presenter.onAdClosed();
             }
         });
     }
@@ -174,16 +170,7 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     @OnClick(R.id.fab)
     public void onAddButtonClick(View view) {
-        analyticsManager.sendEvent("Functions", "AddButton Click", "AddButton Click");
-        if (mInterstitialAd.isLoaded()) {
-            analyticsManager.sendEvent("Ad", "Show Ad", "Add lottery tickets");
-            isAdFromRefresh = false;
-            mInterstitialAd.show();
-        } else {
-            LotteryTicketFormActionCommand lotteryTicketFormActionCommand =
-                    new LotteryTicketFormActionCommand(this);
-            lotteryTicketFormActionCommand.execute();
-        }
+        presenter.onAddLotteryTicketClick();
     }
 
     private void initRecyclerView() {
@@ -195,7 +182,7 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     private void initRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(this);
-        list.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        list.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             }
@@ -221,11 +208,11 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
                 FeedbackUtils.askForFeedback(this);
                 return true;
             case R.id.action_about:
-                AboutActionCommand aboutActionCommand = new AboutActionCommand(this);
-                aboutActionCommand.execute();
+                presenter.onAboutClick();
                 return true;
             case R.id.action_sort:
-                presenter.sortLotteryTickets();
+                //TODO
+                presenter.sortLotteryTicketsByNumber();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -253,32 +240,23 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     }
 
     @Override
-    public void refreshLotteryTicketsList(List<PresentationLotteryTicket> lotteryTickets) {
+    public void showLoading() {
+        swipeRefreshLayout.setRefreshing(true);
+    }
 
-        float totalbet = 0f;
-        float totalwin = 0f;
-
-        for (PresentationLotteryTicket lotteryTicket : lotteryTickets) {
-            totalbet += lotteryTicket.getBet();
-            totalwin += lotteryTicket.getPrize();
-        }
-
-        tvTotalBet.setText(getString(R.string.total_bet, totalbet));
-        tvTotalWin.setText(getString(R.string.total_win, totalwin));
-        tvProfit.setText(getString(R.string.profit, totalwin - totalbet));
-
-        lotteryTicketsListAdapter.updateLotteryTickets(lotteryTickets);
+    @Override
+    public void hideLoading() {
         swipeRefreshLayout.setRefreshing(false);
+    }
 
-        analyticsManager.sendEvent("Statistics", "refreshLotteryTicketsList", "total numbers", lotteryTickets.size());
-        analyticsManager.sendEvent("Statistics", "refreshLotteryTicketsList", "total bet", (long) totalbet);
-        analyticsManager.sendEvent("Statistics", "refreshLotteryTicketsList", "total win", (long) totalwin);
+    @Override
+    public void showLotteryTicketList(List<PresentationLotteryTicket> lotteryTickets) {
+        lotteryTicketsListAdapter.updateLotteryTickets(lotteryTickets);
     }
 
     @Override
     public void showLastUpdate(Date lastUpdate) {
         String lastUpdateText = new SimpleDateFormat("HH:mm dd/MM/yyyy").format(lastUpdate);
-
         tvLastUpdate.setText(getString(R.string.last_update, lastUpdateText));
     }
 
@@ -310,50 +288,32 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
     @Override
     public void showAd() {
         if (mInterstitialAd.isLoaded()) {
-            analyticsManager.sendEvent("Ad", "Show Ad", "Check lottery tickets prize");
-            isAdFromRefresh = true;
             mInterstitialAd.show();
         }
     }
 
     @Override
-    public void refreshUi() {
-        swipeRefreshLayout.setRefreshing(true);
-    }
-
-    @Override
     public void showGetLotteryTicketsError() {
-        swipeRefreshLayout.setRefreshing(false);
         errorManager.showError(getString(R.string.error_get_lottery_tickets));
     }
 
     @Override
-    public void showNoNumbersError() {
-        swipeRefreshLayout.setRefreshing(false);
+    public void showNoLotteryTicketsError() {
         errorManager.showError(getString(R.string.error_no_numbers));
     }
 
     @Override
     public void showDeleteLotteryTicketError() {
-        swipeRefreshLayout.setRefreshing(false);
         errorManager.showError(getString(R.string.error_delete_lottery_ticket));
     }
 
     @Override
-    public void showSortLotteryTicketsError() {
-        swipeRefreshLayout.setRefreshing(false);
-        errorManager.showError(getString(R.string.error_sort_lottery_tickets));
-    }
-
-    @Override
     public void showUpdatePrizesError() {
-        swipeRefreshLayout.setRefreshing(false);
         errorManager.showError(getString(R.string.error_update_prizes));
     }
 
     @Override
     public void showLotteryStatusError() {
-        swipeRefreshLayout.setRefreshing(false);
         errorManager.showError(getString(R.string.error_update_prizes));
     }
 
@@ -369,15 +329,13 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
                     public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                         switch (which) {
                             case 0:
-                                LotteryTicketFormActionCommand lotteryTicketFormActionCommand =
-                                        new LotteryTicketFormActionCommand(MainActivity.this, lotteryTicket);
-                                lotteryTicketFormActionCommand.execute();
+                                presenter.onEditLotteryTicketClick(lotteryTicket);
                                 break;
                             case 1:
                                 comfirmDelete(lotteryTicket);
                                 break;
                             default:
-                                Log.wtf("TAG", "Nunca deberia ver esto");
+                                Log.wtf(TAG, "Nunca deberia ver esto");
                                 break;
                         }
                     }
@@ -392,8 +350,8 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
                 .positiveText("Eliminar")
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onClick(MaterialDialog dialog, DialogAction which) {
-                        if (presenter != null) presenter.deleteLotteryTicket(lotteryTicket.getId());
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        if (presenter != null) presenter.onDeleteLotteryTicketClick(lotteryTicket.getId());
                         analyticsManager.sendEvent("Functions", "Comfirm delete", "Delete number");
                     }
                 })
