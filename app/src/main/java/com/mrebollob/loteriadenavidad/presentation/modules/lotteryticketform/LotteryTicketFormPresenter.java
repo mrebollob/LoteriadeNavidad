@@ -1,5 +1,8 @@
 package com.mrebollob.loteriadenavidad.presentation.modules.lotteryticketform;
 
+import android.util.Log;
+
+import com.mrebollob.loteriadenavidad.app.navigator.Navigator;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CreateLotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.UpdateLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.Presenter;
@@ -11,15 +14,20 @@ import com.mrebollob.loteriadenavidad.presentation.model.mapper.PresentationLott
  */
 public class LotteryTicketFormPresenter extends Presenter {
 
+    private static final String TAG = LotteryTicketFormPresenter.class.getSimpleName();
+
+    private final Navigator navigator;
     private final CreateLotteryTicket createLotteryTicket;
     private final UpdateLotteryTicket updateLotteryTicket;
     private final LotteryTicketFormView view;
     private final PresentationLotteryTicketMapper lotteryTicketMapper;
 
-    public LotteryTicketFormPresenter(CreateLotteryTicket createLotteryTicket,
-                                     UpdateLotteryTicket updateLotteryTicket,
-                                     LotteryTicketFormView view,
-                                     PresentationLotteryTicketMapper lotteryTicketMapper) {
+    public LotteryTicketFormPresenter(Navigator navigator,
+                                      CreateLotteryTicket createLotteryTicket,
+                                      UpdateLotteryTicket updateLotteryTicket,
+                                      LotteryTicketFormView view,
+                                      PresentationLotteryTicketMapper lotteryTicketMapper) {
+        this.navigator = navigator;
         this.createLotteryTicket = createLotteryTicket;
         this.updateLotteryTicket = updateLotteryTicket;
         this.view = view;
@@ -35,15 +43,21 @@ public class LotteryTicketFormPresenter extends Presenter {
     }
 
     public void createLotteryTicket(PresentationLotteryTicket LotteryTicket) {
+        view.showLoading();
         createLotteryTicket.setData(lotteryTicketMapper.dataToModel(LotteryTicket));
         createLotteryTicket.setCallback(createLotteryTicketCallback);
         createLotteryTicket.execute();
     }
 
     public void updateLotteryTicket(PresentationLotteryTicket LotteryTicket) {
+        view.showLoading();
         updateLotteryTicket.setData(lotteryTicketMapper.dataToModel(LotteryTicket));
         updateLotteryTicket.setCallback(updateLotteryTicketCallback);
         updateLotteryTicket.execute();
+    }
+
+    public void onBackPressed() {
+        navigator.goBackToLotteryTicketList();
     }
 
     private final CreateLotteryTicket.Callback createLotteryTicketCallback =
@@ -51,11 +65,14 @@ public class LotteryTicketFormPresenter extends Presenter {
 
                 @Override
                 public void onSuccess() {
-                    view.showCreateOrUpdateLotteryTicketSuccess();
+                    view.hideLoading();
+                    navigator.goBackToLotteryTicketList();
                 }
 
                 @Override
                 public void onError(Throwable error) {
+                    Log.e(TAG, "Error saving lottery ticket", error);
+                    view.hideLoading();
                     view.showCreateLotteryTicketError();
                 }
             };
@@ -65,11 +82,14 @@ public class LotteryTicketFormPresenter extends Presenter {
 
                 @Override
                 public void onSuccess() {
-                    view.showCreateOrUpdateLotteryTicketSuccess();
+                    view.hideLoading();
+                    navigator.goBackToLotteryTicketList();
                 }
 
                 @Override
                 public void onError(Throwable error) {
+                    Log.e(TAG, "Error updating lottery ticket", error);
+                    view.hideLoading();
                     view.showUpdateLotteryTicketError();
                 }
             };

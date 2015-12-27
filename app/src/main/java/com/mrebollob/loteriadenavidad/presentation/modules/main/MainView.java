@@ -10,7 +10,13 @@ import java.util.List;
  */
 public interface MainView {
 
-    void refreshLotteryTicketsList(List<PresentationLotteryTicket> lotteryTickets);
+    void showLoading();
+
+    void hideLoading();
+
+    void showLotteryTicketList(List<PresentationLotteryTicket> lotteryTickets);
+
+    void showLotterySummary(float totalBet, float totalWin, float profit);
 
     void showLastUpdate(Date lastUpdate);
 
@@ -20,15 +26,11 @@ public interface MainView {
 
     void showAd();
 
-    void refreshUi();
-
     void showGetLotteryTicketsError();
 
-    void showNoNumbersError();
+    void showNoLotteryTicketsError();
 
     void showDeleteLotteryTicketError();
-
-    void showSortLotteryTicketsError();
 
     void showUpdatePrizesError();
 

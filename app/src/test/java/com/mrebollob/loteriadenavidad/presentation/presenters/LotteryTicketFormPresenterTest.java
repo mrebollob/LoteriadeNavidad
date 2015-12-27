@@ -1,5 +1,6 @@
 package com.mrebollob.loteriadenavidad.presentation.presenters;
 
+import com.mrebollob.loteriadenavidad.app.navigator.Navigator;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.CreateLotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.lotterytickets.UpdateLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.interactors.CreateLotteryTicketFail;
@@ -38,11 +39,12 @@ public class LotteryTicketFormPresenterTest {
 
         CreateLotteryTicketSuccess createLotteryTicket = new CreateLotteryTicketSuccess(null, null, null);
         LotteryTicketFormView view = getView();
-        LotteryTicketFormPresenter presenter = initializePresenter(createLotteryTicket, null,
+        Navigator navigator = getNavigator();
+        LotteryTicketFormPresenter presenter = initializePresenter(navigator, createLotteryTicket, null,
                 view, lotteryTicketMapper);
 
         presenter.createLotteryTicket(mock(PresentationLotteryTicket.class));
-        verify(view).showCreateOrUpdateLotteryTicketSuccess();
+        verify(navigator).goBackToLotteryTicketList();
     }
 
     @Test
@@ -50,7 +52,8 @@ public class LotteryTicketFormPresenterTest {
 
         CreateLotteryTicketFail createLotteryTicket = new CreateLotteryTicketFail(null, null, null);
         LotteryTicketFormView view = getView();
-        LotteryTicketFormPresenter presenter = initializePresenter(createLotteryTicket, null,
+        Navigator navigator = getNavigator();
+        LotteryTicketFormPresenter presenter = initializePresenter(navigator, createLotteryTicket, null,
                 view, lotteryTicketMapper);
 
         presenter.createLotteryTicket(mock(PresentationLotteryTicket.class));
@@ -62,11 +65,12 @@ public class LotteryTicketFormPresenterTest {
 
         UpdateLotteryTicketSuccess updateLotteryTicket = new UpdateLotteryTicketSuccess(null, null, null);
         LotteryTicketFormView view = getView();
-        LotteryTicketFormPresenter presenter = initializePresenter(null, updateLotteryTicket,
+        Navigator navigator = getNavigator();
+        LotteryTicketFormPresenter presenter = initializePresenter(navigator, null, updateLotteryTicket,
                 view, lotteryTicketMapper);
 
         presenter.updateLotteryTicket(mock(PresentationLotteryTicket.class));
-        verify(view).showCreateOrUpdateLotteryTicketSuccess();
+        verify(navigator).goBackToLotteryTicketList();
     }
 
     @Test
@@ -74,7 +78,8 @@ public class LotteryTicketFormPresenterTest {
 
         UpdateLotteryTicketFail updateLotteryTicket = new UpdateLotteryTicketFail(null, null, null);
         LotteryTicketFormView view = getView();
-        LotteryTicketFormPresenter presenter = initializePresenter(null, updateLotteryTicket,
+        Navigator navigator = getNavigator();
+        LotteryTicketFormPresenter presenter = initializePresenter(navigator, null, updateLotteryTicket,
                 view, lotteryTicketMapper);
 
         presenter.updateLotteryTicket(mock(PresentationLotteryTicket.class));
@@ -85,10 +90,15 @@ public class LotteryTicketFormPresenterTest {
         return mock(LotteryTicketFormView.class);
     }
 
-    private LotteryTicketFormPresenter initializePresenter(CreateLotteryTicket createLotteryTicket,
+    private Navigator getNavigator() {
+        return mock(Navigator.class);
+    }
+
+    private LotteryTicketFormPresenter initializePresenter(Navigator navigator, CreateLotteryTicket createLotteryTicket,
                                                            UpdateLotteryTicket updateLotteryTicket,
                                                            LotteryTicketFormView view,
                                                            PresentationLotteryTicketMapper lotteryTicketMapper) {
-        return new LotteryTicketFormPresenter(createLotteryTicket, updateLotteryTicket, view, lotteryTicketMapper);
+        return new LotteryTicketFormPresenter(navigator, createLotteryTicket, updateLotteryTicket,
+                view, lotteryTicketMapper);
     }
 }
