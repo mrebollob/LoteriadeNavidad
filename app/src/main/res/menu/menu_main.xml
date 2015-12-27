@@ -4,21 +4,26 @@
       tools:context=".app.modules.main.MainActivity">
 
     <item
-        android:id="@+id/action_sort"
-        android:icon="@drawable/ic_sort_white"
-        android:orderInCategory="200"
-        android:title="@string/sort"
-        app:showAsAction="ifRoom"/>
+        android:id="@+id/action_sort_by_label"
+        android:orderInCategory="100"
+        android:title="@string/sort_by_label"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_sort_by_number"
+        android:orderInCategory="101"
+        android:title="@string/sort_by_number"
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_feedback"
-        android:orderInCategory="100"
+        android:orderInCategory="102"
         android:title="@string/action_feedback"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_about"
-        android:orderInCategory="101"
+        android:orderInCategory="103"
         android:title="@string/about"
         app:showAsAction="never"/>
 </menu>

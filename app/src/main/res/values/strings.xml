@@ -2,7 +2,8 @@
     <string name="app_name">Lotería de navidad 2015</string>
     <string name="action_feedback">Ayudanos a mejorar</string>
     <string name="save">Guardar</string>
-    <string name="sort">Ordenar</string>
+    <string name="sort_by_label">Ordenar por nombre</string>
+    <string name="sort_by_number">Ordenar por número</string>
     <string name="about">Sobre nosotros</string>
     <string name="title_activity_lottery_ticket_form">Formulario</string>
 

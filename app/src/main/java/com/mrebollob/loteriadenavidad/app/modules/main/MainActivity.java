@@ -210,8 +210,10 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
             case R.id.action_about:
                 presenter.onAboutClick();
                 return true;
-            case R.id.action_sort:
-                //TODO
+            case R.id.action_sort_by_label:
+                presenter.sortLotteryTicketsByLabel();
+                return true;
+            case R.id.action_sort_by_number:
                 presenter.sortLotteryTicketsByNumber();
                 return true;
             default:
