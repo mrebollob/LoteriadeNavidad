@@ -120,7 +120,7 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
                 case CHRISTMAS:
                     rgLottery.check(R.id.rb_christmas_lottery);
                     break;
-                case CHILD:
+                default:
                     rgLottery.check(R.id.rb_child_lottery);
                     break;
             }
@@ -197,21 +197,25 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
             focusView.requestFocus();
         } else {
 
-            if (mLotteryTicket == null) mLotteryTicket = new PresentationLotteryTicket();
+            if (mLotteryTicket == null) {
+                mLotteryTicket = new PresentationLotteryTicket();
+            }
 
             mLotteryTicket.setLabel(label);
             mLotteryTicket.setNumber(Integer.parseInt(number));
             mLotteryTicket.setBet(Float.parseFloat(bet));
 
-            if (rgLottery.getCheckedRadioButtonId() == R.id.rb_christmas_lottery)
+            if (rgLottery.getCheckedRadioButtonId() == R.id.rb_christmas_lottery) {
                 mLotteryTicket.setLotteryType(PresentationLotteryType.CHRISTMAS);
-            else if (rgLottery.getCheckedRadioButtonId() == R.id.rb_child_lottery)
+            } else if (rgLottery.getCheckedRadioButtonId() == R.id.rb_child_lottery) {
                 mLotteryTicket.setLotteryType(PresentationLotteryType.CHILD);
+            }
 
-            if (mLotteryTicket.getId() == 0)
+            if (mLotteryTicket.getId() == 0) {
                 presenter.createLotteryTicket(mLotteryTicket);
-            else
+            } else {
                 presenter.updateLotteryTicket(mLotteryTicket);
+            }
         }
     }
 

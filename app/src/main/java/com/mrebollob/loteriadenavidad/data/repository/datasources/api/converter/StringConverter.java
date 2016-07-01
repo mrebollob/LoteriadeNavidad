@@ -21,7 +21,7 @@ public class StringConverter implements Converter {
         String text = null;
         try {
             text = fromStream(typedInput.in());
-        } catch (IOException ignored) {/*NOP*/ }
+        } catch (IOException ignored) { /*NOP*/ }
 
         return text;
     }

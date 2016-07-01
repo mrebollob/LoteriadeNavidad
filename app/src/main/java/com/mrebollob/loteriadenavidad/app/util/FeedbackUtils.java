@@ -52,7 +52,8 @@ public class FeedbackUtils {
         emailMessage.append("\n\nInformación del dispositivo:\n\n");
         emailMessage.append(getHandsetInformation(context));
         emailMessage
-                .append("\nPor favor, deje estos datos en el correo electrónico para ayudarnos con los problemas en la aplicación.\nPuedes escribir por encima o por debajo. \n\n");
+                .append("\nPor favor, deje estos datos en el correo electrónico para ayudarnos con los problemas "
+                        + "en la aplicación.\nPuedes escribir por encima o por debajo. \n\n");
         emailMessage.append("_________________\n\n");
         return emailMessage.toString();
     }

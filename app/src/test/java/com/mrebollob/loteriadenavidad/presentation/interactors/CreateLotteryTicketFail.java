@@ -26,7 +26,8 @@ public class CreateLotteryTicketFail extends CreateLotteryTicket {
 
     @Override
     public void execute() {
-        if (mCallback != null)
+        if (mCallback != null) {
             mCallback.onError(new CreateLotteryTicketException());
+        }
     }
 }

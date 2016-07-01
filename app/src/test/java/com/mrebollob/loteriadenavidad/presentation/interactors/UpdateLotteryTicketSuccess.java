@@ -25,7 +25,8 @@ public class UpdateLotteryTicketSuccess extends UpdateLotteryTicket {
 
     @Override
     public void execute() {
-        if (mCallback != null)
+        if (mCallback != null) {
             mCallback.onSuccess();
+        }
     }
 }

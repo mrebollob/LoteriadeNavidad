@@ -42,16 +42,16 @@ public class LotteryTicketFormPresenter extends Presenter {
     public void onPause() {
     }
 
-    public void createLotteryTicket(PresentationLotteryTicket LotteryTicket) {
+    public void createLotteryTicket(PresentationLotteryTicket lotteryTicket) {
         view.showLoading();
-        createLotteryTicket.setData(lotteryTicketMapper.dataToModel(LotteryTicket));
+        createLotteryTicket.setData(lotteryTicketMapper.dataToModel(lotteryTicket));
         createLotteryTicket.setCallback(createLotteryTicketCallback);
         createLotteryTicket.execute();
     }
 
-    public void updateLotteryTicket(PresentationLotteryTicket LotteryTicket) {
+    public void updateLotteryTicket(PresentationLotteryTicket lotteryTicket) {
         view.showLoading();
-        updateLotteryTicket.setData(lotteryTicketMapper.dataToModel(LotteryTicket));
+        updateLotteryTicket.setData(lotteryTicketMapper.dataToModel(lotteryTicket));
         updateLotteryTicket.setCallback(updateLotteryTicketCallback);
         updateLotteryTicket.execute();
     }

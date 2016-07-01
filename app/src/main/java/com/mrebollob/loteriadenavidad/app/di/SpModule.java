@@ -31,8 +31,8 @@ public class SpModule {
     @Provides
     @Singleton
     SharedPreferences provideSharedPreferences(Application application,
-                                               @SharedPreferencesName String SharedPreferencesName) {
-        return application.getSharedPreferences(SharedPreferencesName, Context.MODE_PRIVATE);
+                                               @SharedPreferencesName String sharedPreferencesName) {
+        return application.getSharedPreferences(sharedPreferencesName, Context.MODE_PRIVATE);
     }
 
     @Provides

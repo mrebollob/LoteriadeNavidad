@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
 
     private void initInterstitialAd() {
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(getString(R.string.test_interstitial_ad_unit_id));
+//        mInterstitialAd.setAdUnitId(getString(R.string.test_interstitial_ad_unit_id));
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
@@ -157,6 +157,9 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
                         break;
                     case 2:
                         presenter.onSelectLotteryType(PresentationLotteryType.CHILD);
+                        break;
+                    default:
+                        Log.e("", "");
                         break;
                 }
             }
@@ -359,7 +362,9 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        if (presenter != null) presenter.onDeleteLotteryTicketClick(lotteryTicket.getId());
+                        if (presenter != null) {
+                            presenter.onDeleteLotteryTicketClick(lotteryTicket.getId());
+                        }
                         analyticsManager.sendEvent("Functions", "Comfirm delete", "Delete number");
                     }
                 })
@@ -372,6 +377,6 @@ public class MainActivity extends BaseActivity implements MainView, LotteryTicke
                 .addTestDevice("9F9ECDD1FE8FF910D411658471E3B73E")
                 .build();
 
-        mInterstitialAd.loadAd(adRequest);
+//        mInterstitialAd.loadAd(adRequest);
     }
 }
