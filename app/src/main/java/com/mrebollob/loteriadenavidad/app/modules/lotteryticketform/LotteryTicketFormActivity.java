@@ -17,7 +17,6 @@ import com.mrebollob.loteriadenavidad.R;
 import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
 import com.mrebollob.loteriadenavidad.app.ui.errors.ErrorManager;
 import com.mrebollob.loteriadenavidad.app.ui.errors.SnackbarErrorManagerImp;
-import com.mrebollob.loteriadenavidad.app.util.AnalyticsManager;
 import com.mrebollob.loteriadenavidad.app.util.DecimalDigitsInputFilter;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryType;
@@ -37,8 +36,6 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
 
     @Inject
     LotteryTicketFormPresenter presenter;
-    @Inject
-    AnalyticsManager analyticsManager;
 
     ErrorManager errorManager;
 
@@ -61,7 +58,6 @@ public class LotteryTicketFormActivity extends BaseActivity implements LotteryTi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        analyticsManager.sendScreenView(LotteryTicketFormActivity.class.getSimpleName());
         parseArguments();
         errorManager = new SnackbarErrorManagerImp(coordinatorLayout);
         initUi();

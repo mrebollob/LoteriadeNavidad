@@ -6,7 +6,6 @@ import android.os.Build;
 import com.mrebollob.loteriadenavidad.app.LoteriaDeNavidadApp;
 import com.mrebollob.loteriadenavidad.app.di.qualifiers.ApiLevel;
 import com.mrebollob.loteriadenavidad.app.navigator.Navigator;
-import com.mrebollob.loteriadenavidad.app.util.AnalyticsManager;
 
 import javax.inject.Singleton;
 
@@ -41,12 +40,6 @@ public class AppModule {
     @Singleton
     public Navigator provideNavigator() {
         return new Navigator();
-    }
-
-    @Provides
-    @Singleton
-    AnalyticsManager provideAnalyticsManager() {
-        return new AnalyticsManager(app);
     }
 
     @Provides

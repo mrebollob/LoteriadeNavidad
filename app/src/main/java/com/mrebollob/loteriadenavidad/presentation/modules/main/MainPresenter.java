@@ -198,10 +198,6 @@ public class MainPresenter extends Presenter {
                     setlotteryTickets(lotteryTickets);
                     updateLotteryTicketsView();
                     getLastUpdatedTime();
-
-                    if (shouldSeeAd()) {
-                        view.showAd();
-                    }
                 }
 
                 @Override
@@ -245,8 +241,4 @@ public class MainPresenter extends Presenter {
                     view.showLotteryStatusError();
                 }
             };
-
-    private boolean shouldSeeAd() {
-        return numberOfChecks % 3 == 0;
-    }
 }

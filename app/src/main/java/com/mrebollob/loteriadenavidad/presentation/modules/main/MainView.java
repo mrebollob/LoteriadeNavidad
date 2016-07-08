@@ -24,8 +24,6 @@ public interface MainView {
 
     void showLotteryNotStarted();
 
-    void showAd();
-
     void showGetLotteryTicketsError();
 
     void showNoLotteryTicketsError();
