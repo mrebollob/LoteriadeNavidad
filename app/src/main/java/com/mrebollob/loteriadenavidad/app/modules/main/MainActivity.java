@@ -67,6 +67,7 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
         mPresenter = new LotteryTicketsPresenter();
 
         initUi();
+        initializePresenter();
     }
 
     private void initUi() {
@@ -74,6 +75,11 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
         initInfoTable();
         initRecyclerView();
         initRefreshLayout();
+    }
+
+    private void initializePresenter() {
+        mPresenter.setView(this);
+        mPresenter.initialize();
     }
 
     @Override

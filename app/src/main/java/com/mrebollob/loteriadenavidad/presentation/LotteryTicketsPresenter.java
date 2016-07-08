@@ -35,7 +35,9 @@ public class LotteryTicketsPresenter extends Presenter<LotteryTicketsPresenter.V
         lotteryTicket = new LotteryTicket("Lottery ticket 1", 1, 1, 2, LotteryType.CHRISTMAS);
         lotteryTickets.add(lotteryTicket);
 
+        getView().hideLoading();
         getView().showLotteryTickets(lotteryTickets);
+
     }
 
     public void onLotteryTicketClicked(LotteryTicket lotteryTicket) {
