@@ -16,12 +16,12 @@
     <string name="sample_bet">20 €</string>
     <string name="sample_prize">0 €</string>
 
-    <string name="money_format">%.2f €</string>
-    <string name="number_format">%05d</string>
+    <string name="money_format">%1$.2f €</string>
+    <string name="number_format">%1$05d</string>
 
-    <string name="total_bet">Jugado: %.2f €</string>
-    <string name="total_win">Ganado: %.2f €</string>
-    <string name="profit">Beneficios: %.2f €</string>
+    <string name="total_bet">Jugado: %1$.2f €</string>
+    <string name="total_win">Ganado: %1$.2f €</string>
+    <string name="profit">Beneficios: %1$.2f €</string>
     <string name="void_text">--</string>
 
     <string name="about_text">ATENCIÓN:\nLos resultados obtenidos por esta aplicación son meramente informativos y no vinculantes. Es posible que puedan aparecer errores en los resultados. Ante esta situación, tanto el desarrollador como el proveedor de datos (El País) no se hacen responsables de los perjuicios que puedan causar estos errores.\n\nEs altamente recomendable confirmar los resultados mediante las listas oficiales del sorteo una vez haya concluido el mismo.</string>

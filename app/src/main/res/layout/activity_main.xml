@@ -109,13 +109,13 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/list"
+            android:id="@+id/rv_lottery_tickets"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="4dp"
-            tools:listitem="@layout/lottery_ticket_item"/>
+            tools:listitem="@layout/item_lottery_ticket"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

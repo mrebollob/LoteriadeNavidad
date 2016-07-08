@@ -3,8 +3,31 @@ package com.mrebollob.loteriadenavidad.presentation;
 /**
  * @author mrebollob
  */
-public abstract class Presenter {
-    public abstract void onResume();
+public class Presenter<T extends Presenter.View> {
 
-    public abstract void onPause();
+    private T view;
+
+    public void setView(T view) {
+        this.view = view;
+    }
+
+    public T getView() {
+        return view;
+    }
+
+    public void initialize() {
+
+    }
+
+    public void update() {
+
+    }
+
+    public interface View {
+
+        void showLoading();
+
+        void hideLoading();
+
+    }
 }

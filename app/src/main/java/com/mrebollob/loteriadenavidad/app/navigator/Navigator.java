@@ -2,13 +2,11 @@ package com.mrebollob.loteriadenavidad.app.navigator;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 
 import com.mrebollob.loteriadenavidad.R;
 import com.mrebollob.loteriadenavidad.app.modules.about.AboutActivity;
 import com.mrebollob.loteriadenavidad.app.modules.lotteryticketform.LotteryTicketFormActivity;
 import com.mrebollob.loteriadenavidad.app.modules.main.MainActivity;
-import com.mrebollob.loteriadenavidad.presentation.model.PresentationLotteryTicket;
 
 /**
  * @author mrebollob
@@ -41,16 +39,6 @@ public class Navigator {
     public void goToAddLotteryTicket() {
         finishCurrentActivity();
         Intent intent = new Intent(activity, LotteryTicketFormActivity.class);
-        activity.overridePendingTransition(R.anim.enter_right, R.anim.leave_right);
-        activity.startActivity(intent);
-    }
-
-    public void goToEditLotteryTicket(PresentationLotteryTicket lotteryTicket) {
-        finishCurrentActivity();
-        Intent intent = new Intent(activity, LotteryTicketFormActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(LotteryTicketFormActivity.LOTTERY_TICKET_EXTRA, lotteryTicket);
-        intent.putExtras(bundle);
         activity.overridePendingTransition(R.anim.enter_right, R.anim.leave_right);
         activity.startActivity(intent);
     }
