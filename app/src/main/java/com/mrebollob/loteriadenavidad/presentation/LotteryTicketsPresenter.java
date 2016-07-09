@@ -1,7 +1,6 @@
 package com.mrebollob.loteriadenavidad.presentation;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
-import com.mrebollob.loteriadenavidad.domain.entities.LotteryType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +29,9 @@ public class LotteryTicketsPresenter extends Presenter<LotteryTicketsPresenter.V
 
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
 
-        LotteryTicket lotteryTicket = new LotteryTicket("Lottery ticket 1", 0, 1, 2, LotteryType.CHRISTMAS);
+        LotteryTicket lotteryTicket = new LotteryTicket("Lottery ticket 1", 0, 1, 2);
         lotteryTickets.add(lotteryTicket);
-        lotteryTicket = new LotteryTicket("Lottery ticket 1", 1, 1, 2, LotteryType.CHRISTMAS);
+        lotteryTicket = new LotteryTicket("Lottery ticket 1", 1, 1, 2);
         lotteryTickets.add(lotteryTicket);
 
         getView().hideLoading();

@@ -22,7 +22,6 @@ import com.mrebollob.loteriadenavidad.app.util.FeedbackUtils;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.presentation.LotteryTicketsPresenter;
 
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -85,11 +84,6 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
     @Override
     public int onCreateViewId() {
         return R.layout.activity_main;
-    }
-
-    @Override
-    protected List<Object> getModules() {
-        return Arrays.<Object>asList(new MainModule());
     }
 
     private void initInfoTable() {

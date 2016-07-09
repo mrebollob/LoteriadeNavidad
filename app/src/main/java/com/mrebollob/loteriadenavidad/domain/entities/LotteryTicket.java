@@ -10,17 +10,15 @@ public class LotteryTicket {
     private int number;
     private float bet;
     private float prize;
-    private LotteryType lotteryType;
 
     public LotteryTicket() {
     }
 
-    public LotteryTicket(String label, int number, float bet, float prize, LotteryType lotteryType) {
+    public LotteryTicket(String label, int number, float bet, float prize) {
         this.label = label;
         this.number = number;
         this.bet = bet;
         this.prize = prize;
-        this.lotteryType = lotteryType;
     }
 
     public int getId() {
@@ -61,13 +59,5 @@ public class LotteryTicket {
 
     public void setPrize(float prize) {
         this.prize = prize;
-    }
-
-    public LotteryType getLotteryType() {
-        return lotteryType;
-    }
-
-    public void setLotteryType(LotteryType lotteryType) {
-        this.lotteryType = lotteryType;
     }
 }

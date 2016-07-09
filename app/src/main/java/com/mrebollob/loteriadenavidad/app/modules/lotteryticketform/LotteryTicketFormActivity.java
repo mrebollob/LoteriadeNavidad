@@ -14,9 +14,6 @@ import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
 import com.mrebollob.loteriadenavidad.app.ui.errors.ErrorManager;
 import com.mrebollob.loteriadenavidad.app.ui.errors.SnackbarErrorManagerImp;
 
-import java.util.Arrays;
-import java.util.List;
-
 import butterknife.Bind;
 
 public class LotteryTicketFormActivity extends BaseActivity {
@@ -53,11 +50,6 @@ public class LotteryTicketFormActivity extends BaseActivity {
     @Override
     public int onCreateViewId() {
         return R.layout.activity_lottery_ticket_form;
-    }
-
-    @Override
-    protected List<Object> getModules() {
-        return Arrays.<Object>asList(new LotteryTicketFormModule());
     }
 
     private void initToolbar() {

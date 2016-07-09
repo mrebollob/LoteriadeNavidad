@@ -1,7 +1,6 @@
 package com.mrebollob.loteriadenavidad.presentation;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
-import com.mrebollob.loteriadenavidad.domain.entities.LotteryType;
 
 import java.util.Arrays;
 import java.util.List;
