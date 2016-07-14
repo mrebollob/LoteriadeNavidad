@@ -1,17 +1,13 @@
 package com.mrebollob.loteriadenavidad.app.di.qualifiers;
 
-
 import java.lang.annotation.Retention;
 
-import javax.inject.Qualifier;
+import javax.inject.Scope;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
-/**
- * @author mrebollob
- */
-@Qualifier
+@Scope
 @Retention(RUNTIME)
-public @interface ApiLevel {
+public @interface Activity {
 }

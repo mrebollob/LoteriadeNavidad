@@ -46,12 +46,7 @@ public class LotteryTicketViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void hookListeners(final LotteryTicket lotteryTicket) {
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.onLotteryTicketClicked(lotteryTicket);
-            }
-        });
+        itemView.setOnClickListener(v -> mPresenter.onLotteryTicketClicked(lotteryTicket));
     }
 
     private Context getContext() {

@@ -14,6 +14,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mrebollob.loteriadenavidad.R;
+import com.mrebollob.loteriadenavidad.app.LotteryApplication;
+import com.mrebollob.loteriadenavidad.app.di.components.DaggerLotteryComponent;
+import com.mrebollob.loteriadenavidad.app.di.modules.ActivityModule;
 import com.mrebollob.loteriadenavidad.app.modules.main.adapter.LotteryTicketsAdapter;
 import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
 import com.mrebollob.loteriadenavidad.app.ui.errors.ErrorManager;
@@ -24,14 +27,16 @@ import com.mrebollob.loteriadenavidad.presentation.LotteryTicketsPresenter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements LotteryTicketsPresenter.View,
         SwipeRefreshLayout.OnRefreshListener {
 
+    @Inject
     LotteryTicketsPresenter mPresenter;
-
     ErrorManager errorManager;
 
     @Bind(R.id.coordinator_layout)
@@ -63,8 +68,8 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         errorManager = new SnackbarErrorManagerImp(coordinatorLayout);
-        mPresenter = new LotteryTicketsPresenter();
 
+        initializeDependencyInjector();
         initUi();
         initializePresenter();
     }
@@ -74,6 +79,15 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
         initInfoTable();
         initRecyclerView();
         initRefreshLayout();
+    }
+
+    private void initializeDependencyInjector() {
+        LotteryApplication avengersApplication = (LotteryApplication) getApplication();
+
+        DaggerLotteryComponent.builder()
+                .activityModule(new ActivityModule(this))
+                .appComponent(avengersApplication.getAppComponent())
+                .build().inject(this);
     }
 
     private void initializePresenter() {
@@ -173,21 +187,11 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
 
     @Override
     public void showLoading() {
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(true);
-            }
-        });
+        swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
     }
 
     @Override
     public void hideLoading() {
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+        swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(false));
     }
 }

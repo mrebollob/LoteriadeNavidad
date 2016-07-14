@@ -1,16 +1,22 @@
 package com.mrebollob.loteriadenavidad.presentation;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
+import com.mrebollob.loteriadenavidad.domain.interactors.GetLotteryTickets;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * @author mrebollob
  */
 public class LotteryTicketsPresenter extends Presenter<LotteryTicketsPresenter.View> {
 
-    public LotteryTicketsPresenter() {
+    private final GetLotteryTickets mGetLotteryTickets;
+
+    @Inject
+    public LotteryTicketsPresenter(GetLotteryTickets getLotteryTickets) {
+        this.mGetLotteryTickets = getLotteryTickets;
     }
 
     @Override
@@ -26,17 +32,16 @@ public class LotteryTicketsPresenter extends Presenter<LotteryTicketsPresenter.V
     }
 
     private void getLotteryTickets() {
-
-        List<LotteryTicket> lotteryTickets = new ArrayList<>();
-
-        LotteryTicket lotteryTicket = new LotteryTicket("Lottery ticket 1", 0, 1, 2);
-        lotteryTickets.add(lotteryTicket);
-        lotteryTicket = new LotteryTicket("Lottery ticket 1", 1, 1, 2);
-        lotteryTickets.add(lotteryTicket);
-
-        getView().hideLoading();
-        getView().showLotteryTickets(lotteryTickets);
-
+        mGetLotteryTickets.execute().subscribe(lotteryTickets -> {
+            getView().hideLoading();
+            if (lotteryTickets.isEmpty()) {
+                getView().showEmptyCase();
+            } else {
+                getView().showLotteryTickets(lotteryTickets);
+            }
+        }, throwable -> {
+            getView().hideLoading();
+        });
     }
 
     public void onLotteryTicketClicked(LotteryTicket lotteryTicket) {
