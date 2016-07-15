@@ -171,6 +171,12 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.finalize();
+    }
+
+    @Override
     public void showLotteryTickets(List<LotteryTicket> lotteryTickets) {
         mAdapter.addAll(lotteryTickets);
     }

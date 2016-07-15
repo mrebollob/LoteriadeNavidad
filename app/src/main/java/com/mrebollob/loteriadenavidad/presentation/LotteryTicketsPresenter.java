@@ -7,12 +7,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import rx.Subscription;
+
 /**
  * @author mrebollob
  */
 public class LotteryTicketsPresenter extends Presenter<LotteryTicketsPresenter.View> {
 
     private final GetLotteryTickets mGetLotteryTickets;
+    private Subscription mLotteryTicketsSubscription;
 
     @Inject
     public LotteryTicketsPresenter(GetLotteryTickets getLotteryTickets) {
@@ -31,8 +34,14 @@ public class LotteryTicketsPresenter extends Presenter<LotteryTicketsPresenter.V
         getLotteryTickets();
     }
 
+    @Override
+    public void finalize() {
+        super.finalize();
+        mLotteryTicketsSubscription.unsubscribe();
+    }
+
     private void getLotteryTickets() {
-        mGetLotteryTickets.execute().subscribe(lotteryTickets -> {
+        mLotteryTicketsSubscription = mGetLotteryTickets.execute().subscribe(lotteryTickets -> {
             getView().hideLoading();
             if (lotteryTickets.isEmpty()) {
                 getView().showEmptyCase();
