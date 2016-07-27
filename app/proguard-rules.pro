@@ -16,20 +16,11 @@
 #   public *;
 #}
 
-
--keep class butterknife.** { *; }
--dontwarn butterknife.internal.**
--keep class **$$ViewBinder { *; }
-
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
-
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
-
--dontwarn retrofit.**
--keep class retrofit.** { *; }
+# Add this global rule
 -keepattributes Signature
--keepattributes Exceptions
+
+# This rule will properly ProGuard all the model classes in
+# the package com.mrb.loteriadenavidad.models.
+-keepclassmembers class com.mrb.loteriadenavidad.models.** {
+  *;
+}

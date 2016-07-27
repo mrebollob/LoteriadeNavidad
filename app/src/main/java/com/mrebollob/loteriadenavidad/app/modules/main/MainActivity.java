@@ -82,11 +82,11 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
     }
 
     private void initializeDependencyInjector() {
-        LotteryApplication avengersApplication = (LotteryApplication) getApplication();
+        LotteryApplication lotteryApplication = (LotteryApplication) getApplication();
 
         DaggerLotteryComponent.builder()
                 .activityModule(new ActivityModule(this))
-                .appComponent(avengersApplication.getAppComponent())
+                .appComponent(lotteryApplication.getAppComponent())
                 .build().inject(this);
     }
 

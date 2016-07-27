@@ -27,7 +27,6 @@ public class AppModule {
         return mLotteryApplication;
     }
 
-
     @Provides
     @Singleton
     LotteryRepository provideLotteryRepositoryImp(LotteryRepositoryImp lotteryRepository) {

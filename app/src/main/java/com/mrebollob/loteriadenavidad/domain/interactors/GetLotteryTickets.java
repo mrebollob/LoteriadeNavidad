@@ -10,7 +10,6 @@ import javax.inject.Named;
 
 import rx.Observable;
 import rx.Scheduler;
-import rx.functions.Action1;
 
 /**
  * @author mrebollob
@@ -35,12 +34,7 @@ public class GetLotteryTickets extends UseCase<List<LotteryTicket>> {
     public Observable<List<LotteryTicket>> buildObservable() {
         return mRepository.getLotteryTickets()
                 .observeOn(mUiThread)
-                .subscribeOn(mExecutorThread)
-                .doOnError(new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                    }
-                });
+                .subscribeOn(mExecutorThread);
     }
 
     @Override
