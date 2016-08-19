@@ -39,7 +39,7 @@ public class Presenter<T extends Presenter.View> {
 
     }
 
-    public void finalize() {
+    public void finish() {
 
     }
 

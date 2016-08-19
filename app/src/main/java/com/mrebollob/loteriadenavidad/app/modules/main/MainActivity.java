@@ -189,7 +189,7 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.finalize();
+        mPresenter.finish();
     }
 
     @Override

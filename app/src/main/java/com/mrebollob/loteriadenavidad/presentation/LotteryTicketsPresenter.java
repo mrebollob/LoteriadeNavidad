@@ -51,8 +51,8 @@ public class LotteryTicketsPresenter extends Presenter<LotteryTicketsPresenter.V
     }
 
     @Override
-    public void finalize() {
-        super.finalize();
+    public void finish() {
+        super.finish();
         mLotteryTicketsSubscription.unsubscribe();
     }
 
