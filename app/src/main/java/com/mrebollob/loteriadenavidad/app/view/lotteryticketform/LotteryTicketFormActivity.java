@@ -14,23 +14,21 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.app.modules.lotteryticketform;
+package com.mrebollob.loteriadenavidad.app.view.lotteryticketform;
 
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.mrebollob.loteriadenavidad.R;
-import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
-import com.mrebollob.loteriadenavidad.app.ui.errors.ErrorManager;
-import com.mrebollob.loteriadenavidad.app.ui.errors.SnackbarErrorManagerImp;
+import com.mrebollob.loteriadenavidad.app.util.errors.ErrorManager;
+import com.mrebollob.loteriadenavidad.app.util.errors.SnackbarErrorManagerImp;
+import com.mrebollob.loteriadenavidad.app.view.BaseActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class LotteryTicketFormActivity extends BaseActivity {
 
@@ -38,44 +36,27 @@ public class LotteryTicketFormActivity extends BaseActivity {
 
     ErrorManager errorManager;
 
-    @Bind(R.id.coordinator_layout)
-    protected CoordinatorLayout coordinatorLayout;
-    @Bind(R.id.toolbar)
-    protected Toolbar toolbar;
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
 
-    @Bind(R.id.et_label)
-    protected EditText etLabel;
-    @Bind(R.id.et_number)
-    protected EditText etNumber;
-    @Bind(R.id.et_bet)
-    protected EditText etBet;
-    @Bind(R.id.rg_lottery)
-    protected RadioGroup rgLottery;
+    @BindView(R.id.et_label)
+    EditText etLabel;
+    @BindView(R.id.et_number)
+    EditText etNumber;
+    @BindView(R.id.et_bet)
+    EditText etBet;
+    @BindView(R.id.rg_lottery)
+    RadioGroup rgLottery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         errorManager = new SnackbarErrorManagerImp(coordinatorLayout);
-        initUi();
-    }
-
-    private void initUi() {
-        initToolbar();
     }
 
     @Override
-    public int onCreateViewId() {
+    public int getLayoutId() {
         return R.layout.activity_lottery_ticket_form;
-    }
-
-    private void initToolbar() {
-        setSupportActionBar(toolbar);
-        final ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 
     @Override

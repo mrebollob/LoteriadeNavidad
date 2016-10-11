@@ -22,9 +22,6 @@ import android.text.Spanned;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author mrebollob
- */
 public class DecimalDigitsInputFilter implements InputFilter {
 
     Pattern mPattern;

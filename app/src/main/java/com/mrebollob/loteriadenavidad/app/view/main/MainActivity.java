@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.app.modules.main;
+package com.mrebollob.loteriadenavidad.app.view.main;
 
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,19 +31,19 @@ import com.mrebollob.loteriadenavidad.R;
 import com.mrebollob.loteriadenavidad.app.LotteryApplication;
 import com.mrebollob.loteriadenavidad.app.di.components.DaggerLotteryComponent;
 import com.mrebollob.loteriadenavidad.app.di.modules.ActivityModule;
-import com.mrebollob.loteriadenavidad.app.modules.main.adapter.LotteryTicketsAdapter;
-import com.mrebollob.loteriadenavidad.app.ui.BaseActivity;
-import com.mrebollob.loteriadenavidad.app.ui.errors.ErrorManager;
-import com.mrebollob.loteriadenavidad.app.ui.errors.SnackbarErrorManagerImp;
+import com.mrebollob.loteriadenavidad.app.presenter.LotteryTicketsPresenter;
 import com.mrebollob.loteriadenavidad.app.util.FeedbackUtils;
+import com.mrebollob.loteriadenavidad.app.util.errors.ErrorManager;
+import com.mrebollob.loteriadenavidad.app.util.errors.SnackbarErrorManagerImp;
+import com.mrebollob.loteriadenavidad.app.view.BaseActivity;
+import com.mrebollob.loteriadenavidad.app.view.main.adapter.LotteryTicketsAdapter;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
-import com.mrebollob.loteriadenavidad.presentation.LotteryTicketsPresenter;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements LotteryTicketsPresenter.View,
@@ -55,27 +53,25 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
     LotteryTicketsPresenter mPresenter;
     ErrorManager errorManager;
 
-    @Bind(R.id.coordinator_layout)
-    protected CoordinatorLayout coordinatorLayout;
-    @Bind(R.id.toolbar)
-    protected Toolbar toolbar;
-    @Bind(R.id.spinner)
-    protected Spinner spinner;
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.spinner)
+    Spinner spinner;
 
-    @Bind(R.id.tv_total_bet)
-    protected TextView tvTotalBet;
-    @Bind(R.id.tv_total_win)
-    protected TextView tvTotalWin;
-    @Bind(R.id.tv_profit)
-    protected TextView tvProfit;
-    @Bind(R.id.tv_lottery_status)
-    protected TextView tvLotteryStatus;
-    @Bind(R.id.tv_last_update)
-    protected TextView tvLastUpdate;
+    @BindView(R.id.tv_total_bet)
+    TextView tvTotalBet;
+    @BindView(R.id.tv_total_win)
+    TextView tvTotalWin;
+    @BindView(R.id.tv_profit)
+    TextView tvProfit;
+    @BindView(R.id.tv_lottery_status)
+    TextView tvLotteryStatus;
+    @BindView(R.id.tv_last_update)
+    TextView tvLastUpdate;
 
-    @Bind(R.id.swipeRefreshLayout)
+    @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
-    @Bind(R.id.rv_lottery_tickets)
+    @BindView(R.id.rv_lottery_tickets)
     RecyclerView lotteryTicketsRecyclerView;
 
     private LotteryTicketsAdapter mAdapter;
@@ -90,8 +86,12 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
         initializePresenter();
     }
 
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
     private void initUi() {
-        initToolbar();
         initInfoTable();
         initRecyclerView();
         initRefreshLayout();
@@ -111,26 +111,11 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
         mPresenter.initialize();
     }
 
-    @Override
-    public int onCreateViewId() {
-        return R.layout.activity_main;
-    }
-
     private void initInfoTable() {
         tvTotalBet.setText(getString(R.string.total_bet, 0f));
         tvTotalWin.setText(getString(R.string.total_win, 0f));
         tvProfit.setText(getString(R.string.profit, 0f));
     }
-
-    private void initToolbar() {
-        setSupportActionBar(toolbar);
-        final ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(false);
-        }
-    }
-
 
     @OnClick(R.id.fab)
     public void onAddButtonClick(View view) {

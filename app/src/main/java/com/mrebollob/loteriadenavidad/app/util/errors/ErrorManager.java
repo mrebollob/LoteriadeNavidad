@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.app.ui.errors;
+package com.mrebollob.loteriadenavidad.app.util.errors;
 
-/**
- * @author mrebollob
- */
 public interface ErrorManager {
     void showError(String error);
 }

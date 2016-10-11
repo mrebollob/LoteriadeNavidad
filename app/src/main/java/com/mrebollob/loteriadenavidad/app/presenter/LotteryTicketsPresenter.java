@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.presentation;
+package com.mrebollob.loteriadenavidad.app.presenter;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.GetLotteryTickets;
@@ -25,9 +25,6 @@ import javax.inject.Inject;
 
 import rx.Subscription;
 
-/**
- * @author mrebollob
- */
 public class LotteryTicketsPresenter extends Presenter<LotteryTicketsPresenter.View> {
 
     private final GetLotteryTickets mGetLotteryTickets;

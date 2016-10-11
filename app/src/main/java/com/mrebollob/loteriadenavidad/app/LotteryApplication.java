@@ -22,9 +22,6 @@ import com.mrebollob.loteriadenavidad.app.di.components.AppComponent;
 import com.mrebollob.loteriadenavidad.app.di.components.DaggerAppComponent;
 import com.mrebollob.loteriadenavidad.app.di.modules.AppModule;
 
-/**
- * @author mrebollob
- */
 public class LotteryApplication extends Application {
 
     private AppComponent mAppComponent;

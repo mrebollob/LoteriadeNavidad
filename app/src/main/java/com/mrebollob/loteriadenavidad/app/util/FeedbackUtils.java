@@ -21,9 +21,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
-/**
- * @author mrebollob
- */
 public class FeedbackUtils {
     private static final String FEEDBACK_CHOOSER_TITLE = "Envianos un email con tus comentarios";
     private static final String EMAIL_ADDRESS = "mrebollob.developer@gmail.com";

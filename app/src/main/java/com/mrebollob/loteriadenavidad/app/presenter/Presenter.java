@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.presentation;
+package com.mrebollob.loteriadenavidad.app.presenter;
 
-/**
- * @author mrebollob
- */
+
 public class Presenter<T extends Presenter.View> {
 
     private T view;

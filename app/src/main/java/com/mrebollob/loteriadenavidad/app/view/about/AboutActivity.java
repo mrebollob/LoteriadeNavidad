@@ -14,31 +14,15 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.app.ui;
+package com.mrebollob.loteriadenavidad.app.view.about;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.mrebollob.loteriadenavidad.R;
+import com.mrebollob.loteriadenavidad.app.view.BaseActivity;
 
-import butterknife.ButterKnife;
-
-/**
- * @author mrebollob
- */
-public abstract class BaseActivity extends AppCompatActivity {
-
+public class AboutActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        int layoutId = onCreateViewId();
-        if (layoutId != 0) {
-            setContentView(layoutId);
-            ButterKnife.bind(this);
-        }
-    }
-
-    public int onCreateViewId() {
-        return 0;
+    public int getLayoutId() {
+        return R.layout.activity_about;
     }
 }

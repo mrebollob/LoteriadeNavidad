@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.app.modules.main.adapter;
+package com.mrebollob.loteriadenavidad.app.view.main.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -22,26 +22,23 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mrebollob.loteriadenavidad.R;
+import com.mrebollob.loteriadenavidad.app.presenter.LotteryTicketsPresenter;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
-import com.mrebollob.loteriadenavidad.presentation.LotteryTicketsPresenter;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * @author mrebollob
- */
 public class LotteryTicketViewHolder extends RecyclerView.ViewHolder {
 
     private final LotteryTicketsPresenter mPresenter;
 
-    @Bind(R.id.tv_label)
+    @BindView(R.id.tv_label)
     TextView labelTextView;
-    @Bind(R.id.tv_number)
+    @BindView(R.id.tv_number)
     TextView numberTextView;
-    @Bind(R.id.tv_bet)
+    @BindView(R.id.tv_bet)
     TextView betTextView;
-    @Bind(R.id.tv_prize)
+    @BindView(R.id.tv_prize)
     TextView prizeTextView;
 
     public LotteryTicketViewHolder(View itemView, LotteryTicketsPresenter lotteryTicketsPresenter) {

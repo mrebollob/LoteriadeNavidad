@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.app.modules.main.adapter;
+package com.mrebollob.loteriadenavidad.app.view.main.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,15 +23,12 @@ import android.view.ViewGroup;
 
 import com.mrebollob.loteriadenavidad.R;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
-import com.mrebollob.loteriadenavidad.presentation.LotteryTicketsPresenter;
+import com.mrebollob.loteriadenavidad.app.presenter.LotteryTicketsPresenter;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * @author mrebollob
- */
 public class LotteryTicketsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final LotteryTicketsPresenter mPresenter;

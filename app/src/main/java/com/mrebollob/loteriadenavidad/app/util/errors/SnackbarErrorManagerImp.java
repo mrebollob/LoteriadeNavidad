@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.app.ui.errors;
+package com.mrebollob.loteriadenavidad.app.util.errors;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-/**
- * @author mrebollob
- */
 public class SnackbarErrorManagerImp implements ErrorManager {
 
     private View view;

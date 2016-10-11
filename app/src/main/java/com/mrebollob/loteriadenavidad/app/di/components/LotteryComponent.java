@@ -20,7 +20,7 @@ import android.content.Context;
 
 import com.mrebollob.loteriadenavidad.app.di.modules.ActivityModule;
 import com.mrebollob.loteriadenavidad.app.di.qualifiers.Activity;
-import com.mrebollob.loteriadenavidad.app.modules.main.MainActivity;
+import com.mrebollob.loteriadenavidad.app.view.main.MainActivity;
 
 import dagger.Component;
 
