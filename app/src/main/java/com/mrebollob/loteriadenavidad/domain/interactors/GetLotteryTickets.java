@@ -27,9 +27,6 @@ import javax.inject.Named;
 import rx.Observable;
 import rx.Scheduler;
 
-/**
- * @author mrebollob
- */
 public class GetLotteryTickets extends UseCase<List<LotteryTicket>> {
 
     private final LotteryRepository mRepository;

@@ -29,7 +29,7 @@ import android.widget.TextView;
 
 import com.mrebollob.loteriadenavidad.R;
 import com.mrebollob.loteriadenavidad.app.LotteryApplication;
-import com.mrebollob.loteriadenavidad.app.di.components.DaggerLotteryComponent;
+import com.mrebollob.loteriadenavidad.app.di.components.DaggerActivityComponent;
 import com.mrebollob.loteriadenavidad.app.di.modules.ActivityModule;
 import com.mrebollob.loteriadenavidad.app.presenter.LotteryTicketsPresenter;
 import com.mrebollob.loteriadenavidad.app.util.FeedbackUtils;
@@ -100,7 +100,7 @@ public class MainActivity extends BaseActivity implements LotteryTicketsPresente
     private void initializeDependencyInjector() {
         LotteryApplication lotteryApplication = (LotteryApplication) getApplication();
 
-        DaggerLotteryComponent.builder()
+        DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .appComponent(lotteryApplication.getAppComponent())
                 .build().inject(this);

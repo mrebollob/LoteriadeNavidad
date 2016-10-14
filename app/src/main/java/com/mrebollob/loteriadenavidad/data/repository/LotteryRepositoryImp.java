@@ -26,9 +26,6 @@ import javax.inject.Inject;
 
 import rx.Observable;
 
-/**
- * @author mrebollob
- */
 public class LotteryRepositoryImp implements LotteryRepository {
 
     @Inject
@@ -37,7 +34,7 @@ public class LotteryRepositoryImp implements LotteryRepository {
 
     @Override
     public Observable<List<LotteryTicket>> getLotteryTickets() {
-        return Observable.create((Observable.OnSubscribe<List<LotteryTicket>>) subscriber -> {
+        return Observable.create(subscriber -> {
             try {
                 List<LotteryTicket> lotteryTickets = new ArrayList<>();
 

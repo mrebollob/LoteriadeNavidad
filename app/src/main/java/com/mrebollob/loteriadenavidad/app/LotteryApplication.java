@@ -17,6 +17,7 @@
 package com.mrebollob.loteriadenavidad.app;
 
 import android.app.Application;
+import android.support.annotation.VisibleForTesting;
 
 import com.mrebollob.loteriadenavidad.app.di.components.AppComponent;
 import com.mrebollob.loteriadenavidad.app.di.components.DaggerAppComponent;
@@ -40,5 +41,10 @@ public class LotteryApplication extends Application {
 
     public AppComponent getAppComponent() {
         return mAppComponent;
+    }
+
+    @VisibleForTesting
+    public void setComponent(AppComponent appComponent) {
+        this.mAppComponent = appComponent;
     }
 }

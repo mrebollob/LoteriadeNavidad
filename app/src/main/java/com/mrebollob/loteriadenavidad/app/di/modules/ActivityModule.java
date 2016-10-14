@@ -18,13 +18,14 @@ package com.mrebollob.loteriadenavidad.app.di.modules;
 
 import android.content.Context;
 
-import com.mrebollob.loteriadenavidad.app.di.qualifiers.Activity;
+import com.mrebollob.loteriadenavidad.app.di.qualifiers.PerActivity;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
 public class ActivityModule {
+
     private final Context mContext;
 
     public ActivityModule(Context mContext) {
@@ -32,7 +33,7 @@ public class ActivityModule {
     }
 
     @Provides
-    @Activity
+    @PerActivity
     Context provideActivityContext() {
         return mContext;
     }

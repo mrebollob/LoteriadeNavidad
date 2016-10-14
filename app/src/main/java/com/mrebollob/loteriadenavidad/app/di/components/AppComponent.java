@@ -29,6 +29,7 @@ import rx.Scheduler;
 @Singleton
 @Component(modules = AppModule.class)
 public interface AppComponent {
+
     LotteryApplication app();
 
     LotteryRepository dataRepository();

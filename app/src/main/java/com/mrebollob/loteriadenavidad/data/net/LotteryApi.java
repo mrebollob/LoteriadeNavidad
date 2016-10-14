@@ -23,9 +23,6 @@ import java.util.List;
 import retrofit2.http.GET;
 import rx.Observable;
 
-/**
- * @author mrebollob
- */
 public interface LotteryApi {
 
     @GET("/v1/public/characters")

@@ -16,6 +16,7 @@
 
 package com.mrebollob.loteriadenavidad.app.presenter;
 
+import com.mrebollob.loteriadenavidad.app.di.qualifiers.PerActivity;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
 import com.mrebollob.loteriadenavidad.domain.interactors.GetLotteryTickets;
 
@@ -25,6 +26,7 @@ import javax.inject.Inject;
 
 import rx.Subscription;
 
+@PerActivity
 public class LotteryTicketsPresenter extends Presenter<LotteryTicketsPresenter.View> {
 
     private final GetLotteryTickets mGetLotteryTickets;

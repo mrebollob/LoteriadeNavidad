@@ -22,9 +22,6 @@ import java.util.List;
 
 import rx.Observable;
 
-/**
- * @author mrebollob
- */
 public interface LotteryRepository {
 
     Observable<List<LotteryTicket>> getLotteryTickets();
