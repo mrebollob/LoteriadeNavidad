@@ -6,11 +6,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
         classpath "com.fernandocejas.frodo:frodo-plugin:0.8.3"
         classpath 'com.google.gms:google-services:3.0.0'
-        classpath 'org.codehaus.groovy:groovy-android-gradle-plugin:1.1.0'
     }
 }
 

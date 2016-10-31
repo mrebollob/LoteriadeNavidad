@@ -16,9 +16,12 @@
 
 package com.mrebollob.loteriadenavidad.app.di.modules;
 
+import android.content.SharedPreferences;
+
 import com.mrebollob.loteriadenavidad.app.LotteryApplication;
 import com.mrebollob.loteriadenavidad.data.repository.LotteryRepositoryImp;
 import com.mrebollob.loteriadenavidad.domain.repository.LotteryRepository;
+import com.mrebollob.loteriadenavidad.utils.SessionManager;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -41,6 +44,12 @@ public class AppModule {
     @Singleton
     LotteryApplication provideLotteryApplicationContext() {
         return mLotteryApplication;
+    }
+
+    @Provides
+    @Singleton
+    public SessionManager provideSessionManager(SharedPreferences sharedPreferences) {
+        return new SessionManager(sharedPreferences);
     }
 
     @Provides

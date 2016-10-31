@@ -18,6 +18,8 @@ package com.mrebollob.loteriadenavidad.app.di.components;
 
 import com.mrebollob.loteriadenavidad.app.LotteryApplication;
 import com.mrebollob.loteriadenavidad.app.di.modules.AppModule;
+import com.mrebollob.loteriadenavidad.app.di.modules.DbModule;
+import com.mrebollob.loteriadenavidad.app.di.modules.SpModule;
 import com.mrebollob.loteriadenavidad.domain.repository.LotteryRepository;
 
 import javax.inject.Named;
@@ -27,7 +29,7 @@ import dagger.Component;
 import rx.Scheduler;
 
 @Singleton
-@Component(modules = AppModule.class)
+@Component(modules = {AppModule.class, DbModule.class, SpModule.class})
 public interface AppComponent {
 
     LotteryApplication app();

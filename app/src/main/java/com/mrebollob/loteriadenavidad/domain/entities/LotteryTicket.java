@@ -16,9 +16,6 @@
 
 package com.mrebollob.loteriadenavidad.domain.entities;
 
-/**
- * @author mrebollob
- */
 public class LotteryTicket {
 
     private int id;
