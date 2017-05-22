@@ -20,7 +20,6 @@ import com.mrebollob.loteriadenavidad.app.LotteryApplication;
 import com.mrebollob.loteriadenavidad.app.di.modules.AppModule;
 import com.mrebollob.loteriadenavidad.app.di.modules.DbModule;
 import com.mrebollob.loteriadenavidad.app.di.modules.SpModule;
-import com.mrebollob.loteriadenavidad.domain.repository.LotteryRepository;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

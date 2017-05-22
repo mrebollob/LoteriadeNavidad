@@ -17,7 +17,6 @@
 package com.mrebollob.loteriadenavidad.data.repository;
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
-import com.mrebollob.loteriadenavidad.domain.repository.LotteryRepository;
 
 import java.util.ArrayList;
 import java.util.List;

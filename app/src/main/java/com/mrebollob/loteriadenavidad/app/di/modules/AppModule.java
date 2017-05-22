@@ -20,8 +20,6 @@ import android.content.SharedPreferences;
 
 import com.mrebollob.loteriadenavidad.app.LotteryApplication;
 import com.mrebollob.loteriadenavidad.data.repository.LotteryRepositoryImp;
-import com.mrebollob.loteriadenavidad.domain.repository.LotteryRepository;
-import com.mrebollob.loteriadenavidad.utils.SessionManager;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

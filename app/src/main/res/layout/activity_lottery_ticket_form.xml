@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2016 Manuel Rebollo Báez.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +14,10 @@
   ~ limitations under the License.
   -->
 
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/coordinator_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
@@ -36,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -52,58 +50,43 @@
         tools:context="com.mrebollob.loteriadenavidad.app.view.lotteryticketform.LotteryTicketFormActivity"
         tools:showIn="@layout/activity_lottery_ticket_form">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/et_label"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:hint="@string/label"
-            android:inputType="textCapSentences"
-            android:singleLine="true"
-            app:met_floatingLabel="normal"/>
+            android:layout_height="wrap_content">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/et_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:ems="10"
-            android:hint="@string/number"
-            android:inputType="numberDecimal"
-            android:maxLength="5"
-            app:met_floatingLabel="normal"/>
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/et_bet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:ems="10"
-            android:hint="@string/bet"
-            android:inputType="numberDecimal"
-            app:met_floatingLabel="normal"/>
-
-        <RadioGroup
-            android:id="@+id/rg_lottery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
-
-            <RadioButton
-                android:id="@+id/rb_christmas_lottery"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/labelEditText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/christmas_lottery"/>
+                android:hint="@string/label"
+                android:inputType="textCapSentences"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
 
-            <RadioButton
-                android:id="@+id/rb_child_lottery"
-                android:layout_width="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/numberEditText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/child_lottery"/>
+                android:hint="@string/number"
+                android:inputType="numberDecimal"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
 
-        </RadioGroup>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <EditText
+                android:id="@+id/betEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/bet"
+                android:inputType="textCapSentences"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
-
 </android.support.design.widget.CoordinatorLayout>

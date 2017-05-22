@@ -16,6 +16,23 @@
 
 package com.mrebollob.loteriadenavidad.domain.entities
 
-data class LotteryTicket(val id: Int, val label: String = "", val number: Int, val bet: Float, val prize: Float) {
+import com.mrebollob.loteriadenavidad.utils.PositionsFactory
+import java.util.*
+
+const val LOCAL_ID = "localId"
+
+fun generateLocalId(): String = LOCAL_ID + "_" + UUID.randomUUID().toString().replace("-".toRegex(), "")
+
+enum class Color {
+    RED, YELLOW, GREEN, BLUE, WHITE
+}
+
+data class LotteryTicket(val localId: String = generateLocalId(),
+                         val label: String = "",
+                         val number: Int,
+                         val bet: Float,
+                         val prize: Float,
+                         val color: Color = Color.WHITE,
+                         val position: Long = object : PositionsFactory {}.newPosition()) {
 
 }

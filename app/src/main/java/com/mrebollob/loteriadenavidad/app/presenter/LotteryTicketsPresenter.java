@@ -18,7 +18,6 @@ package com.mrebollob.loteriadenavidad.app.presenter;
 
 import com.mrebollob.loteriadenavidad.app.di.qualifiers.PerActivity;
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket;
-import com.mrebollob.loteriadenavidad.domain.interactors.GetLotteryTickets;
 
 import java.util.List;
 
