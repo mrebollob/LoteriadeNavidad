@@ -1,38 +1,40 @@
 buildscript {
     repositories {
-        maven { url 'https://maven.fabric.io/public' }
-        mavenCentral()
         jcenter()
     }
 
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
-        classpath 'me.tatarka:gradle-retrolambda:3.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.2'
     }
 }
 
 repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+    maven { url "http://repository.jetbrains.com/all" }
     maven { url 'https://maven.fabric.io/public' }
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'com.fernandocejas.frodo'
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.getkeepsafe.dexcount'
+apply from: 'config/gradle/jacoco.gradle'
 
 def STRING = "String"
 def BOOLEAN = "boolean"
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "24.0.2"
+    buildToolsVersion '25.0.3'
 
     defaultConfig {
         applicationId "com.mrb.loteriadenavidad"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 26
+        versionCode computeVersionCode()
         versionName "4.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -41,74 +43,97 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix '.develop'
+            buildConfigField STRING, "GIT_SHA", "\"DEBUG\""
+            buildConfigField STRING, "BUILD_TIME", "\"DEBUG\""
             buildConfigField BOOLEAN, "RETROFIT_LOG", "true"
+            debuggable true
+            minifyEnabled false
+            testCoverageEnabled true
         }
-        release {
-            buildConfigField BOOLEAN, "RETROFIT_LOG", "false"
 
-            minifyEnabled true
+        release {
+            def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+            def buildTime = new GregorianCalendar().format("MM-dd-yyyy' 'h:mm:ss a z")
+            buildConfigField STRING, "GIT_SHA", "\"${gitSha}\""
+            buildConfigField STRING, "BUILD_TIME", "\"${buildTime}\""
+            buildConfigField BOOLEAN, "RETROFIT_LOG", "false"
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    packagingOptions {
-        exclude 'META-INF/services/org.codehaus.groovy.transform.ASTTransformation'
-        exclude 'META-INF/services/org.codehaus.groovy.runtime.ExtensionModule'
-        exclude 'LICENSE.txt'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/ASL2.0'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-    }
-
-    packagingOptions {
-        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 
     lintOptions {
         quiet true
         abortOnError false
         ignoreWarnings true
-        disable 'InvalidPackage'  // Some libraries have issues with this
-        disable 'OldTargetApi'    // Due to Robolectric that modifies the manifest when running tests
     }
+}
+
+kapt {
+    generateStubs = true
+}
+
+dexcount {
+    format = "list"
+    includeClasses = false
+    includeFieldCount = true
+    includeTotalMethodCount = true
+    orderByMethodCount = false
+    verbose = true
+    maxTreeDepth = Integer.MAX_VALUE
+    enableForInstantRun = false
+    runOnEachAssemble = false
 }
 
 dependencies {
 
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
-    compile 'com.android.support:support-v4:25.0.0'
-    compile 'com.android.support:recyclerview-v7:25.0.0'
-    compile 'com.android.support:cardview-v7:25.0.0'
-    compile 'com.android.support:support-annotations:25.0.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    compile 'com.google.firebase:firebase-database:9.6.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support:support-annotations:25.3.1'
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 
-    compile 'com.rengwuxian.materialedittext:library:2.1.4'
-    compile 'com.afollestad.material-dialogs:core:0.8.6.1'
-
-    compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-
-    provided 'javax.annotation:jsr250-api:1.0'
-    compile 'javax.inject:javax.inject:1'
-    compile 'io.reactivex:rxjava:1.0.14'
-    compile 'io.reactivex:rxandroid:1.0.1'
-    compile 'com.google.dagger:dagger-compiler:2.0.2'
-    compile 'com.google.dagger:dagger:2.0.2'
-    compile 'com.google.code.gson:gson:2.4'
-    compile 'com.squareup.okhttp:okhttp:2.5.0'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+    compile 'io.reactivex.rxjava2:rxjava:2.0.2'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.2'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.2'
+    compile 'org.jsoup:jsoup:1.10.1'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.6@aar') {
         transitive = true;
     }
+
+    compile 'com.google.dagger:dagger:2.5'
+    kapt 'com.google.dagger:dagger-compiler:2.5'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.nhaarman:mockito-kotlin:1.1.0'
+    testCompile 'org.assertj:assertj-core:3.6.1'
 }
 
-apply plugin: 'com.google.gms.google-services'
+/**
+ * Gets the commit number from the current Git commit. E.g. 538
+ */
+def computeVersionCode() {
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-list', '--count', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim().toInteger()
+}
