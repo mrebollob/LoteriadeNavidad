@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2016 Manuel Rebollo Báez.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +14,7 @@
   ~ limitations under the License.
   -->
 
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -36,28 +34,28 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_label"
+                android:id="@+id/labelTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:text="@string/sample_label"
-                android:textSize="@dimen/text_size_medium"/>
+                android:textSize="@dimen/text_size_medium" />
 
             <TextView
-                android:id="@+id/tv_number"
+                android:id="@+id/numberTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:text="@string/sample_number"
-                android:textSize="@dimen/text_size_medium"/>
+                android:textSize="@dimen/text_size_medium" />
 
             <TextView
-                android:id="@+id/tv_bet"
+                android:id="@+id/betTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:text="@string/sample_bet"
-                android:textSize="@dimen/text_size_medium"/>
+                android:textSize="@dimen/text_size_medium" />
         </LinearLayout>
 
         <LinearLayout
@@ -66,13 +64,13 @@
             android:layout_gravity="end|center_vertical">
 
             <TextView
-                android:id="@+id/tv_prize"
+                android:id="@+id/prizeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:text="@string/sample_prize"
-                android:textSize="@dimen/text_size_title"/>
+                android:textSize="@dimen/text_size_title" />
         </LinearLayout>
     </FrameLayout>
 </android.support.v7.widget.CardView>
