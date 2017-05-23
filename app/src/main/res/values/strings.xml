@@ -69,5 +69,6 @@
     <string name="error_create_lottery_ticket">Error al crear el número</string>
     <string name="error_update_lottery_ticket">Error al actualizar el número</string>
     <string name="error_no_numbers">No hay números que comprobar</string>
+    <string name="done">Done</string>
 
 </resources>

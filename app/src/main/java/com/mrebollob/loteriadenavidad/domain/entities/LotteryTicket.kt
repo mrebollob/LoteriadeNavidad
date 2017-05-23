@@ -29,9 +29,9 @@ enum class Color {
 
 data class LotteryTicket(val localId: String = generateLocalId(),
                          val label: String = "",
-                         val number: Int,
-                         val bet: Float,
-                         val prize: Float,
+                         val number: Int? = null,
+                         val bet: Float? = null,
+                         val prize: Float? = null,
                          val color: Color = Color.WHITE,
                          val position: Long = object : PositionsFactory {}.newPosition()) {
 

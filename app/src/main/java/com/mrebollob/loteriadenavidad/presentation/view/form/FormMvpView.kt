@@ -1,11 +1,11 @@
 /*
- * Copyright 2016 Manuel Rebollo Báez.
+ * Copyright (c) 2017. Manuel Rebollo Báez.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.app.view.about;
+package com.mrebollob.loteriadenavidad.presentation.view.form
 
-import com.mrebollob.loteriadenavidad.R;
-import com.mrebollob.loteriadenavidad.app.view.BaseActivity;
+import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
+import com.mrebollob.loteriadenavidad.presentation.view.MvpView
 
-public class AboutActivity extends BaseActivity {
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_about;
-    }
+interface FormMvpView : MvpView {
+
+    fun showlotteryTicket(lotteryTicket: LotteryTicket)
+
+    fun showLotteryTickets()
+
+    fun showCreateLotteryTicketError()
+
+    fun showUpdateLotteryTicketError()
 }

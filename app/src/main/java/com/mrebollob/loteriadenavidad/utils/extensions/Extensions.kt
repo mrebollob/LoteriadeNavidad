@@ -19,6 +19,7 @@ package com.mrebollob.loteriadenavidad.utils.extensions
 
 import android.content.Context
 import android.support.v4.content.ContextCompat.getColor
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,3 +76,7 @@ fun EditText.isDifferentThan(newText: String): Boolean =
 
 fun EditText.isNotBlank(): Boolean =
         text.isNotBlank()
+
+fun Editable.toInt(): Int = java.lang.Integer.parseInt(this.toString())
+
+fun Editable.toFloat(): Float = java.lang.Float.parseFloat(this.toString())

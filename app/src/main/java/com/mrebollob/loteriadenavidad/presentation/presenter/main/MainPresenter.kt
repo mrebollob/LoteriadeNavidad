@@ -23,9 +23,10 @@ import com.mrebollob.loteriadenavidad.presentation.presenter.Presenter
 import com.mrebollob.loteriadenavidad.presentation.view.main.MainMvpView
 import javax.inject.Inject
 
-class MainPresenter @Inject constructor(val getLotteryTickets: GetLotteryTickets) : Presenter<MainMvpView> {
+class MainPresenter @Inject constructor(private val getLotteryTickets: GetLotteryTickets)
+    : Presenter<MainMvpView> {
 
-    var mView: MainMvpView? = null
+    private var mView: MainMvpView? = null
 
     override fun attachView(view: MainMvpView, isNew: Boolean) {
         mView = view
