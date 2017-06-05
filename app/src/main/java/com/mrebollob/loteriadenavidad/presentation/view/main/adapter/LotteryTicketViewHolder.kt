@@ -33,10 +33,14 @@ class LotteryTicketViewHolder constructor(itemView: View, val presenter: MainPre
     fun bind(lotteryTicket: LotteryTicket) {
 
         hookListeners(lotteryTicket)
-        val totalPrize = lotteryTicket.bet * lotteryTicket.prize / 20
 
         labelTextView.text = lotteryTicket.label
-        prizeTextView.text = getContext().getString(R.string.money_format, totalPrize)
+
+        if (lotteryTicket.bet != null && lotteryTicket.prize != null) {
+            (lotteryTicket.bet * lotteryTicket.prize / 20f).let {
+                prizeTextView.text = getContext().getString(R.string.money_format, it)
+            }
+        }
     }
 
     private fun getContext(): Context {

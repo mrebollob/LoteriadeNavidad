@@ -16,7 +16,7 @@
 
 package com.mrebollob.loteriadenavidad.domain.interactor
 
-import com.mrebollob.loteriadenavidad.domain.datasources.DbDataSource
+import com.mrebollob.loteriadenavidad.domain.datasource.LotteryTicketDataSource
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
 import com.mrebollob.loteriadenavidad.domain.executor.PostExecutionThread
 import com.mrebollob.loteriadenavidad.domain.executor.ThreadExecutor
@@ -24,13 +24,13 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 
-class CreateLotteryTicket @Inject constructor(val dbDataSource: DbDataSource,
+class CreateLotteryTicket @Inject constructor(val lotteryTicketDataSource: LotteryTicketDataSource,
                                               threadExecutor: ThreadExecutor,
                                               postExecutionThread: PostExecutionThread)
     : AbstractInteractor<Unit, LotteryTicket>(threadExecutor, postExecutionThread) {
 
     override fun buildInteractorObservable(lotteryTicket: LotteryTicket): Observable<Unit> {
 
-        return dbDataSource.createLotteryTicket(lotteryTicket)
+        return lotteryTicketDataSource.createLotteryTicket(lotteryTicket)
     }
 }

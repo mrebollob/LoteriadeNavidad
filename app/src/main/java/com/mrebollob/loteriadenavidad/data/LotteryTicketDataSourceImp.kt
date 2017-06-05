@@ -14,21 +14,29 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.domain.interactor
+package com.mrebollob.loteriadenavidad.data
 
 import com.mrebollob.loteriadenavidad.domain.datasource.LotteryTicketDataSource
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
-import com.mrebollob.loteriadenavidad.domain.executor.PostExecutionThread
-import com.mrebollob.loteriadenavidad.domain.executor.ThreadExecutor
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetLotteryTickets @Inject constructor(val lotteryTicketDataSource: LotteryTicketDataSource,
-                                            threadExecutor: ThreadExecutor,
-                                            postExecutionThread: PostExecutionThread)
-    : AbstractInteractor<List<LotteryTicket>, Unit>(threadExecutor, postExecutionThread) {
 
-    override fun buildInteractorObservable(params: Unit): Observable<List<LotteryTicket>> {
-        return lotteryTicketDataSource.readLotteryTickets()
+class LotteryTicketDataSourceImp @Inject constructor() : LotteryTicketDataSource {
+
+    override fun createLotteryTicket(lotteryTicket: LotteryTicket): Observable<Unit> {
+        TODO("not implemented")
+    }
+
+    override fun readLotteryTickets(): Observable<List<LotteryTicket>> {
+        TODO("not implemented")
+    }
+
+    override fun updateLotteryTicket(lotteryTicket: LotteryTicket): Observable<Unit> {
+        TODO("not implemented")
+    }
+
+    override fun deleteLotteryTicket(id: String): Observable<Unit> {
+        TODO("not implemented")
     }
 }

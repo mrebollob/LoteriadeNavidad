@@ -24,7 +24,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     android:fitsSystemWindows="true"
-    tools:context=".app.view.main.MainActivity">
+    tools:context=".presentation.view.main.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/total_bet"
                     android:textColor="@color/primary_white_text"
-                    android:textSize="@dimen/text_size_small"/>
+                    android:textSize="@dimen/font_normal"/>
 
                 <TextView
                     android:id="@+id/tv_total_win"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/total_win"
                     android:textColor="@color/primary_white_text"
-                    android:textSize="@dimen/text_size_small"/>
+                    android:textSize="@dimen/font_normal"/>
 
                 <TextView
                     android:id="@+id/tv_profit"
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/profit"
                     android:textColor="@color/primary_white_text"
-                    android:textSize="@dimen/text_size_large"/>
+                    android:textSize="@dimen/font_normal"/>
 
                 <TextView
                     android:id="@+id/tv_lottery_status"
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/void_text"
                     android:textColor="@color/primary_white_text"
-                    android:textSize="@dimen/text_size_medium"/>
+                    android:textSize="@dimen/font_normal"/>
 
                 <TextView
                     android:id="@+id/tv_last_update"
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/void_text"
                     android:textColor="@color/primary_white_text"
-                    android:textSize="@dimen/text_size_medium"/>
+                    android:textSize="@dimen/font_normal"/>
             </LinearLayout>
 
             <android.support.v7.widget.Toolbar

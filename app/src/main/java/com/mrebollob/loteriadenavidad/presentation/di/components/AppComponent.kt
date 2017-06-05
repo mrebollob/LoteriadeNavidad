@@ -17,14 +17,13 @@
 package com.mrebollob.loteriadenavidad.presentation.di.components
 
 import com.mrebollob.loteriadenavidad.presentation.di.modules.AppModule
-import com.mrebollob.loteriadenavidad.presentation.di.modules.DbModule
 import com.mrebollob.loteriadenavidad.presentation.view.form.FormActivity
 import com.mrebollob.loteriadenavidad.presentation.view.main.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(AppModule::class, DbModule::class))
+@Component(modules = arrayOf(AppModule::class))
 interface AppComponent {
 
     fun inject(activity: MainActivity)

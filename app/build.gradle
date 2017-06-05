@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.android.tools.build:gradle:2.3.2'
         classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.2'
     }
 }
@@ -120,10 +120,6 @@ dependencies {
     compile 'com.google.dagger:dagger:2.5'
     kapt 'com.google.dagger:dagger-compiler:2.5'
     provided 'org.glassfish:javax.annotation:10.0-b28'
-
-    testCompile 'junit:junit:4.12'
-    testCompile 'com.nhaarman:mockito-kotlin:1.1.0'
-    testCompile 'org.assertj:assertj-core:3.6.1'
 }
 
 /**

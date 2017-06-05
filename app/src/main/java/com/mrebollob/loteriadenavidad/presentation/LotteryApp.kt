@@ -24,6 +24,7 @@ import com.crashlytics.android.core.CrashlyticsCore
 import com.mrebollob.loteriadenavidad.BuildConfig
 import com.mrebollob.loteriadenavidad.R
 import com.mrebollob.loteriadenavidad.presentation.di.components.AppComponent
+import com.mrebollob.loteriadenavidad.presentation.di.components.DaggerAppComponent
 import com.mrebollob.loteriadenavidad.presentation.di.modules.AppModule
 import io.fabric.sdk.android.Fabric
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig

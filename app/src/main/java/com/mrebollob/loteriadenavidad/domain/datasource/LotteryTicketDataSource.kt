@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.domain.datasources
+package com.mrebollob.loteriadenavidad.domain.datasource
 
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
 import io.reactivex.Observable
 
-interface DbDataSource {
+interface LotteryTicketDataSource {
 
     fun createLotteryTicket(lotteryTicket: LotteryTicket): Observable<Unit>
 
     fun readLotteryTickets(): Observable<List<LotteryTicket>>
+
+    fun updateLotteryTicket(lotteryTicket: LotteryTicket): Observable<Unit>
+
+    fun deleteLotteryTicket(id: String): Observable<Unit>
 }
