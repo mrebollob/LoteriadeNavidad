@@ -16,27 +16,60 @@
 
 package com.mrebollob.loteriadenavidad.data
 
+import com.mrebollob.loteriadenavidad.data.db.*
 import com.mrebollob.loteriadenavidad.domain.datasource.LotteryTicketDataSource
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
 import io.reactivex.Observable
+import io.realm.Realm
 import javax.inject.Inject
 
 
 class LotteryTicketDataSourceImp @Inject constructor() : LotteryTicketDataSource {
 
     override fun createLotteryTicket(lotteryTicket: LotteryTicket): Observable<Unit> {
-        TODO("not implemented")
+
+        val db = Realm.getDefaultInstance()
+        lotteryTicket.toDbLotteryTicket().insertOrUpdate(db)
+        db.close()
+
+        return Observable.just(Unit)
     }
 
     override fun readLotteryTickets(): Observable<List<LotteryTicket>> {
-        TODO("not implemented")
+
+        val db = Realm.getDefaultInstance()
+        val persistenceItems = db.queryAllDbLotteryTicketsSortedByPosition()
+        val lotteryTickets = persistenceItems.toLotteryTicketList()
+        db.close()
+
+        return Observable.just(lotteryTickets)
     }
 
     override fun updateLotteryTicket(lotteryTicket: LotteryTicket): Observable<Unit> {
-        TODO("not implemented")
+
+        val db = Realm.getDefaultInstance()
+        val dbLotteryTicket = db.queryByLocalId(lotteryTicket.localId)
+        dbLotteryTicket?.update(db) {
+            label = lotteryTicket.label
+            number = lotteryTicket.number
+            bet = lotteryTicket.bet
+            prize = lotteryTicket.prize
+            setColorAsEnum(lotteryTicket.color)
+            position = lotteryTicket.position
+
+        }
+        db.close()
+
+        return Observable.just(Unit)
     }
 
     override fun deleteLotteryTicket(id: String): Observable<Unit> {
-        TODO("not implemented")
+
+        val db = Realm.getDefaultInstance()
+        val managedItem = db.queryByLocalId(id)
+        managedItem?.delete(db)
+        db.close()
+
+        return Observable.just(Unit)
     }
 }

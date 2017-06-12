@@ -49,4 +49,18 @@ class AppModule(val mApplication: Application) {
 
         return AnalyticsHelper(Answers.getInstance())
     }
+
+    @Provides
+    @Singleton
+    fun providesThreadExecutor(jobExecutor: JobExecutor): ThreadExecutor {
+
+        return jobExecutor
+    }
+
+    @Provides
+    @Singleton
+    fun providesPostExecutionThread(uiThread: UIThread): PostExecutionThread {
+
+        return uiThread
+    }
 }

@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.presentation.di.components
+package com.mrebollob.loteriadenavidad.presentation.di.modules
 
-import com.mrebollob.loteriadenavidad.presentation.di.modules.AppModule
-import com.mrebollob.loteriadenavidad.presentation.di.modules.DataModule
-import com.mrebollob.loteriadenavidad.presentation.view.form.FormActivity
-import com.mrebollob.loteriadenavidad.presentation.view.main.MainActivity
-import dagger.Component
+import com.mrebollob.loteriadenavidad.data.LotteryTicketDataSourceImp
+import com.mrebollob.loteriadenavidad.domain.datasource.LotteryTicketDataSource
+import dagger.Module
+import dagger.Provides
 import javax.inject.Singleton
 
-@Singleton
-@Component(modules = arrayOf(AppModule::class, DataModule::class))
-interface AppComponent {
+@Module
+class DataModule() {
 
-    fun inject(activity: MainActivity)
-
-    fun inject(activity: FormActivity)
+    @Provides
+    @Singleton
+    fun provideLotteryTicketDataSource(lotteryTicketDataSourceImp: LotteryTicketDataSourceImp): LotteryTicketDataSource {
+        return lotteryTicketDataSourceImp
+    }
 }

@@ -23,6 +23,7 @@ import com.crashlytics.android.answers.Answers
 import com.crashlytics.android.core.CrashlyticsCore
 import com.mrebollob.loteriadenavidad.BuildConfig
 import com.mrebollob.loteriadenavidad.R
+import com.mrebollob.loteriadenavidad.data.db.setupPersistence
 import com.mrebollob.loteriadenavidad.presentation.di.components.AppComponent
 import com.mrebollob.loteriadenavidad.presentation.di.components.DaggerAppComponent
 import com.mrebollob.loteriadenavidad.presentation.di.modules.AppModule
@@ -45,6 +46,8 @@ class LotteryApp : Application() {
         }
         initializeCalligraphy()
         initializeCrashlytics()
+
+        setupPersistence(context = this)
     }
 
     private fun initializeCrashlytics() {

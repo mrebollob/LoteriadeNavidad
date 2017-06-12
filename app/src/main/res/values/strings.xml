@@ -71,4 +71,5 @@
     <string name="error_no_numbers">No hay números que comprobar</string>
     <string name="done">Done</string>
 
+    <string name="database_name">loteriadenavidad.realm</string>
 </resources>

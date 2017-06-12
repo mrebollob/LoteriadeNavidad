@@ -19,6 +19,8 @@ package com.mrebollob.loteriadenavidad.domain.entities
 import com.mrebollob.loteriadenavidad.utils.PositionsFactory
 import java.util.*
 
+
+
 const val LOCAL_ID = "localId"
 
 fun generateLocalId(): String = LOCAL_ID + "_" + UUID.randomUUID().toString().replace("-".toRegex(), "")

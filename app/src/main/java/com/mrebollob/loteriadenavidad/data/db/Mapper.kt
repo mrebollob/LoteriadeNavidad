@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.presentation.di.components
+package com.mrebollob.loteriadenavidad.data.db
 
-import com.mrebollob.loteriadenavidad.presentation.di.modules.AppModule
-import com.mrebollob.loteriadenavidad.presentation.di.modules.DataModule
-import com.mrebollob.loteriadenavidad.presentation.view.form.FormActivity
-import com.mrebollob.loteriadenavidad.presentation.view.main.MainActivity
-import dagger.Component
-import javax.inject.Singleton
 
-@Singleton
-@Component(modules = arrayOf(AppModule::class, DataModule::class))
-interface AppComponent {
+import com.mrebollob.loteriadenavidad.data.db.model.DbLotteryTicket
+import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
 
-    fun inject(activity: MainActivity)
-
-    fun inject(activity: FormActivity)
+fun LotteryTicket.toDbLotteryTicket(): DbLotteryTicket = with(this) {
+    DbLotteryTicket(localId, label, number, bet, prize, color, position)
 }
+
+fun DbLotteryTicket.toLotteryTicket(): LotteryTicket = with(this) {
+    LotteryTicket(localId, label, number, bet, prize, getColorAsEnum(), position)
+}
+
+fun List<DbLotteryTicket>.toLotteryTicketList(): List<LotteryTicket> =
+        this.map(DbLotteryTicket::toLotteryTicket)
