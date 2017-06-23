@@ -16,36 +16,96 @@
 
 package com.mrebollob.loteriadenavidad.presentation.view.main.adapter
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mrebollob.loteriadenavidad.R
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
 import com.mrebollob.loteriadenavidad.presentation.presenter.main.MainPresenter
-import com.mrebollob.loteriadenavidad.utils.extensions.inflate
-import kotlin.properties.Delegates
+import com.mrebollob.loteriadenavidad.utils.extensions.getStableId
+import java.util.*
 
 
-class LotteryTicketsAdapter constructor(val presenter: MainPresenter)
-    : RecyclerView.Adapter<LotteryTicketViewHolder>() {
+internal interface ItemTouchHelperAdapter {
+    fun onItemMove(fromPosition: Int, toPosition: Int)
+    fun onItemDeleted(position: Int)
+}
 
-    var lotteryTickets: List<LotteryTicket> by Delegates.observable(emptyList())
-    { prop, old, new -> notifyDataSetChange() }
+class LotteryTicketsAdapter(private var lotteryTickets: List<LotteryTicket>,
+                            private val presenter: MainPresenter)
+    : RecyclerView.Adapter<LotteryTicketViewHolder>(), ItemTouchHelperAdapter {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LotteryTicketViewHolder? {
-        val view = parent.inflate(R.layout.item_lottery_ticket)
-        return LotteryTicketViewHolder(view, presenter)
+    init {
+        setHasStableIds(true)
     }
 
-    override fun onBindViewHolder(holder: LotteryTicketViewHolder, position: Int) {
-        val lotteryTicket = lotteryTickets[position]
-        holder.bind(lotteryTicket)
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): LotteryTicketViewHolder {
+        val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_lottery_ticket,
+                parent, false)
+        return LotteryTicketViewHolder(view, presenter, this::updateItemsPositions)
     }
 
-    override fun getItemCount(): Int {
-        return lotteryTickets.count()
+    override fun onBindViewHolder(itemViewHolder: LotteryTicketViewHolder, position: Int) {
+        itemViewHolder.bindItem(lotteryTickets[position])
     }
 
-    fun notifyDataSetChange() {
-        notifyDataSetChanged()
+    override fun getItemCount(): Int = lotteryTickets.size
+
+    fun getItem(position: Int): LotteryTicket = lotteryTickets[position]
+
+    override fun getItemId(position: Int): Long =
+            getItem(position).getStableId()
+
+    fun removeAt(position: Int) {
+        lotteryTickets = lotteryTickets.minus(lotteryTickets[position])
+        notifyItemRemoved(position)
+    }
+
+    fun updateItems(newItems: List<LotteryTicket>) {
+        val oldItems = lotteryTickets
+        lotteryTickets = newItems
+        applyDiff(oldItems, lotteryTickets)
+    }
+
+    private fun applyDiff(oldItems: List<LotteryTicket>, newItems: List<LotteryTicket>) {
+        val diffResult = DiffUtil.calculateDiff(LotteryTicketsDiffCallback(oldItems, newItems))
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    private fun updateItemsPositions() {
+        presenter.updateLotteryTicketPositions(lotteryTickets)
+    }
+
+    override fun onItemDeleted(position: Int) {
+        presenter.onDeleteLotteryTicket(lotteryTickets[position])
+        removeAt(position)
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        swapItems(fromPosition, toPosition)
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    fun swapItems(fromPosition: Int, toPosition: Int) = if (fromPosition < toPosition) {
+        (fromPosition..toPosition - 1).forEach { i ->
+            swapPositions(i, i + 1)
+            Collections.swap(lotteryTickets, i, i + 1)
+        }
+    } else {
+        (fromPosition downTo toPosition + 1).forEach { i ->
+            swapPositions(i, i - 1)
+            Collections.swap(lotteryTickets, i, i - 1)
+        }
+    }
+
+    fun swapPositions(position1: Int, position2: Int) {
+        val item1 = lotteryTickets[position1]
+        val item2 = lotteryTickets[position2]
+        lotteryTickets = lotteryTickets.map {
+            if (it.localId == item1.localId) it.copy(position = item2.position)
+            else if (it.localId == item2.localId) it.copy(position = item1.position)
+            else it
+        }
     }
 }

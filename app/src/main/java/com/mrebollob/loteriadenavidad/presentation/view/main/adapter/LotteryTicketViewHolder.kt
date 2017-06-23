@@ -16,38 +16,53 @@
 
 package com.mrebollob.loteriadenavidad.presentation.view.main.adapter
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.mrebollob.loteriadenavidad.R
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
 import com.mrebollob.loteriadenavidad.presentation.presenter.main.MainPresenter
+import com.mrebollob.loteriadenavidad.utils.extensions.changeBackgroundColor
+import com.mrebollob.loteriadenavidad.utils.extensions.toColorResource
+import org.jetbrains.anko.find
 
-class LotteryTicketViewHolder constructor(itemView: View, val presenter: MainPresenter)
-    : RecyclerView.ViewHolder(itemView) {
+internal interface ItemTouchHelperViewHolder {
+    fun onItemSelected()
+    fun onItemClear()
+}
 
-    private val labelTextView by lazy { itemView.findViewById(R.id.labelTextView) as TextView }
-    private val prizeTextView by lazy { itemView.findViewById(R.id.prizeTextView) as TextView }
+class LotteryTicketViewHolder(view: View, private val presenter: MainPresenter,
+                              private val reorderItems: () -> Unit)
+    : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder {
 
-    fun bind(lotteryTicket: LotteryTicket) {
+    private lateinit var currentLotteryTicket: LotteryTicket
+    val itemContentLayout: RelativeLayout = itemView.find(R.id.contentLayout)
+    val labelTextView: TextView = itemView.find(R.id.labelTextView)
 
-        hookListeners(lotteryTicket)
-
-        labelTextView.text = lotteryTicket.label
-
-        if (lotteryTicket.bet != null && lotteryTicket.prize != null) {
-            (lotteryTicket.bet * lotteryTicket.prize / 20f).let {
-                prizeTextView.text = getContext().getString(R.string.money_format, it)
+    fun bindItem(lotteryTicket: LotteryTicket) =
+            with(lotteryTicket) {
+                currentLotteryTicket = this
+                bindViewContent(this)
+                bindClickHandlers(this)
             }
-        }
+
+    private fun bindViewContent(lotteryTicket: LotteryTicket) =
+            with(lotteryTicket) {
+                labelTextView.text = number?.toString()
+                itemContentLayout.changeBackgroundColor(color.toColorResource())
+            }
+
+    private fun bindClickHandlers(lotteryTicket: LotteryTicket) {
+        itemContentLayout.setOnClickListener { presenter.onLotteryTicketClick(lotteryTicket) }
     }
 
-    private fun getContext(): Context {
-        return itemView.context
+    override fun onItemSelected() {
+        itemContentLayout.changeBackgroundColor(R.color.item_selected)
     }
 
-    private fun hookListeners(lotteryTicket: LotteryTicket) {
-        itemView.setOnClickListener { v -> presenter.onLotteryTicketClick(lotteryTicket) }
+    override fun onItemClear() {
+        itemContentLayout.changeBackgroundColor(currentLotteryTicket.color.toColorResource())
+        reorderItems()
     }
 }

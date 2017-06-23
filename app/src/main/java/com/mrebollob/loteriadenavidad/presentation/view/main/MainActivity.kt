@@ -21,14 +21,16 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.Menu
 import android.view.MenuItem
 import com.mrebollob.loteriadenavidad.R
-import com.mrebollob.loteriadenavidad.utils.FeedbackUtils
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
 import com.mrebollob.loteriadenavidad.presentation.presenter.main.MainPresenter
 import com.mrebollob.loteriadenavidad.presentation.view.BaseActivity
+import com.mrebollob.loteriadenavidad.presentation.view.main.adapter.LotteryTicketTouchHelperCallback
 import com.mrebollob.loteriadenavidad.presentation.view.main.adapter.LotteryTicketsAdapter
+import com.mrebollob.loteriadenavidad.utils.FeedbackUtils
 import com.mrebollob.loteriadenavidad.utils.analytics.AnalyticsHelper
 import com.mrebollob.loteriadenavidad.utils.extensions.toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,7 +41,7 @@ class MainActivity : BaseActivity(), MainMvpView, SwipeRefreshLayout.OnRefreshLi
 
     @Inject lateinit var presenter: MainPresenter
     @Inject lateinit var mAnalyticsHelper: AnalyticsHelper
-    var lotteryTicketsAdapter: LotteryTicketsAdapter? = null
+    private lateinit var lotteryTicketsAdapter: LotteryTicketsAdapter
     var isNewActivity = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,9 +88,17 @@ class MainActivity : BaseActivity(), MainMvpView, SwipeRefreshLayout.OnRefreshLi
     }
 
     private fun initRecyclerView() {
-        lotteryTicketsAdapter = LotteryTicketsAdapter(presenter)
-        lotteryTicketsListView.layoutManager = LinearLayoutManager(this)
+        lotteryTicketsAdapter = LotteryTicketsAdapter(
+                lotteryTickets = emptyList<LotteryTicket>(),
+                presenter = presenter)
+
+        val linearLayoutManager = LinearLayoutManager(this)
+        lotteryTicketsListView.layoutManager = linearLayoutManager
         lotteryTicketsListView.adapter = lotteryTicketsAdapter
+
+        val touchHelperCallback = LotteryTicketTouchHelperCallback(lotteryTicketsAdapter)
+        val touchHelper = ItemTouchHelper(touchHelperCallback)
+        touchHelper.attachToRecyclerView(lotteryTicketsListView)
     }
 
     private fun initRefreshLayout() {
@@ -106,7 +116,7 @@ class MainActivity : BaseActivity(), MainMvpView, SwipeRefreshLayout.OnRefreshLi
     }
 
     override fun showLotteryTickets(lotteryTickets: List<LotteryTicket>) {
-        lotteryTicketsAdapter?.lotteryTickets = lotteryTickets
+        lotteryTicketsAdapter.updateItems(lotteryTickets)
     }
 
     override fun showGetLotteryTicketsError() {

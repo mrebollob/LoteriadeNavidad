@@ -41,6 +41,14 @@ class MainPresenter @Inject constructor(private val getLotteryTickets: GetLotter
 
     }
 
+    fun updateLotteryTicketPositions(lotteryTickets: List<LotteryTicket>) {
+
+    }
+
+    fun onDeleteLotteryTicket(lotteryTicket: LotteryTicket) {
+
+    }
+
     fun onNewLotteryTicketClick() {
         mView?.showNewLotteryTicketForm()
     }

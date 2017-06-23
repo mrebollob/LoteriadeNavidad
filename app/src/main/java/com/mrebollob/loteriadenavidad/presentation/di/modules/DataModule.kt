@@ -23,11 +23,12 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class DataModule() {
+class DataModule {
 
     @Provides
     @Singleton
-    fun provideLotteryTicketDataSource(lotteryTicketDataSourceImp: LotteryTicketDataSourceImp): LotteryTicketDataSource {
+    fun provideLotteryTicketDataSource(lotteryTicketDataSourceImp: LotteryTicketDataSourceImp)
+            : LotteryTicketDataSource {
         return lotteryTicketDataSourceImp
     }
 }
