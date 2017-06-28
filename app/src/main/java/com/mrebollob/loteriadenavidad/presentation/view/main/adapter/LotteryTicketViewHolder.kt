@@ -18,6 +18,7 @@ package com.mrebollob.loteriadenavidad.presentation.view.main.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.mrebollob.loteriadenavidad.R
@@ -37,7 +38,7 @@ class LotteryTicketViewHolder(view: View, private val presenter: MainPresenter,
     : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder {
 
     private lateinit var currentLotteryTicket: LotteryTicket
-    val itemContentLayout: RelativeLayout = itemView.find(R.id.contentLayout)
+    val itemContentLayout: FrameLayout = itemView.find(R.id.contentLayout)
     val labelTextView: TextView = itemView.find(R.id.labelTextView)
 
     fun bindItem(lotteryTicket: LotteryTicket) =

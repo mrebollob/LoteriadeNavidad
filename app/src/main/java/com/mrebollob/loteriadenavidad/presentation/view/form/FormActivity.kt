@@ -124,7 +124,7 @@ class FormActivity : BaseActivity(), FormMvpView {
     }
 
     override fun showLotteryTickets() {
-        TODO("not implemented")
+        finish()
     }
 
     override fun showCreateLotteryTicketError() {

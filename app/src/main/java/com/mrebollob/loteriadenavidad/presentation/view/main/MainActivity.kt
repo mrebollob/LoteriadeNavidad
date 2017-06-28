@@ -28,6 +28,7 @@ import com.mrebollob.loteriadenavidad.R
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
 import com.mrebollob.loteriadenavidad.presentation.presenter.main.MainPresenter
 import com.mrebollob.loteriadenavidad.presentation.view.BaseActivity
+import com.mrebollob.loteriadenavidad.presentation.view.form.FormActivity
 import com.mrebollob.loteriadenavidad.presentation.view.main.adapter.LotteryTicketTouchHelperCallback
 import com.mrebollob.loteriadenavidad.presentation.view.main.adapter.LotteryTicketsAdapter
 import com.mrebollob.loteriadenavidad.utils.FeedbackUtils
@@ -82,9 +83,9 @@ class MainActivity : BaseActivity(), MainMvpView, SwipeRefreshLayout.OnRefreshLi
         initRecyclerView()
         initRefreshLayout()
 
-//        fab.setOnClickListener { view ->
-//            presenter.onEditCreditCardClick()
-//        }
+        fab.setOnClickListener { _ ->
+            presenter.onNewLotteryTicketClick()
+        }
     }
 
     private fun initRecyclerView() {
@@ -124,7 +125,7 @@ class MainActivity : BaseActivity(), MainMvpView, SwipeRefreshLayout.OnRefreshLi
     }
 
     override fun showNewLotteryTicketForm() {
-        TODO("not implemented")
+        FormActivity.open(this)
     }
 
     override fun showLoading() {
