@@ -20,12 +20,14 @@ import com.mrebollob.loteriadenavidad.domain.entities.Color
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
 import com.mrebollob.loteriadenavidad.domain.interactor.CreateLotteryTicket
 import com.mrebollob.loteriadenavidad.domain.interactor.DefaultObserver
+import com.mrebollob.loteriadenavidad.domain.interactor.DeleteLotteryTicket
 import com.mrebollob.loteriadenavidad.presentation.presenter.Presenter
 import com.mrebollob.loteriadenavidad.presentation.view.form.FormMvpView
 import javax.inject.Inject
 
 
-class FormPresenter @Inject constructor(private val createLotteryTicket: CreateLotteryTicket)
+class FormPresenter @Inject constructor(private val createLotteryTicket: CreateLotteryTicket,
+                                        private val deleteLotteryTicket: DeleteLotteryTicket)
     : Presenter<FormMvpView> {
 
     private var mView: FormMvpView? = null
@@ -34,6 +36,12 @@ class FormPresenter @Inject constructor(private val createLotteryTicket: CreateL
 
     override fun attachView(view: FormMvpView, isNew: Boolean) {
         mView = view
+        if (!lotteryTicketId.isNullOrEmpty()) {
+            currentLotteryTicket = currentLotteryTicket.copy(
+                    localId = lotteryTicketId ?: "",
+                    number = 111)
+            mView?.showlotteryTicket(currentLotteryTicket)
+        }
     }
 
     fun updateColor(color: Color) {
@@ -42,14 +50,19 @@ class FormPresenter @Inject constructor(private val createLotteryTicket: CreateL
 
     fun createOrUpdateLotteryTicket(label: String, number: Int, bet: Float) {
         currentLotteryTicket = currentLotteryTicket.copy(label = label, number = number, bet = bet)
-        createLotteryTicket.execute(CreateCreditCardObserver(), currentLotteryTicket)
+        createLotteryTicket.execute(FormObserver(), currentLotteryTicket)
+    }
+
+    fun onDeleteClick() {
+        deleteLotteryTicket.execute(FormObserver(), currentLotteryTicket.localId)
     }
 
     override fun detachView() {
         createLotteryTicket.dispose()
+        deleteLotteryTicket.dispose()
     }
 
-    private inner class CreateCreditCardObserver : DefaultObserver<Unit>() {
+    private inner class FormObserver : DefaultObserver<Unit>() {
 
         override fun onNext(value: Unit) {
         }
@@ -59,7 +72,7 @@ class FormPresenter @Inject constructor(private val createLotteryTicket: CreateL
         }
 
         override fun onError(e: Throwable?) {
-            mView?.showCreateLotteryTicketError()
+            mView?.showSaveChangesError()
         }
     }
 }

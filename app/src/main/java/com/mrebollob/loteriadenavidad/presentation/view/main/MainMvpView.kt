@@ -26,4 +26,6 @@ interface MainMvpView : MvpView {
     fun showGetLotteryTicketsError()
 
     fun showNewLotteryTicketForm()
+
+    fun showLotteryTicketForm(lotteryTicket: LotteryTicket)
 }

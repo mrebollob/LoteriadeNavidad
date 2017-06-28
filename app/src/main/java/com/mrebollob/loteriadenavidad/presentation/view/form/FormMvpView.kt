@@ -26,7 +26,5 @@ interface FormMvpView : MvpView {
 
     fun showLotteryTickets()
 
-    fun showCreateLotteryTicketError()
-
-    fun showUpdateLotteryTicketError()
+    fun showSaveChangesError()
 }

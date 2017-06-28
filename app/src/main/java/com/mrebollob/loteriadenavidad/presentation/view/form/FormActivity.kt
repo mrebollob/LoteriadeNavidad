@@ -33,6 +33,7 @@ import com.mrebollob.loteriadenavidad.utils.analytics.AnalyticsHelper
 import com.mrebollob.loteriadenavidad.utils.extensions.isNotBlank
 import com.mrebollob.loteriadenavidad.utils.extensions.toFloat
 import com.mrebollob.loteriadenavidad.utils.extensions.toInt
+import com.mrebollob.loteriadenavidad.utils.extensions.toast
 import kotlinx.android.synthetic.main.activity_form.*
 import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
@@ -84,25 +85,34 @@ class FormActivity : BaseActivity(), FormMvpView {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu_done, menu)
+        if (getCardId().isEmpty()) {
+            inflater.inflate(R.menu.menu_done, menu)
+        } else {
+            inflater.inflate(R.menu.menu_form, menu)
+        }
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_done) {
-            presenter.let {
-                if (labelEditText.isNotBlank() && numberEditText.isNotBlank()
-                        && betEditText.isNotBlank()) {
+        when {
+            item.itemId == R.id.action_done -> {
+                presenter.let {
+                    if (labelEditText.isNotBlank() && numberEditText.isNotBlank()
+                            && betEditText.isNotBlank()) {
 
-                    it.createOrUpdateLotteryTicket(
-                            label = labelEditText.text.toString(),
-                            number = numberEditText.text.toInt(),
-                            bet = betEditText.text.toFloat())
+                        it.createOrUpdateLotteryTicket(
+                                label = labelEditText.text.toString(),
+                                number = numberEditText.text.toInt(),
+                                bet = betEditText.text.toFloat())
+                    }
                 }
+                return true
             }
-            return true
-        } else {
-            return super.onOptionsItemSelected(item)
+            item.itemId == R.id.action_delete -> {
+                presenter.onDeleteClick()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 
@@ -120,19 +130,25 @@ class FormActivity : BaseActivity(), FormMvpView {
     }
 
     override fun showlotteryTicket(lotteryTicket: LotteryTicket) {
-        TODO("not implemented")
+        labelEditText.setText(lotteryTicket.label)
+        numberEditText.setText(lotteryTicket.label)
+        betEditText.setText(lotteryTicket.label)
+
+        when (lotteryTicket.color) {
+            Color.RED -> itemRedColor.isChecked = true
+            Color.BLUE -> itemBlueColor.isChecked = true
+            Color.GREEN -> itemGreenColor.isChecked = true
+            Color.WHITE -> itemWhiteColor.isChecked = true
+            Color.YELLOW -> itemYellowColor.isChecked = true
+        }
     }
 
     override fun showLotteryTickets() {
         finish()
     }
 
-    override fun showCreateLotteryTicketError() {
-        TODO("not implemented")
-    }
-
-    override fun showUpdateLotteryTicketError() {
-        TODO("not implemented")
+    override fun showSaveChangesError() {
+        toast("Save changes error")
     }
 
     private fun getCardId(): String {

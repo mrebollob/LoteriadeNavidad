@@ -128,6 +128,10 @@ class MainActivity : BaseActivity(), MainMvpView, SwipeRefreshLayout.OnRefreshLi
         FormActivity.open(this)
     }
 
+    override fun showLotteryTicketForm(lotteryTicket: LotteryTicket) {
+        FormActivity.open(this, lotteryTicket.localId)
+    }
+
     override fun showLoading() {
         swipeRefreshLayout.isRefreshing = true
     }
