@@ -19,11 +19,14 @@ package com.mrebollob.loteriadenavidad.presentation.presenter.main
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
 import com.mrebollob.loteriadenavidad.domain.interactor.DefaultObserver
 import com.mrebollob.loteriadenavidad.domain.interactor.GetLotteryTickets
+import com.mrebollob.loteriadenavidad.domain.interactor.UnitObserver
+import com.mrebollob.loteriadenavidad.domain.interactor.UpdateLotteryTickets
 import com.mrebollob.loteriadenavidad.presentation.presenter.Presenter
 import com.mrebollob.loteriadenavidad.presentation.view.main.MainMvpView
 import javax.inject.Inject
 
-class MainPresenter @Inject constructor(private val getLotteryTickets: GetLotteryTickets)
+class MainPresenter @Inject constructor(private val getLotteryTickets: GetLotteryTickets,
+                                        private val updateLotteryTickets: UpdateLotteryTickets)
     : Presenter<MainMvpView> {
 
     private var mView: MainMvpView? = null
@@ -42,7 +45,7 @@ class MainPresenter @Inject constructor(private val getLotteryTickets: GetLotter
     }
 
     fun updateLotteryTicketPositions(lotteryTickets: List<LotteryTicket>) {
-
+        updateLotteryTickets.execute(UnitObserver(), lotteryTickets)
     }
 
     fun onDeleteLotteryTicket(lotteryTicket: LotteryTicket) {
@@ -59,6 +62,7 @@ class MainPresenter @Inject constructor(private val getLotteryTickets: GetLotter
 
     override fun detachView() {
         getLotteryTickets.dispose()
+        updateLotteryTickets.dispose()
     }
 
     private inner class CreditCardObserver : DefaultObserver<List<LotteryTicket>>() {

@@ -29,7 +29,6 @@ import java.util.*
 
 internal interface ItemTouchHelperAdapter {
     fun onItemMove(fromPosition: Int, toPosition: Int)
-    fun onItemDeleted(position: Int)
 }
 
 class LotteryTicketsAdapter(private var lotteryTickets: List<LotteryTicket>,
@@ -43,7 +42,7 @@ class LotteryTicketsAdapter(private var lotteryTickets: List<LotteryTicket>,
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): LotteryTicketViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_lottery_ticket,
                 parent, false)
-        return LotteryTicketViewHolder(view, presenter, this::updateItemsPositions)
+        return LotteryTicketViewHolder(view, presenter)
     }
 
     override fun onBindViewHolder(itemViewHolder: LotteryTicketViewHolder, position: Int) {
@@ -54,13 +53,7 @@ class LotteryTicketsAdapter(private var lotteryTickets: List<LotteryTicket>,
 
     fun getItem(position: Int): LotteryTicket = lotteryTickets[position]
 
-    override fun getItemId(position: Int): Long =
-            getItem(position).getStableId()
-
-    fun removeAt(position: Int) {
-        lotteryTickets = lotteryTickets.minus(lotteryTickets[position])
-        notifyItemRemoved(position)
-    }
+    override fun getItemId(position: Int): Long = getItem(position).getStableId()
 
     fun updateItems(newItems: List<LotteryTicket>) {
         val oldItems = lotteryTickets
@@ -73,18 +66,10 @@ class LotteryTicketsAdapter(private var lotteryTickets: List<LotteryTicket>,
         diffResult.dispatchUpdatesTo(this)
     }
 
-    private fun updateItemsPositions() {
-        presenter.updateLotteryTicketPositions(lotteryTickets)
-    }
-
-    override fun onItemDeleted(position: Int) {
-        presenter.onDeleteLotteryTicket(lotteryTickets[position])
-        removeAt(position)
-    }
-
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
         swapItems(fromPosition, toPosition)
         notifyItemMoved(fromPosition, toPosition)
+        presenter.updateLotteryTicketPositions(lotteryTickets)
     }
 
     fun swapItems(fromPosition: Int, toPosition: Int) = if (fromPosition < toPosition) {

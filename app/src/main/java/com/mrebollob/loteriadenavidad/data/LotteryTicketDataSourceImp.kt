@@ -63,6 +63,25 @@ class LotteryTicketDataSourceImp @Inject constructor() : LotteryTicketDataSource
         return Observable.just(Unit)
     }
 
+    override fun updateLotteryTickets(lotteryTickets: List<LotteryTicket>): Observable<Unit> {
+
+        val db = Realm.getDefaultInstance()
+
+        lotteryTickets.map {
+            val dbLotteryTicket = db.queryByLocalId(it.localId)
+            dbLotteryTicket?.update(db) {
+                label = it.label
+                number = it.number
+                bet = it.bet
+                prize = it.prize
+                setColorAsEnum(it.color)
+                position = it.position
+            }
+        }
+
+        return Observable.just(Unit)
+    }
+
     override fun deleteLotteryTicket(id: String): Observable<Unit> {
 
         val db = Realm.getDefaultInstance()

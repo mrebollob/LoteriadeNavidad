@@ -20,23 +20,25 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 
 class LotteryTicketTouchHelperCallback(val lotteryTicketsAdapter: LotteryTicketsAdapter)
-    : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.START) {
+    : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, -1) {
 
     var isDragging = false
 
-    override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-        lotteryTicketsAdapter.onItemMove(fromPosition = viewHolder.adapterPosition, toPosition = target.adapterPosition)
+    override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder,
+                        target: RecyclerView.ViewHolder): Boolean {
+        lotteryTicketsAdapter.onItemMove(
+                fromPosition = viewHolder.adapterPosition,
+                toPosition = target.adapterPosition)
         return true
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        if (direction == ItemTouchHelper.START) {
-            lotteryTicketsAdapter.onItemDeleted(viewHolder.adapterPosition)
-        }
+
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-        if (actionState == ItemTouchHelper.ACTION_STATE_DRAG && viewHolder is ItemTouchHelperViewHolder) {
+        if (actionState == ItemTouchHelper.ACTION_STATE_DRAG
+                && viewHolder is ItemTouchHelperViewHolder) {
             isDragging = true
             viewHolder.onItemSelected()
         }

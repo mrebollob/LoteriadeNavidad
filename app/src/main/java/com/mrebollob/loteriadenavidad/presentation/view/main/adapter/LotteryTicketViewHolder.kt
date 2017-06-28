@@ -19,7 +19,6 @@ package com.mrebollob.loteriadenavidad.presentation.view.main.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import com.mrebollob.loteriadenavidad.R
 import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
@@ -33,20 +32,18 @@ internal interface ItemTouchHelperViewHolder {
     fun onItemClear()
 }
 
-class LotteryTicketViewHolder(view: View, private val presenter: MainPresenter,
-                              private val reorderItems: () -> Unit)
+class LotteryTicketViewHolder(view: View, private val presenter: MainPresenter)
     : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder {
 
     private lateinit var currentLotteryTicket: LotteryTicket
     val itemContentLayout: FrameLayout = itemView.find(R.id.contentLayout)
     val labelTextView: TextView = itemView.find(R.id.labelTextView)
 
-    fun bindItem(lotteryTicket: LotteryTicket) =
-            with(lotteryTicket) {
-                currentLotteryTicket = this
-                bindViewContent(this)
-                bindClickHandlers(this)
-            }
+    fun bindItem(lotteryTicket: LotteryTicket) = with(lotteryTicket) {
+        currentLotteryTicket = this
+        bindViewContent(this)
+        bindClickHandlers(this)
+    }
 
     private fun bindViewContent(lotteryTicket: LotteryTicket) =
             with(lotteryTicket) {
@@ -64,6 +61,5 @@ class LotteryTicketViewHolder(view: View, private val presenter: MainPresenter,
 
     override fun onItemClear() {
         itemContentLayout.changeBackgroundColor(currentLotteryTicket.color.toColorResource())
-        reorderItems()
     }
 }

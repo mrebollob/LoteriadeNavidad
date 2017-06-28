@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.domain.datasource
+package com.mrebollob.loteriadenavidad.domain.interactor
 
-import com.mrebollob.loteriadenavidad.domain.entities.LotteryTicket
-import io.reactivex.Observable
+class UnitObserver : DefaultObserver<Unit>() {
 
-interface LotteryTicketDataSource {
+    override fun onNext(value: Unit) {
+    }
 
-    fun createLotteryTicket(lotteryTicket: LotteryTicket): Observable<Unit>
+    override fun onComplete() {
+    }
 
-    fun readLotteryTickets(): Observable<List<LotteryTicket>>
-
-    fun updateLotteryTicket(lotteryTicket: LotteryTicket): Observable<Unit>
-
-    fun updateLotteryTickets(lotteryTickets: List<LotteryTicket>): Observable<Unit>
-
-    fun deleteLotteryTicket(id: String): Observable<Unit>
+    override fun onError(e: Throwable?) {
+    }
 }
