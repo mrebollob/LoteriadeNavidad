@@ -36,6 +36,13 @@ class LotteryTicketTouchHelperCallback(val lotteryTicketsAdapter: LotteryTickets
 
     }
 
+    override fun getSwipeDirs(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?): Int {
+        if (viewHolder is ItemTouchHelperViewHolder) {
+            return 0
+        }
+        return super.getSwipeDirs(recyclerView, viewHolder)
+    }
+
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         if (actionState == ItemTouchHelper.ACTION_STATE_DRAG
                 && viewHolder is ItemTouchHelperViewHolder) {
