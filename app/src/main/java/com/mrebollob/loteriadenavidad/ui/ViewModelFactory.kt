@@ -14,10 +14,21 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.presentation.di.qualifiers
+package com.mrebollob.loteriadenavidad.ui
 
-import javax.inject.Qualifier
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import com.mrebollob.loteriadenavidad.persistence.UserDao
 
-@Qualifier
-@Retention
-annotation class DataBaseName
+/**
+ * Factory for ViewModels
+ */
+class ViewModelFactory(private val dataSource: UserDao) : ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(UserViewModel::class.java)) {
+            return UserViewModel(dataSource) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}

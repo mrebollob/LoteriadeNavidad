@@ -73,4 +73,6 @@
 
     <string name="database_name">loteriadenavidad.realm</string>
     <string name="delete">delete</string>
+
+    <string name="update_user">Update username</string>
 </resources>

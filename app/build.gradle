@@ -1,40 +1,35 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.2'
-    }
-}
-
-repositories {
-    mavenCentral()
-    maven { url "https://jitpack.io" }
-    maven { url "http://repository.jetbrains.com/all" }
-    maven { url 'https://maven.fabric.io/public' }
-}
+/*
+ * Copyright (c) 2017. Manuel Rebollo Báez.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'realm-android'
-apply plugin: 'io.fabric'
-apply plugin: 'com.getkeepsafe.dexcount'
-apply from: 'config/gradle/jacoco.gradle'
 
 def STRING = "String"
 def BOOLEAN = "boolean"
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
 
     defaultConfig {
         applicationId "com.mrb.loteriadenavidad"
-        minSdkVersion 16
-        targetSdkVersion 25
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode computeVersionCode()
         versionName "4.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -64,64 +59,66 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-
     lintOptions {
         quiet true
         abortOnError false
         ignoreWarnings true
     }
-}
 
-kapt {
-    generateStubs = true
-}
-
-dexcount {
-    format = "list"
-    includeClasses = false
-    includeFieldCount = true
-    includeTotalMethodCount = true
-    orderByMethodCount = false
-    verbose = true
-    maxTreeDepth = Integer.MAX_VALUE
-    enableForInstantRun = false
-    runOnEachAssemble = false
+    kapt { generateStubs = true }
 }
 
 dependencies {
+    // Support libraries
+    implementation deps.support.app_compat
+    implementation deps.support.v4
+    implementation deps.support.design
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.anko:anko-commons:$anko_version"
+    // Architecture components
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    kapt deps.lifecycle.compiler
+    implementation deps.room.runtime
+    kapt deps.room.compiler
+    implementation deps.room.rxjava2
 
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile 'com.android.support:cardview-v7:25.3.1'
-    compile 'com.android.support:support-annotations:25.3.1'
-    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+    // RxJava
+    implementation deps.rx_android
+    implementation deps.rxjava2
 
-    compile 'io.reactivex.rxjava2:rxjava:2.0.2'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.squareup.okhttp3:okhttp:3.4.2'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.4.2'
-    compile 'org.jsoup:jsoup:1.10.1'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.6@aar') {
-        transitive = true;
-    }
+    // kotlin
+    // Kotlin
+    implementation deps.kotlin.stdlib
 
-    compile 'com.google.dagger:dagger:2.11'
-    kapt 'com.google.dagger:dagger-compiler:2.11'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    // Dependencies for local unit tests
+    testImplementation deps.junit
+    testImplementation deps.mockito.all
+    testImplementation deps.hamcrest
+    testImplementation deps.arch_core.testing
+    testImplementation deps.kotlin.stdlib
+    testImplementation deps.kotlin.test
+
+    // Android Testing Support Library's runner and rules
+    androidTestCompile deps.atsl.runner
+    androidTestCompile deps.atsl.rules
+    androidTestCompile deps.room.testing
+    androidTestCompile deps.arch_core.testing
+
+    // Dependencies for Android unit tests
+    androidTestCompile deps.junit
+    androidTestCompile deps.mockito.core, { exclude group: 'net.bytebuddy' }
+    androidTestCompile deps.dexmaker
+
+    // Espresso UI Testing
+    androidTestCompile deps.espresso.core
+    androidTestCompile deps.espresso.contrib
+    androidTestCompile deps.espresso.intents
+
+    // Resolve conflicts between main and test APK:
+    androidTestCompile deps.support.annotations
+    androidTestCompile deps.support.v4
+    androidTestCompile deps.support.app_compat
+    androidTestCompile deps.support.design
 }
 
 /**

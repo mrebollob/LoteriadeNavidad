@@ -14,6 +14,22 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.domain.exception
+package com.mrebollob.loteriadenavidad
 
-class EmptyLotteryTicketException : Exception()
+import android.content.Context
+import com.mrebollob.loteriadenavidad.persistence.UserDao
+import com.mrebollob.loteriadenavidad.persistence.UsersDatabase
+import com.mrebollob.loteriadenavidad.ui.ViewModelFactory
+
+object Injection {
+
+    fun provideUserDataSource(context: Context): UserDao {
+        val database = UsersDatabase.getInstance(context)
+        return database.userDao()
+    }
+
+    fun provideViewModelFactory(context: Context): ViewModelFactory {
+        val dataSource = provideUserDataSource(context)
+        return ViewModelFactory(dataSource)
+    }
+}
