@@ -22,29 +22,30 @@ import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import io.reactivex.Flowable
 
+
 /**
- * Data Access Object for the users table.
+ * Data Access Object for the tickets table.
  */
 @Dao
-interface UserDao {
+interface TicketDao {
 
     /**
-     * Get a user by id.
-     * @return the user from the table with a specific id.
+     * Get a ticket by id.
+     * @return the ticket from the table with a specific id.
      */
-    @Query("SELECT * FROM Users WHERE userid = :id")
-    fun getUserById(id: String): Flowable<User>
+    @Query("SELECT * FROM Tickets WHERE ticketid = :id")
+    fun getTicketById(id: String): Flowable<Ticket>
 
     /**
-     * Insert a user in the database. If the user already exists, replace it.
-     * @param user the user to be inserted.
+     * Insert a ticket in the database. If the ticket already exists, replace it.
+     * @param ticket the ticket to be inserted.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUser(user: User)
+    fun insertTicket(ticket: Ticket)
 
     /**
-     * Delete all users.
+     * Delete all tickets.
      */
-    @Query("DELETE FROM Users")
-    fun deleteAllUsers()
+    @Query("DELETE FROM Tickets")
+    fun deleteAllTickets()
 }

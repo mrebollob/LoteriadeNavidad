@@ -17,8 +17,8 @@
 package com.mrebollob.loteriadenavidad.ui
 
 import android.arch.lifecycle.ViewModel
-import com.mrebollob.loteriadenavidad.persistence.User
-import com.mrebollob.loteriadenavidad.persistence.UserDao
+import com.mrebollob.loteriadenavidad.persistence.Ticket
+import com.mrebollob.loteriadenavidad.persistence.TicketDao
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.functions.Action
@@ -27,33 +27,33 @@ import io.reactivex.internal.operators.completable.CompletableFromAction
 /**
  * View Model for the [UserActivity]
  */
-class UserViewModel(private val dataSource: UserDao) : ViewModel() {
+class TicketViewModel(private val dataSource: TicketDao) : ViewModel() {
 
     /**
-     * Get the user name of the user.
-     * @return a [Flowable] that will emit every time the user name has been updated.
+     * Get the number of the ticket.
+     * @return a [Flowable] that will emit every time the ticket number has been updated.
      */
-    // for every emission of the user, get the user name
-    fun userName(): Flowable<String> {
-        return dataSource.getUserById(USER_ID)
-                .map { user -> user.userName }
+    // for every emission of the ticket, get the number
+    fun number(): Flowable<Int> {
+        return dataSource.getTicketById(TICKET_ID)
+                .map { ticket -> ticket.number }
     }
 
     /**
-     * Update the user name.
-     * @param userName the new user name
+     * Update the ticket number.
+     * @param number the new ticket number
      * *
-     * @return a [Completable] that completes when the user name is updated
+     * @return a [Completable] that completes when the ticket number is updated
      */
-    fun updateUserName(userName: String): Completable {
+    fun updateNumber(number: Int): Completable {
         return CompletableFromAction(Action {
-            val user = User(USER_ID, userName)
-            dataSource.insertUser(user)
+            val ticket = Ticket(TICKET_ID, number)
+            dataSource.insertTicket(ticket)
         })
     }
 
     companion object {
         // using a hardcoded value for simplicity
-        const val USER_ID = "1"
+        const val TICKET_ID = "1"
     }
 }

@@ -18,16 +18,16 @@ package com.mrebollob.loteriadenavidad.ui
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.mrebollob.loteriadenavidad.persistence.UserDao
+import com.mrebollob.loteriadenavidad.persistence.TicketDao
 
 /**
  * Factory for ViewModels
  */
-class ViewModelFactory(private val dataSource: UserDao) : ViewModelProvider.Factory {
+class ViewModelFactory(private val dataSource: TicketDao) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(UserViewModel::class.java)) {
-            return UserViewModel(dataSource) as T
+        if (modelClass.isAssignableFrom(TicketViewModel::class.java)) {
+            return TicketViewModel(dataSource) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

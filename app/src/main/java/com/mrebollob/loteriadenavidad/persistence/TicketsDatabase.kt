@@ -22,25 +22,25 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 
 /**
- * The Room database that contains the Users table
+ * The Room database that contains the Tickets table
  */
-@Database(entities = arrayOf(User::class), version = 1)
-abstract class UsersDatabase : RoomDatabase() {
+@Database(entities = arrayOf(Ticket::class), version = 1)
+abstract class TicketsDatabase : RoomDatabase() {
 
-    abstract fun userDao(): UserDao
+    abstract fun ticketDao(): TicketDao
 
     companion object {
 
-        @Volatile private var INSTANCE: UsersDatabase? = null
+        @Volatile private var INSTANCE: TicketsDatabase? = null
 
-        fun getInstance(context: Context): UsersDatabase =
+        fun getInstance(context: Context): TicketsDatabase =
                 INSTANCE ?: synchronized(this) {
                     INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
                 }
 
         private fun buildDatabase(context: Context) =
                 Room.databaseBuilder(context.applicationContext,
-                        UsersDatabase::class.java, "Sample.db")
+                        TicketsDatabase::class.java, "Lottery.db")
                         .build()
     }
 }

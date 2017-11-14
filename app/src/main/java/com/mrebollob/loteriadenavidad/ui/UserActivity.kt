@@ -34,7 +34,7 @@ class UserActivity : AppCompatActivity() {
 
     private lateinit var viewModelFactory: ViewModelFactory
 
-    private lateinit var viewModel: UserViewModel
+    private lateinit var viewModel: TicketViewModel
 
     private val disposable = CompositeDisposable()
 
@@ -43,7 +43,7 @@ class UserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user)
 
         viewModelFactory = Injection.provideViewModelFactory(this)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(TicketViewModel::class.java)
         update_user_button.setOnClickListener { updateUserName() }
     }
 
@@ -52,10 +52,10 @@ class UserActivity : AppCompatActivity() {
         // Subscribe to the emissions of the user name from the view model.
         // Update the user name text view, at every onNext emission.
         // In case of error, log the exception.
-        disposable.add(viewModel.userName()
+        disposable.add(viewModel.number()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ this.user_name.text = it },
+                .subscribe({ this.user_name.text = it.toString() },
                         { error -> Log.e(TAG, "Unable to get username", error) }))
     }
 
@@ -72,7 +72,7 @@ class UserActivity : AppCompatActivity() {
         update_user_button.isEnabled = false
         // Subscribe to updating the user name.
         // Enable back the button once the user name has been updated
-        disposable.add(viewModel.updateUserName(userName)
+        disposable.add(viewModel.updateNumber(userName.toInt())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ update_user_button.isEnabled = true },

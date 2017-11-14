@@ -17,19 +17,19 @@
 package com.mrebollob.loteriadenavidad
 
 import android.content.Context
-import com.mrebollob.loteriadenavidad.persistence.UserDao
-import com.mrebollob.loteriadenavidad.persistence.UsersDatabase
+import com.mrebollob.loteriadenavidad.persistence.TicketDao
+import com.mrebollob.loteriadenavidad.persistence.TicketsDatabase
 import com.mrebollob.loteriadenavidad.ui.ViewModelFactory
 
 object Injection {
 
-    fun provideUserDataSource(context: Context): UserDao {
-        val database = UsersDatabase.getInstance(context)
-        return database.userDao()
+    fun provideTicketDataSource(context: Context): TicketDao {
+        val database = TicketsDatabase.getInstance(context)
+        return database.ticketDao()
     }
 
     fun provideViewModelFactory(context: Context): ViewModelFactory {
-        val dataSource = provideUserDataSource(context)
+        val dataSource = provideTicketDataSource(context)
         return ViewModelFactory(dataSource)
     }
 }
