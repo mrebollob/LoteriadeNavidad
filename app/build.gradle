@@ -64,8 +64,6 @@ android {
         abortOnError false
         ignoreWarnings true
     }
-
-    kapt { generateStubs = true }
 }
 
 dependencies {

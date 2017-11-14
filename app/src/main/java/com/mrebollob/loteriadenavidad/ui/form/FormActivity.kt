@@ -14,21 +14,16 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.ui
+package com.mrebollob.loteriadenavidad.ui.form
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import com.mrebollob.loteriadenavidad.persistence.TicketDao
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.mrebollob.loteriadenavidad.R
 
-/**
- * Factory for ViewModels
- */
-class ViewModelFactory(private val dataSource: TicketDao) : ViewModelProvider.Factory {
+class FormActivity : AppCompatActivity() {
 
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(TicketViewModel::class.java)) {
-            return TicketViewModel(dataSource) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_form)
     }
 }

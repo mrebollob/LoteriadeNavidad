@@ -19,7 +19,7 @@ package com.mrebollob.loteriadenavidad
 import android.content.Context
 import com.mrebollob.loteriadenavidad.persistence.TicketDao
 import com.mrebollob.loteriadenavidad.persistence.TicketsDatabase
-import com.mrebollob.loteriadenavidad.ui.ViewModelFactory
+import com.mrebollob.loteriadenavidad.ui.main.ViewModelFactory
 
 object Injection {
 

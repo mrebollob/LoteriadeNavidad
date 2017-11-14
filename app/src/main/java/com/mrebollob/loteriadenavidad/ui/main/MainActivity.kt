@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.ui
+package com.mrebollob.loteriadenavidad.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -30,12 +30,10 @@ import kotlinx.android.synthetic.main.activity_user.*
 /**
  * Main screen of the app. Displays a user name and gives the option to update the user name.
  */
-class UserActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModelFactory: ViewModelFactory
-
     private lateinit var viewModel: TicketViewModel
-
     private val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,6 +78,6 @@ class UserActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val TAG = UserActivity::class.java.simpleName
+        private val TAG = MainActivity::class.java.simpleName
     }
 }

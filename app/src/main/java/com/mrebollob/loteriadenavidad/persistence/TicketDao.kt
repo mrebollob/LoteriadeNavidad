@@ -20,6 +20,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
+import com.mrebollob.loteriadenavidad.models.Ticket
 import io.reactivex.Flowable
 
 
@@ -28,6 +29,13 @@ import io.reactivex.Flowable
  */
 @Dao
 interface TicketDao {
+
+    /**
+     * Get a ticket list.
+     * @return ticket list from the table.
+     */
+    @Query("SELECT * FROM Tickets")
+    fun getTickets(): Flowable<List<Ticket>>
 
     /**
      * Get a ticket by id.

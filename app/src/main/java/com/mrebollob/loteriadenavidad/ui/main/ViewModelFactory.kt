@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.persistence
+package com.mrebollob.loteriadenavidad.ui.main
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
-import java.util.*
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
+import com.mrebollob.loteriadenavidad.persistence.TicketDao
 
-@Entity(tableName = "tickets")
-data class Ticket(@PrimaryKey
-                  @ColumnInfo(name = "ticketid")
-                  val id: String = UUID.randomUUID().toString(),
-                  @ColumnInfo(name = "number")
-                  val number: Int)
+/**
+ * Factory for ViewModels
+ */
+class ViewModelFactory(private val dataSource: TicketDao) : ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(TicketViewModel::class.java)) {
+            return TicketViewModel(dataSource) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}

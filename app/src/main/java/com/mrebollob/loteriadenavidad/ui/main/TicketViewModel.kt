@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.mrebollob.loteriadenavidad.ui
+package com.mrebollob.loteriadenavidad.ui.main
 
 import android.arch.lifecycle.ViewModel
-import com.mrebollob.loteriadenavidad.persistence.Ticket
+import com.mrebollob.loteriadenavidad.models.Ticket
 import com.mrebollob.loteriadenavidad.persistence.TicketDao
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -25,7 +25,7 @@ import io.reactivex.functions.Action
 import io.reactivex.internal.operators.completable.CompletableFromAction
 
 /**
- * View Model for the [UserActivity]
+ * View Model for the [MainActivity]
  */
 class TicketViewModel(private val dataSource: TicketDao) : ViewModel() {
 
