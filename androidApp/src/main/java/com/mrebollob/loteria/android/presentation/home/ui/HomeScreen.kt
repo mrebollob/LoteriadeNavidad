@@ -14,6 +14,7 @@ import com.mrebollob.loteria.android.presentation.platform.extension.supportWide
 import com.mrebollob.loteria.android.presentation.platform.ui.components.LotterySnackbarHost
 import com.mrebollob.loteria.android.presentation.platform.ui.layout.BaseScaffold
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
+import com.mrebollob.loteria.domain.entity.Ticket
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -47,7 +48,7 @@ fun HomeScreen(
                     uiState.tickets.forEach { ticket ->
                         item {
                             Text(
-                                text = ticket,
+                                text = ticket.name,
                                 style = MaterialTheme.typography.body1,
                             )
                         }
@@ -62,7 +63,10 @@ fun HomeScreen(
 @Composable
 fun PreviewCreateScreen() {
     val uiState = HomeUiState(
-        tickets = listOf("Test ticket 1", "Test ticket 2"),
+        tickets = listOf(
+            Ticket(name = "Test ticket 1", number = 0, bet = 20),
+            Ticket(name = "Test ticket 2", number = 0, bet = 20)
+        ),
         isLoading = false,
         errorMessages = emptyList(),
     )

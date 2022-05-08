@@ -2,10 +2,13 @@ package com.mrebollob.loteria.android.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mrebollob.loteria.domain.repository.TicketsRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class HomeViewModel() : ViewModel() {
+class HomeViewModel(
+    private val ticketsRepository: TicketsRepository
+) : ViewModel() {
 
     private val viewModelState = MutableStateFlow(HomeViewModelState())
     val uiState = viewModelState
@@ -24,8 +27,7 @@ class HomeViewModel() : ViewModel() {
         viewModelState.update { it.copy(isLoading = true) }
 
         viewModelScope.launch {
-            val tickets = listOf("Ticket 1", "Ticket 2")
-
+            val tickets = ticketsRepository.getTickets().getOrElse { emptyList() }
             viewModelState.update {
                 it.copy(
                     tickets = tickets,
