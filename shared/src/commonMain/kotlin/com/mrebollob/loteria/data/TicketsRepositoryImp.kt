@@ -9,8 +9,8 @@ class TicketsRepositoryImp : TicketsRepository {
 
         return Result.success(
             listOf(
-                Ticket(name = "Test ticket 1", number = 0, bet = 20),
-                Ticket(name = "Test ticket 2", number = 0, bet = 20)
+                Ticket(name = "Test ticket 1", number = 0, bet = 20f),
+                Ticket(name = "Test ticket 2", number = 0, bet = 20f)
             )
         )
     }
