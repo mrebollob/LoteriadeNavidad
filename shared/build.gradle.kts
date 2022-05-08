@@ -21,9 +21,23 @@ kotlin {
             baseName = "shared"
         }
     }
-    
+
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                // Kotlin
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1") {
+                    isForce = true
+                }
+
+                // Koin
+                api("io.insert-koin:koin-core:3.1.6")
+                api("io.insert-koin:koin-test:3.1.6")
+
+                // Log
+                api("co.touchlab:kermit:1.0.0")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))

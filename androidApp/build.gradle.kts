@@ -70,4 +70,11 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.20.0")
     implementation("com.google.accompanist:accompanist-pager:0.20.0")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.20.0")
+
+    // Koin
+    implementation("io.insert-koin:koin-core:3.1.6")
+    implementation("io.insert-koin:koin-android:3.1.6")
+    implementation("io.insert-koin:koin-androidx-compose:3.1.6")
+    implementation("io.insert-koin:koin-test:3.1.6")
+    implementation("io.insert-koin:koin-test-junit4:3.1.6")
 }
