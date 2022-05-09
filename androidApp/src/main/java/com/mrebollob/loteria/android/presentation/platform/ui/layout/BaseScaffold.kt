@@ -18,7 +18,7 @@ import com.google.accompanist.insets.statusBarsPadding
 @Composable
 fun BaseScaffold(
     modifier: Modifier = Modifier,
-    toolbarText: String = "",
+    toolbarText: String? = null,
     backgroundColor: Color = MaterialTheme.colors.background,
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     snackbarHost: @Composable (SnackbarHostState) -> Unit = { SnackbarHost(it) },
@@ -34,10 +34,12 @@ fun BaseScaffold(
             snackbarHost = snackbarHost,
             backgroundColor = backgroundColor,
             topBar = {
-                BaseTopAppBar(
-                    toolbarText = toolbarText,
-                    onBackClick = onBackClick
-                )
+                if (toolbarText != null) {
+                    BaseTopAppBar(
+                        toolbarText = toolbarText,
+                        onBackClick = onBackClick
+                    )
+                }
             },
             content = {
                 content()

@@ -3,6 +3,14 @@
     <!-- General -->
     <string name="app_name" translatable="false">Lotería de Navidad 2022</string>
     <string name="back">Atrás</string>
-    <string name="retry">Retry</string>
+    <string name="retry">Reintentar</string>
     <string name="ok_text">OK</string>
+
+    <!-- Home Screen -->
+    <string name="lottery_countdown_today">Hoy es el día del sorteo</string>
+    <string name="lottery_countdown_end">El sorteo ha finalizado</string>
+    <plurals name="lottery_countdown_days">
+        <item quantity="one">Falta %1$d día para el sorteo</item>
+        <item quantity="other">Faltan %1$d días para el sorteo</item>
+    </plurals>
 </resources>

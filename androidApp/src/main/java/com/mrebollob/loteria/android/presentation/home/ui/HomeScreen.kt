@@ -2,6 +2,7 @@ package com.mrebollob.loteria.android.presentation.home.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ScaffoldState
@@ -19,6 +20,7 @@ import com.mrebollob.loteria.android.presentation.platform.ui.components.Lottery
 import com.mrebollob.loteria.android.presentation.platform.ui.layout.BaseScaffold
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 import com.mrebollob.loteria.domain.entity.Ticket
+import java.util.Date
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -44,9 +46,18 @@ fun HomeScreen(
         content = {
             LazyColumn(
                 state = rememberLazyListState(),
-                contentPadding = PaddingValues(16.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
+
+                item {
+                    CountdownSectionView(
+                        modifier = Modifier.padding(top = 16.dp),
+                        today = uiState.today,
+                        daysToLotteryDraw = uiState.daysToLotteryDraw
+                    )
+                }
+
                 uiState.tickets.forEach { ticket ->
                     item {
                         TicketItemView(
@@ -63,6 +74,8 @@ fun HomeScreen(
 @Composable
 fun PreviewCreateScreen() {
     val uiState = HomeUiState(
+        today = Date(),
+        daysToLotteryDraw = 10,
         tickets = listOf(
             Ticket(name = "Test ticket 1", number = 0, bet = 20f),
             Ticket(name = "Test ticket 2", number = 0, bet = 20f)
