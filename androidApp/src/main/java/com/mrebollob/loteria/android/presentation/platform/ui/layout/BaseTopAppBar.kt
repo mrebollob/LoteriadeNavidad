@@ -1,6 +1,7 @@
 package com.mrebollob.loteria.android.presentation.platform.ui.layout
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -15,6 +16,7 @@ import com.mrebollob.loteria.android.R
 fun BaseTopAppBar(
     modifier: Modifier = Modifier,
     toolbarText: String,
+    barActions: @Composable RowScope.() -> Unit = {},
     onBackClick: (() -> Unit)? = null,
 ) {
     TopAppBar(
@@ -28,9 +30,7 @@ fun BaseTopAppBar(
                 )
             }
         },
-        actions = {
-
-        },
+        actions = barActions,
         backgroundColor = MaterialTheme.colors.background,
         elevation = 0.dp,
         navigationIcon = if (onBackClick != null) {

@@ -2,6 +2,7 @@ package com.mrebollob.loteria.android.presentation.platform.ui.layout
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -21,6 +22,7 @@ fun BaseScaffold(
     toolbarText: String? = null,
     backgroundColor: Color = MaterialTheme.colors.background,
     scaffoldState: ScaffoldState = rememberScaffoldState(),
+    barActions: @Composable RowScope.() -> Unit = {},
     snackbarHost: @Composable (SnackbarHostState) -> Unit = { SnackbarHost(it) },
     content: @Composable () -> Unit,
     onBackClick: (() -> Unit)? = null
@@ -37,6 +39,7 @@ fun BaseScaffold(
                 if (toolbarText != null) {
                     BaseTopAppBar(
                         toolbarText = toolbarText,
+                        barActions = barActions,
                         onBackClick = onBackClick
                     )
                 }

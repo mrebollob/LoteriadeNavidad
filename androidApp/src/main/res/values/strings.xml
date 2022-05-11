@@ -2,11 +2,15 @@
 <resources>
     <!-- General -->
     <string name="app_name" translatable="false">Lotería de Navidad 2022</string>
+    <string name="app_name_sort" translatable="false">Lotería 2022</string>
     <string name="back">Atrás</string>
     <string name="retry">Reintentar</string>
     <string name="ok_text">OK</string>
 
     <!-- Home Screen -->
+    <string name="home_screen_menu_new_ticket">Añadir nuevo cupón</string>
+    <string name="home_screen_menu_sort">Ordenar cupones</string>
+    <string name="home_screen_menu_settings">Ajustes</string>
     <string name="lottery_countdown_today">Hoy es el día del sorteo</string>
     <string name="lottery_countdown_end">El sorteo ha finalizado</string>
     <plurals name="lottery_countdown_days">
@@ -22,4 +26,11 @@
     <string name="lottery_ticket_number">Número</string>
     <string name="lottery_ticket_bet">Jugado</string>
     <string name="lottery_ticket_prize">Ganado</string>
+
+    <!-- Create Screen -->
+    <string name="create_screen_title">Nuevo cupón</string>
+    <string name="create_screen_ticket_name">Nombre</string>
+    <string name="create_screen_ticket_number">Número</string>
+    <string name="create_screen_ticket_bet">Jugado</string>
+    <string name="create_screen_ticket_save">Guardar cupón</string>
 </resources>

@@ -1,30 +1,19 @@
-package com.mrebollob.loteria.android.presentation.home
+package com.mrebollob.loteria.android.presentation.create
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.mrebollob.loteria.Greeting
-import com.mrebollob.loteria.android.presentation.create.CreateActivity
-import com.mrebollob.loteria.android.presentation.home.ui.HomeScreen
+import com.mrebollob.loteria.android.presentation.create.ui.CreateScreen
 import com.mrebollob.loteria.android.presentation.platform.BaseActivity
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 
-fun greet(): String {
-    return Greeting().greeting()
-}
-
-class MainActivity : BaseActivity() {
-
-    private val createTicketResult = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-
-    }
+class CreateActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,15 +30,15 @@ class MainActivity : BaseActivity() {
                     )
                 }
 
-                HomeScreen(
-                    onCreateTicketClick = { openCreateTicketScreen() },
-                    onSettingsClick = {}
+                CreateScreen(
+                    onBackClick = { onBackPressed() }
                 )
             }
         }
     }
 
-    private fun openCreateTicketScreen() {
-        createTicketResult.launch(CreateActivity.newIntent(this))
+    companion object {
+        @JvmStatic
+        fun newIntent(context: Context): Intent = Intent(context, CreateActivity::class.java)
     }
 }

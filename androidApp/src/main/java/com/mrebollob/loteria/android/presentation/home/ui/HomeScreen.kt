@@ -7,14 +7,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mrebollob.loteria.android.R
 import com.mrebollob.loteria.android.presentation.home.HomeUiState
 import com.mrebollob.loteria.android.presentation.home.HomeViewModel
 import com.mrebollob.loteria.android.presentation.platform.extension.supportWideScreen
@@ -27,24 +32,70 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel = getViewModel()
+    homeViewModel: HomeViewModel = getViewModel(),
+    onCreateTicketClick: (() -> Unit),
+    onSettingsClick: (() -> Unit)
 ) {
     val uiState by homeViewModel.uiState.collectAsState()
 
     HomeScreen(
         uiState = uiState,
+        onSortTicketClick = {},
+        onCreateTicketClick = onCreateTicketClick,
+        onSettingsClick = onSettingsClick
     )
 }
 
 @Composable
 fun HomeScreen(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
-    uiState: HomeUiState
+    uiState: HomeUiState,
+    onSortTicketClick: (() -> Unit),
+    onCreateTicketClick: (() -> Unit),
+    onSettingsClick: (() -> Unit)
 ) {
     BaseScaffold(
         modifier = Modifier.supportWideScreen(),
         scaffoldState = scaffoldState,
+        toolbarText = stringResource(id = R.string.app_name_sort),
         snackbarHost = { LotterySnackbarHost(hostState = it) },
+        barActions = {
+            IconButton(
+                onClick = {
+                    onSortTicketClick()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Sort,
+                    tint = MaterialTheme.colors.onBackground,
+                    contentDescription = stringResource(R.string.home_screen_menu_sort)
+                )
+            }
+
+            IconButton(
+                onClick = {
+                    onCreateTicketClick()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    tint = MaterialTheme.colors.onBackground,
+                    contentDescription = stringResource(R.string.home_screen_menu_new_ticket)
+                )
+            }
+
+            IconButton(
+                onClick = {
+                    onSettingsClick()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Settings,
+                    tint = MaterialTheme.colors.onBackground,
+                    contentDescription = stringResource(R.string.home_screen_menu_settings)
+                )
+            }
+        },
         content = {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
@@ -85,7 +136,7 @@ fun HomeScreen(
 @Preview("Home screen")
 @Preview("Home screen (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun PreviewCreateScreen() {
+fun PreviewHomeScreen() {
     val uiState = HomeUiState(
         today = Date(),
         daysToLotteryDraw = 10,
@@ -101,7 +152,10 @@ fun PreviewCreateScreen() {
 
     LotteryTheme {
         HomeScreen(
-            uiState = uiState
+            uiState = uiState,
+            onSortTicketClick = {},
+            onCreateTicketClick = {},
+            onSettingsClick = {}
         )
     }
 }
