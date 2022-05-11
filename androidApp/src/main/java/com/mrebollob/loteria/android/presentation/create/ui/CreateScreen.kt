@@ -40,11 +40,10 @@ import com.mrebollob.loteria.android.presentation.platform.ui.components.Lottery
 import com.mrebollob.loteria.android.presentation.platform.ui.components.OutlinedBoxTextField
 import com.mrebollob.loteria.android.presentation.platform.ui.layout.BaseScaffold
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
-import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun CreateScreen(
-    createViewModel: CreateViewModel = getViewModel(),
+    createViewModel: CreateViewModel,
     onBackClick: (() -> Unit)
 ) {
     val uiState by createViewModel.uiState.collectAsState()
@@ -134,10 +133,9 @@ fun CreateScreen(
                     ),
                     keyboardActions = KeyboardActions(
                         onDone = {
+                            focusManager.clearFocus()
                             if (uiState.isValidForm) {
                                 onSaveTicketClick()
-                            } else {
-                                focusManager.clearFocus()
                             }
                         }
                     ),
@@ -150,7 +148,10 @@ fun CreateScreen(
                         .clipToBounds()
                         .padding(top = 32.dp),
                     shape = RoundedCornerShape(24.dp),
-                    onClick = { onSaveTicketClick() },
+                    onClick = {
+                        focusManager.clearFocus()
+                        onSaveTicketClick()
+                    },
                     enabled = uiState.isValidForm
                 ) {
                     Text(

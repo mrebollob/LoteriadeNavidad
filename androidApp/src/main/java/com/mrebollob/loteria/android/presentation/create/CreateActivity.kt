@@ -1,5 +1,6 @@
 package com.mrebollob.loteria.android.presentation.create
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,15 +9,28 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.mrebollob.loteria.android.presentation.create.ui.CreateScreen
 import com.mrebollob.loteria.android.presentation.platform.BaseActivity
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
+import com.mrebollob.loteria.domain.entity.Ticket
+import kotlinx.coroutines.flow.consumeAsFlow
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateActivity : BaseActivity() {
 
+    private val createViewModel: CreateViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        lifecycleScope.launchWhenCreated {
+            createViewModel.onTicketCreated.consumeAsFlow().collect {
+                onTicketCreated(it)
+            }
+        }
+
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
@@ -31,10 +45,17 @@ class CreateActivity : BaseActivity() {
                 }
 
                 CreateScreen(
+                    createViewModel = createViewModel,
                     onBackClick = { onBackPressed() }
                 )
             }
         }
+    }
+
+    private fun onTicketCreated(ticket: Ticket) {
+        val data = Intent()
+        setResult(Activity.RESULT_OK, data)
+        finish()
     }
 
     companion object {

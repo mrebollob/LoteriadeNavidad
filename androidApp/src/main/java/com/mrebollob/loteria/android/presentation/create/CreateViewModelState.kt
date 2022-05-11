@@ -15,7 +15,7 @@ data class CreateViewModelState(
             name = name,
             number = number,
             bet = bet,
-            isValidForm = true,
+            isValidForm = name.isNotBlank() && number.isNotBlank() && bet.isNotBlank(),
             isLoading = isLoading,
             errorMessages = errorMessages
         )

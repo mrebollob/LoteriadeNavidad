@@ -8,22 +8,22 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.mrebollob.loteria.Greeting
 import com.mrebollob.loteria.android.presentation.create.CreateActivity
 import com.mrebollob.loteria.android.presentation.home.ui.HomeScreen
 import com.mrebollob.loteria.android.presentation.platform.BaseActivity
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
-
-fun greet(): String {
-    return Greeting().greeting()
-}
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
+
+    private val homeViewModel: HomeViewModel by viewModel()
 
     private val createTicketResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
-
+        if (result.resultCode == RESULT_OK) {
+            homeViewModel.refreshData()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +42,7 @@ class MainActivity : BaseActivity() {
                 }
 
                 HomeScreen(
+                    homeViewModel=homeViewModel,
                     onCreateTicketClick = { openCreateTicketScreen() },
                     onSettingsClick = {}
                 )

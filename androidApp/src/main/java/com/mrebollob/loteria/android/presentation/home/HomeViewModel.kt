@@ -25,7 +25,7 @@ class HomeViewModel(
         refreshData()
     }
 
-    private fun refreshData() {
+     fun refreshData() {
         viewModelState.update { it.copy(isLoading = true) }
 
         viewModelScope.launch {

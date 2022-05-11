@@ -7,11 +7,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Sort
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -28,11 +32,10 @@ import com.mrebollob.loteria.android.presentation.platform.ui.layout.BaseScaffol
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 import com.mrebollob.loteria.domain.entity.Ticket
 import java.util.Date
-import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel = getViewModel(),
+    homeViewModel: HomeViewModel,
     onCreateTicketClick: (() -> Unit),
     onSettingsClick: (() -> Unit)
 ) {

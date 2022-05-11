@@ -31,6 +31,9 @@
     <string name="create_screen_title">Nuevo cupón</string>
     <string name="create_screen_ticket_name">Nombre</string>
     <string name="create_screen_ticket_number">Número</string>
-    <string name="create_screen_ticket_bet">Jugado</string>
+    <string name="create_screen_ticket_bet">Jugado (€)</string>
     <string name="create_screen_ticket_save">Guardar cupón</string>
+    <string name="create_screen_error_save">Error al guardar el cupón</string>
+    <string name="create_screen_error_number">Introduce un número válido</string>
+    <string name="create_screen_error_bet">Introduce una cantidad válida</string>
 </resources>

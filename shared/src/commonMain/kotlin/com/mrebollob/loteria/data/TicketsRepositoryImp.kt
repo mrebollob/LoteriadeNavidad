@@ -15,8 +15,19 @@ class TicketsRepositoryImp : TicketsRepository {
         )
     }
 
-    override suspend fun createTicket(ticket: Ticket): Result<Ticket> {
-        TODO("Not yet implemented")
+    override suspend fun createTicket(
+        name: String,
+        number: Int,
+        bet: Float
+    ): Result<Ticket> {
+
+        return Result.success(
+            Ticket(
+                name = name,
+                number = number,
+                bet = bet
+            )
+        )
     }
 
     override suspend fun deleteTicket(ticket: Ticket): Result<Unit> {
