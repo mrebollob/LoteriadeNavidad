@@ -17,4 +17,9 @@
     <string name="lottery_stats_total_prize">Total ganado</string>
     <string name="lottery_stats_total_prize_empty">-</string>
     <string name="lottery_stats_money_format">%.2f €</string>
+    <string name="lottery_ticket_number_format">%05d</string>
+    <string name="lottery_ticket_name">Nombre</string>
+    <string name="lottery_ticket_number">Número</string>
+    <string name="lottery_ticket_bet">Jugado</string>
+    <string name="lottery_ticket_prize">Ganado</string>
 </resources>

@@ -3,6 +3,7 @@ package com.mrebollob.loteria.android.presentation.home.ui
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -46,6 +47,7 @@ fun HomeScreen(
         snackbarHost = { LotterySnackbarHost(hostState = it) },
         content = {
             LazyColumn(
+                modifier = Modifier.fillMaxSize(),
                 state = rememberLazyListState(),
                 contentPadding = PaddingValues(horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -61,7 +63,7 @@ fun HomeScreen(
 
                 item {
                     StatsSectionView(
-                        modifier = Modifier.padding(top = 16.dp),
+                        modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
                         totalBet = uiState.totalBet,
                         totalPrize = uiState.totalPrize
                     )
@@ -70,7 +72,8 @@ fun HomeScreen(
                 uiState.tickets.forEach { ticket ->
                     item {
                         TicketItemView(
-                            ticket = ticket
+                            ticket = ticket,
+                            totalPrize = 20000000f
                         )
                     }
                 }
