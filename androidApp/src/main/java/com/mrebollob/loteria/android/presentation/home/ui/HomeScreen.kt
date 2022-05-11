@@ -1,5 +1,6 @@
 package com.mrebollob.loteria.android.presentation.home.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -58,6 +59,14 @@ fun HomeScreen(
                     )
                 }
 
+                item {
+                    StatsSectionView(
+                        modifier = Modifier.padding(top = 16.dp),
+                        totalBet = uiState.totalBet,
+                        totalPrize = uiState.totalPrize
+                    )
+                }
+
                 uiState.tickets.forEach { ticket ->
                     item {
                         TicketItemView(
@@ -71,11 +80,14 @@ fun HomeScreen(
 }
 
 @Preview("Home screen")
+@Preview("Home screen (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewCreateScreen() {
     val uiState = HomeUiState(
         today = Date(),
         daysToLotteryDraw = 10,
+        totalBet = 20.5f,
+        totalPrize = null,
         tickets = listOf(
             Ticket(name = "Test ticket 1", number = 0, bet = 20f),
             Ticket(name = "Test ticket 2", number = 0, bet = 20f)

@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.mrebollob.loteria.android.R
 import com.mrebollob.loteria.android.presentation.platform.extension.getStringDate
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.Grey4
+import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 import java.util.Date
 
 @Composable
@@ -55,16 +56,18 @@ fun CountdownSectionView(
 @Preview("Countdown section (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewCountdownSectionView() {
-    Surface(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
+    LotteryTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize()
         ) {
-            CountdownSectionView(
-                today = Date(),
-                daysToLotteryDraw = 10
-            )
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                CountdownSectionView(
+                    today = Date(),
+                    daysToLotteryDraw = 10
+                )
+            }
         }
     }
 }

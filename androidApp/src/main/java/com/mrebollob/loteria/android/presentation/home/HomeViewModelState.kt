@@ -16,6 +16,8 @@ data class HomeViewModelState(
         return HomeUiState(
             today = today,
             daysToLotteryDraw = daysToLotteryDraw,
+            totalBet = tickets.map { it.bet }.sum(),
+            totalPrize = null,
             tickets = tickets,
             isLoading = isLoading,
             errorMessages = errorMessages

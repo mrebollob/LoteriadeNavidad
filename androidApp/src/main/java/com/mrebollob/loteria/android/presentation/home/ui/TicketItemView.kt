@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mrebollob.loteria.android.presentation.platform.ui.components.TicketShape
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.Grey4
+import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 import com.mrebollob.loteria.domain.entity.Ticket
 
 @Composable
@@ -57,19 +58,21 @@ fun TicketItemView(
 @Preview("Ticket item view (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewTicketItemView() {
-    Surface(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+    LotteryTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize()
         ) {
-            TicketItemView(
-                ticket = Ticket(name = "Test ticket 1", number = 0, bet = 0.5f)
-            )
-            TicketItemView(
-                ticket = Ticket(name = "Test ticket 2", number = 99999, bet = 200f)
-            )
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                TicketItemView(
+                    ticket = Ticket(name = "Test ticket 1", number = 0, bet = 0.5f)
+                )
+                TicketItemView(
+                    ticket = Ticket(name = "Test ticket 2", number = 99999, bet = 200f)
+                )
+            }
         }
     }
 }

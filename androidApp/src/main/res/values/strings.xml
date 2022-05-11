@@ -10,7 +10,11 @@
     <string name="lottery_countdown_today">Hoy es el día del sorteo</string>
     <string name="lottery_countdown_end">El sorteo ha finalizado</string>
     <plurals name="lottery_countdown_days">
-        <item quantity="one">Falta %1$d día para el sorteo</item>
-        <item quantity="other">Faltan %1$d días para el sorteo</item>
+        <item quantity="one">%1$d día para el sorteo</item>
+        <item quantity="other">%1$d días para el sorteo</item>
     </plurals>
+    <string name="lottery_stats_total_bet">Total jugado</string>
+    <string name="lottery_stats_total_prize">Total ganado</string>
+    <string name="lottery_stats_total_prize_empty">-</string>
+    <string name="lottery_stats_money_format">%.2f €</string>
 </resources>
