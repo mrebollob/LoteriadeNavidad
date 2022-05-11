@@ -146,8 +146,8 @@ fun PreviewHomeScreen() {
         totalBet = 20.5f,
         totalPrize = null,
         tickets = listOf(
-            Ticket(name = "Test ticket 1", number = 0, bet = 20f),
-            Ticket(name = "Test ticket 2", number = 0, bet = 20f)
+            Ticket(id = 1, name = "Test ticket 1", number = 0, bet = 20f),
+            Ticket(id = 1, name = "Test ticket 2", number = 0, bet = 20f)
         ),
         isLoading = false,
         errorMessages = emptyList(),

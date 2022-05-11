@@ -1,33 +1,35 @@
 package com.mrebollob.loteria.data
 
+import com.mrebollob.loteria.data.mapper.TicketMapper
+import com.mrebollob.loteria.di.LotteryDatabaseWrapper
 import com.mrebollob.loteria.domain.entity.Ticket
 import com.mrebollob.loteria.domain.repository.TicketsRepository
 
-class TicketsRepositoryImp : TicketsRepository {
+class TicketsRepositoryImp(
+    lotteryDatabaseWrapper: LotteryDatabaseWrapper,
+    private val ticketMapper: TicketMapper
+) : TicketsRepository {
+
+    private val lotteryQueries = lotteryDatabaseWrapper.instance?.lotteryQueries
 
     override suspend fun getTickets(): Result<List<Ticket>> {
-
-        return Result.success(
-            listOf(
-                Ticket(name = "Test ticket 1", number = 0, bet = 20f),
-                Ticket(name = "Test ticket 2", number = 99999, bet = 200f)
-            )
-        )
+        val dbTickets = lotteryQueries?.selectAll()?.executeAsList() ?: emptyList()
+        return Result.success(dbTickets.map { ticketMapper.toDomain(it) })
     }
 
     override suspend fun createTicket(
         name: String,
         number: Int,
         bet: Float
-    ): Result<Ticket> {
-
-        return Result.success(
-            Ticket(
-                name = name,
-                number = number,
-                bet = bet
-            )
+    ): Result<Unit> {
+        lotteryQueries?.insertItem(
+            id = null,
+            name = name,
+            number = number.toLong(),
+            bet = bet.toDouble()
         )
+
+        return Result.success(Unit)
     }
 
     override suspend fun deleteTicket(ticket: Ticket): Result<Unit> {

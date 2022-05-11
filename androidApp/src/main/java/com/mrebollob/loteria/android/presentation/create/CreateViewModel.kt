@@ -21,7 +21,7 @@ class CreateViewModel(
     private val ticketsRepository: TicketsRepository
 ) : ViewModel() {
 
-    val onTicketCreated = Channel<Ticket>(Channel.CONFLATED)
+    val onTicketCreated = Channel<Unit>(Channel.CONFLATED)
     private val viewModelState = MutableStateFlow(CreateViewModelState())
     val uiState = viewModelState
         .map { it.toUiState() }
@@ -60,7 +60,7 @@ class CreateViewModel(
                     number = number,
                     bet = bet
                 ).onSuccess {
-                    onTicketCreated.trySend(it)
+                    onTicketCreated.trySend(Unit)
                 }.onFailure {
                     showError(R.string.create_screen_error_save)
                 }

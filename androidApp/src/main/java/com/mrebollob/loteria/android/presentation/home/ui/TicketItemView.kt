@@ -2,7 +2,13 @@ package com.mrebollob.loteria.android.presentation.home.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -169,11 +175,11 @@ fun PreviewTicketItemView() {
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 TicketItemView(
-                    ticket = Ticket(name = "Test ticket 1", number = 0, bet = 0.5f),
+                    ticket = Ticket(id = 1, name = "Test ticket 1", number = 0, bet = 0.5f),
                     totalPrize = null
                 )
                 TicketItemView(
-                    ticket = Ticket(name = "Test ticket 2", number = 99999, bet = 200f),
+                    ticket = Ticket(id = 2, name = "Test ticket 2", number = 99999, bet = 200f),
                     totalPrize = 20000000f
                 )
             }

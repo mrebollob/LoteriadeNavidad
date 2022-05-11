@@ -10,7 +10,7 @@ interface TicketsRepository {
         name: String,
         number: Int,
         bet: Float
-    ): Result<Ticket>
+    ): Result<Unit>
 
     suspend fun deleteTicket(ticket: Ticket): Result<Unit>
 }

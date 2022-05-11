@@ -14,7 +14,6 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.mrebollob.loteria.android.presentation.create.ui.CreateScreen
 import com.mrebollob.loteria.android.presentation.platform.BaseActivity
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
-import com.mrebollob.loteria.domain.entity.Ticket
 import kotlinx.coroutines.flow.consumeAsFlow
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,7 +26,7 @@ class CreateActivity : BaseActivity() {
 
         lifecycleScope.launchWhenCreated {
             createViewModel.onTicketCreated.consumeAsFlow().collect {
-                onTicketCreated(it)
+                onTicketCreated()
             }
         }
 
@@ -52,7 +51,7 @@ class CreateActivity : BaseActivity() {
         }
     }
 
-    private fun onTicketCreated(ticket: Ticket) {
+    private fun onTicketCreated() {
         val data = Intent()
         setResult(Activity.RESULT_OK, data)
         finish()

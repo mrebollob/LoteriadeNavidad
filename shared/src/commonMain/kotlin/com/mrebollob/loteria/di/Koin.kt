@@ -1,6 +1,7 @@
 package com.mrebollob.loteria.di
 
 import com.mrebollob.loteria.data.TicketsRepositoryImp
+import com.mrebollob.loteria.data.mapper.TicketMapper
 import com.mrebollob.loteria.domain.repository.TicketsRepository
 import com.mrebollob.loteria.domain.usecase.GetDaysToLotteryDraw
 import kotlinx.coroutines.CoroutineScope
@@ -13,7 +14,7 @@ import org.koin.dsl.module
 fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclaration = {}) =
     startKoin {
         appDeclaration()
-        modules(commonModule(enableNetworkLogs = enableNetworkLogs))
+        modules(commonModule(enableNetworkLogs = enableNetworkLogs), platformModule())
     }
 
 // called by iOS etc
@@ -23,8 +24,11 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
     single { CoroutineScope(Dispatchers.Default + SupervisorJob()) }
 
     // Repository
-    single<TicketsRepository> { TicketsRepositoryImp() }
+    single<TicketsRepository> { TicketsRepositoryImp(get(), get()) }
 
     // Use case
     single { GetDaysToLotteryDraw() }
+
+    // Mapper
+    single { TicketMapper() }
 }
