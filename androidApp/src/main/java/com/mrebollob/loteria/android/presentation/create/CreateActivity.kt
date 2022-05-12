@@ -8,7 +8,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
-import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.mrebollob.loteria.android.presentation.create.ui.CreateScreen
@@ -29,8 +28,6 @@ class CreateActivity : BaseActivity() {
                 onTicketCreated()
             }
         }
-
-        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
             LotteryTheme {

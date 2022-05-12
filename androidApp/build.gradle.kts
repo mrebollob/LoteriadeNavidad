@@ -75,6 +75,7 @@ dependencies {
     implementation("com.airbnb.android:lottie:4.1.0")
     implementation("com.airbnb.android:lottie-compose:4.1.0")
     implementation("com.valentinilk.shimmer:compose-shimmer:1.0.1")
+    implementation( "androidx.core:core-splashscreen:1.0.0-beta02" )
 
     // Koin
     implementation("io.insert-koin:koin-core:3.1.6")
