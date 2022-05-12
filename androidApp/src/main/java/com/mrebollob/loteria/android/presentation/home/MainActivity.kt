@@ -51,6 +51,11 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.refreshData()
+    }
+
     private fun openCreateTicketScreen() {
         createTicketResult.launch(CreateActivity.newIntent(this))
     }
