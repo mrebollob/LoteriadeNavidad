@@ -1,7 +1,9 @@
 package com.mrebollob.loteria.di
 
+import com.mrebollob.loteria.data.SettingsRepositoryImp
 import com.mrebollob.loteria.data.TicketsRepositoryImp
 import com.mrebollob.loteria.data.mapper.TicketMapper
+import com.mrebollob.loteria.domain.repository.SettingsRepository
 import com.mrebollob.loteria.domain.repository.TicketsRepository
 import com.mrebollob.loteria.domain.usecase.GetDaysToLotteryDraw
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +27,7 @@ fun commonModule(enableNetworkLogs: Boolean) = module {
 
     // Repository
     single<TicketsRepository> { TicketsRepositoryImp(get(), get()) }
+    single<SettingsRepository> { SettingsRepositoryImp() }
 
     // Use case
     single { GetDaysToLotteryDraw() }

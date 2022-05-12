@@ -3,6 +3,7 @@
     <!-- General -->
     <string name="app_name" translatable="false">Lotería de Navidad 2022</string>
     <string name="app_name_sort" translatable="false">Lotería 2022</string>
+    <string name="load_error">Error al actualizar</string>
     <string name="back">Atrás</string>
     <string name="retry">Reintentar</string>
     <string name="ok_text">OK</string>
@@ -36,4 +37,35 @@
     <string name="create_screen_error_save">Error al guardar el cupón</string>
     <string name="create_screen_error_number">Introduce un número válido</string>
     <string name="create_screen_error_bet">Introduce una cantidad válida</string>
+
+    <!-- Settings screen -->
+    <string name="settings_screen_title">Ajustes</string>
+    <string name="settings_screen_item_manage_tickets">Administrar tus Cupones</string>
+    <string name="settings_screen_item_privacy">Política de privacidad</string>
+    <string name="settings_screen_item_terms">Términos y Condiciones</string>
+    <string name="settings_screen_item_email_me">Contáctame</string>
+    <string name="settings_screen_item_email_me_text">Puedes contactarme en</string>
+    <string name="settings_screen_item_email_me_action">OK</string>
+    <string name="settings_screen_tickets_sorting_method">Ordenar cupones por</string>
+    <string name="settings_screen_tickets_sorting_method_name">Nombre</string>
+    <string name="settings_screen_tickets_sorting_method_number">Número</string>
+    <string name="settings_screen_save_action">Guardar</string>
+
+    <!-- About screen -->
+    <string name="about_screen_item_email_me">Contáctame</string>
+    <string name="about_screen_item_email_me_text">Puedes contactarme en</string>
+    <string name="about_screen_item_email_me_action">OK</string>
+
+    <!-- Share screen -->
+    <string name="share_screen_title">Comparte la aplicación</string>
+    <string name="share_screen_app_url_label">Abre Google Play</string>
+
+    <!-- Manage tickets screen -->
+    <string name="manage_tickets_screen_title">Tus Cupones</string>
+    <string name="manage_tickets_screen_delete_action">Borrar</string>
+
+    <!-- Config -->
+    <string name="about_screen_url_privacy" translatable="false">https://mrebollob.com/loteria/privacy</string>
+    <string name="about_screen_url_terms" translatable="false">https://mrebollob.com/loteria/terms</string>
+    <string name="about_screen_contact_email" translatable="false">hi@mrebollob.com</string>
 </resources>

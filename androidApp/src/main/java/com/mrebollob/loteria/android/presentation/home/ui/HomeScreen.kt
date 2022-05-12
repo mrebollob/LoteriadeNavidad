@@ -13,7 +13,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Sort
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -43,7 +42,6 @@ fun HomeScreen(
 
     HomeScreen(
         uiState = uiState,
-        onSortTicketClick = {},
         onCreateTicketClick = onCreateTicketClick,
         onSettingsClick = onSettingsClick
     )
@@ -53,7 +51,6 @@ fun HomeScreen(
 fun HomeScreen(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     uiState: HomeUiState,
-    onSortTicketClick: (() -> Unit),
     onCreateTicketClick: (() -> Unit),
     onSettingsClick: (() -> Unit)
 ) {
@@ -63,18 +60,6 @@ fun HomeScreen(
         toolbarText = stringResource(id = R.string.app_name_sort),
         snackbarHost = { LotterySnackbarHost(hostState = it) },
         barActions = {
-            IconButton(
-                onClick = {
-                    onSortTicketClick()
-                }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Sort,
-                    tint = MaterialTheme.colors.onBackground,
-                    contentDescription = stringResource(R.string.home_screen_menu_sort)
-                )
-            }
-
             IconButton(
                 onClick = {
                     onCreateTicketClick()
@@ -156,7 +141,6 @@ fun PreviewHomeScreen() {
     LotteryTheme {
         HomeScreen(
             uiState = uiState,
-            onSortTicketClick = {},
             onCreateTicketClick = {},
             onSettingsClick = {}
         )

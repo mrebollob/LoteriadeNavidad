@@ -21,5 +21,7 @@
 
         <activity android:name=".presentation.create.CreateActivity" />
 
+        <activity android:name=".presentation.settings.SettingsActivity" />
+
     </application>
 </manifest> 

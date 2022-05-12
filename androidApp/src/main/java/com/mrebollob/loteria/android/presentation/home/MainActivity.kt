@@ -12,6 +12,7 @@ import com.mrebollob.loteria.android.presentation.create.CreateActivity
 import com.mrebollob.loteria.android.presentation.home.ui.HomeScreen
 import com.mrebollob.loteria.android.presentation.platform.BaseActivity
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
+import com.mrebollob.loteria.android.presentation.settings.SettingsActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
@@ -42,9 +43,9 @@ class MainActivity : BaseActivity() {
                 }
 
                 HomeScreen(
-                    homeViewModel=homeViewModel,
+                    homeViewModel = homeViewModel,
                     onCreateTicketClick = { openCreateTicketScreen() },
-                    onSettingsClick = {}
+                    onSettingsClick = { SettingsActivity.open(this) }
                 )
             }
         }
