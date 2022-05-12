@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mrebollob.loteria.android.R
+import com.mrebollob.loteria.android.presentation.platform.extension.getNameString
 import com.mrebollob.loteria.android.presentation.platform.extension.supportWideScreen
 import com.mrebollob.loteria.android.presentation.platform.ui.components.LotterySnackbarHost
 import com.mrebollob.loteria.android.presentation.platform.ui.layout.BaseScaffold
@@ -128,7 +129,7 @@ fun SettingsScreen(
                         SettingsItemView(
                             title = stringResource(R.string.settings_screen_tickets_sorting_method),
                             imageVector = Icons.Default.Sort,
-                            value = "test",
+                            value = stringResource(id = uiState.sortingMethod.getNameString()),
                             onClick = onSetTicketsSortClick
                         )
 

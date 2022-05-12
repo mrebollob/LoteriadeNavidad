@@ -1,4 +1,4 @@
-package com.mrebollob.loteria
+package com.mrebollob.loteria.di
 
 import com.mrb.loteria.db.LotteryDatabase
 import com.mrebollob.loteria.di.LotteryDatabaseWrapper
