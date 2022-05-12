@@ -28,6 +28,7 @@ import com.mrebollob.loteria.android.presentation.home.HomeViewModel
 import com.mrebollob.loteria.android.presentation.platform.extension.supportWideScreen
 import com.mrebollob.loteria.android.presentation.platform.ui.components.LotterySnackbarHost
 import com.mrebollob.loteria.android.presentation.platform.ui.layout.BaseScaffold
+import com.mrebollob.loteria.android.presentation.platform.ui.layout.LoadingContent
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 import com.mrebollob.loteria.domain.entity.Ticket
 import java.util.Date
@@ -43,6 +44,7 @@ fun HomeScreen(
     HomeScreen(
         uiState = uiState,
         onCreateTicketClick = onCreateTicketClick,
+        onRefreshData = { homeViewModel.refreshData() },
         onSettingsClick = onSettingsClick
     )
 }
@@ -52,6 +54,7 @@ fun HomeScreen(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     uiState: HomeUiState,
     onCreateTicketClick: (() -> Unit),
+    onRefreshData: () -> Unit,
     onSettingsClick: (() -> Unit)
 ) {
     BaseScaffold(
@@ -85,38 +88,53 @@ fun HomeScreen(
             }
         },
         content = {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                state = rememberLazyListState(),
-                contentPadding = PaddingValues(horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-
-                item {
-                    CountdownSectionView(
-                        modifier = Modifier.padding(top = 16.dp),
-                        today = uiState.today,
-                        daysToLotteryDraw = uiState.daysToLotteryDraw
+            LoadingContent(
+                empty = uiState.tickets.isEmpty(),
+                emptyContent = {
+                    HomeEmptyView(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxSize(),
+                        onCreateTicketClick = onCreateTicketClick
                     )
-                }
+                },
+                loading = uiState.isLoading,
+                onRefresh = onRefreshData,
+                content = {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        state = rememberLazyListState(),
+                        contentPadding = PaddingValues(horizontal = 16.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
 
-                item {
-                    StatsSectionView(
-                        modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
-                        totalBet = uiState.totalBet,
-                        totalPrize = uiState.totalPrize
-                    )
-                }
+                        item {
+                            CountdownSectionView(
+                                modifier = Modifier.padding(top = 16.dp),
+                                today = uiState.today,
+                                daysToLotteryDraw = uiState.daysToLotteryDraw
+                            )
+                        }
 
-                uiState.tickets.forEach { ticket ->
-                    item {
-                        TicketItemView(
-                            ticket = ticket,
-                            totalPrize = 20000000f
-                        )
+                        item {
+                            StatsSectionView(
+                                modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
+                                totalBet = uiState.totalBet,
+                                totalPrize = uiState.totalPrize
+                            )
+                        }
+
+                        uiState.tickets.forEach { ticket ->
+                            item {
+                                TicketItemView(
+                                    ticket = ticket,
+                                    totalPrize = 20000000f
+                                )
+                            }
+                        }
                     }
                 }
-            }
+            )
         }
     )
 }
@@ -142,6 +160,7 @@ fun PreviewHomeScreen() {
         HomeScreen(
             uiState = uiState,
             onCreateTicketClick = {},
+            onRefreshData = {},
             onSettingsClick = {}
         )
     }

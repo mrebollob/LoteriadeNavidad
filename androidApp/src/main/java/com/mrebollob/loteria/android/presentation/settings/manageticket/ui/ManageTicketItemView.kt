@@ -64,8 +64,9 @@ fun ManageTicketItemView(
 
             Icon(
                 modifier = Modifier
+                    .padding(vertical = 24.dp)
                     .clickable { onClick() }
-                    .size(32.dp),
+                    .size(24.dp),
                 imageVector = Icons.Outlined.Delete,
                 contentDescription = stringResource(id = R.string.manage_tickets_screen_delete_action),
                 tint = SystemRed

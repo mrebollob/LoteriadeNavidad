@@ -27,6 +27,9 @@
     <string name="lottery_ticket_number">Número</string>
     <string name="lottery_ticket_bet">Jugado</string>
     <string name="lottery_ticket_prize">Ganado</string>
+    <string name="home_screen_empty_title">Empieza añadiendo tu primer cupón</string>
+    <string name="home_screen_empty_ticket_sample_name">Familia</string>
+    <string name="home_screen_empty_cta">Añadir nuevo cupón</string>
 
     <!-- Create Screen -->
     <string name="create_screen_title">Nuevo cupón</string>

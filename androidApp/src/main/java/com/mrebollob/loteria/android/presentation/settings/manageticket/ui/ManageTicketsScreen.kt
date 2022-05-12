@@ -1,6 +1,7 @@
 package com.mrebollob.loteria.android.presentation.settings.manageticket.ui
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
@@ -20,33 +21,34 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.mrebollob.loteria.android.R
+import com.mrebollob.loteria.android.presentation.home.ui.HomeEmptyView
 import com.mrebollob.loteria.android.presentation.platform.extension.supportWideScreen
 import com.mrebollob.loteria.android.presentation.platform.ui.components.LotterySnackbarHost
 import com.mrebollob.loteria.android.presentation.platform.ui.layout.BaseScaffold
-import com.mrebollob.loteria.android.presentation.platform.ui.layout.FullScreenLoading
 import com.mrebollob.loteria.android.presentation.platform.ui.layout.LoadingContent
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.Grey2
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 import com.mrebollob.loteria.android.presentation.settings.manageticket.ManageTicketsUiState
 import com.mrebollob.loteria.android.presentation.settings.manageticket.ManageTicketsViewModel
 import com.mrebollob.loteria.domain.entity.Ticket
-import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun ManageTicketsScreen(
-    manageTimersViewModel: ManageTicketsViewModel = getViewModel(),
+    manageTicketsViewModel: ManageTicketsViewModel,
+    onCreateTicketClick: (() -> Unit),
     navController: NavController
 ) {
-    val uiState by manageTimersViewModel.uiState.collectAsState()
+    val uiState by manageTicketsViewModel.uiState.collectAsState()
 
     ManageTicketsScreen(
         uiState = uiState,
         onDeleteTicketClick = {
-            manageTimersViewModel.onDeleteTicketClick(it)
+            manageTicketsViewModel.onDeleteTicketClick(it)
         },
         onBackClick = { navController.popBackStack() },
-        onRefreshData = { manageTimersViewModel.refreshData() },
-        onErrorDismiss = { manageTimersViewModel.errorShown(it) },
+        onRefreshData = { manageTicketsViewModel.refreshData() },
+        onCreateTicketClick = onCreateTicketClick,
+        onErrorDismiss = { manageTicketsViewModel.errorShown(it) },
     )
 }
 
@@ -58,6 +60,7 @@ fun ManageTicketsScreen(
     onDeleteTicketClick: ((Ticket) -> Unit),
     onBackClick: (() -> Unit),
     onRefreshData: () -> Unit,
+    onCreateTicketClick: (() -> Unit),
     onErrorDismiss: (Long) -> Unit,
 ) {
     Surface(
@@ -71,8 +74,15 @@ fun ManageTicketsScreen(
             onBackClick = onBackClick,
             content = {
                 LoadingContent(
-                    empty = uiState.isLoading,
-                    emptyContent = { FullScreenLoading() },
+                    empty = uiState.tickets.isEmpty(),
+                    emptyContent = {
+                        HomeEmptyView(
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .fillMaxSize(),
+                            onCreateTicketClick = onCreateTicketClick
+                        )
+                    },
                     loading = uiState.isLoading,
                     onRefresh = onRefreshData,
                     content = {
@@ -91,7 +101,13 @@ fun ManageTicketsScreen(
                                             end = 24.dp
                                         ),
                                         title = ticket.name,
-                                        subTitle = ticket.number.toString(),
+                                        subTitle = stringResource(
+                                            id = R.string.lottery_ticket_number_format,
+                                            ticket.number
+                                        ) + " - " + stringResource(
+                                            id = R.string.lottery_stats_money_format,
+                                            ticket.bet
+                                        ),
                                         onClick = { onDeleteTicketClick(ticket) }
                                     )
                                     Divider(color = Grey2)
@@ -142,6 +158,7 @@ fun PreviewManageTicketsScreen() {
             onDeleteTicketClick = {},
             onBackClick = {},
             onRefreshData = {},
+            onCreateTicketClick = {},
             onErrorDismiss = {},
         )
     }

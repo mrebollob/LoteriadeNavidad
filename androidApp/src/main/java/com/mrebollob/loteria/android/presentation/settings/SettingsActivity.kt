@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
@@ -18,15 +19,28 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.mrebollob.loteria.android.BuildConfig
 import com.mrebollob.loteria.android.R
+import com.mrebollob.loteria.android.presentation.create.CreateActivity
 import com.mrebollob.loteria.android.presentation.platform.extension.loadCustomTabs
 import com.mrebollob.loteria.android.presentation.platform.extension.sendEmail
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
+import com.mrebollob.loteria.android.presentation.settings.manageticket.ManageTicketsViewModel
 import com.mrebollob.loteria.android.presentation.settings.manageticket.ui.ManageTicketsScreen
 import com.mrebollob.loteria.android.presentation.settings.menu.SettingItemId
 import com.mrebollob.loteria.android.presentation.settings.menu.ui.SettingsScreen
 import com.mrebollob.loteria.android.presentation.settings.share.ShareScreen
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsActivity : AppCompatActivity() {
+
+    private val manageTicketsViewModel: ManageTicketsViewModel by viewModel()
+
+    private val createTicketResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            manageTicketsViewModel.refreshData()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,12 +80,18 @@ class SettingsActivity : AppCompatActivity() {
                     }
                     composable(route = SettingsRoute.ManageTickets.route) {
                         ManageTicketsScreen(
-                            navController = navController
+                            manageTicketsViewModel = manageTicketsViewModel,
+                            navController = navController,
+                            onCreateTicketClick = { openCreateTicketScreen() },
                         )
                     }
                 }
             }
         }
+    }
+
+    private fun openCreateTicketScreen() {
+        createTicketResult.launch(CreateActivity.newIntent(this))
     }
 
     private fun onSettingClick(
