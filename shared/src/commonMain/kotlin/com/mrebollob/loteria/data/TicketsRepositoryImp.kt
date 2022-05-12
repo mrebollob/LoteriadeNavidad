@@ -33,6 +33,7 @@ class TicketsRepositoryImp(
     }
 
     override suspend fun deleteTicket(ticket: Ticket): Result<Unit> {
-        TODO("Not yet implemented")
+        lotteryQueries?.deleteById(id = ticket.id)
+        return Result.success(Unit)
     }
 }

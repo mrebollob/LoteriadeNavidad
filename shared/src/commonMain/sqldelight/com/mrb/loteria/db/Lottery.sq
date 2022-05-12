@@ -14,3 +14,6 @@ SELECT * FROM DbTicket;
 deleteAll:
 DELETE FROM DbTicket;
 
+deleteById:
+DELETE FROM DbTicket
+WHERE id = (:id);
