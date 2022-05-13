@@ -2,6 +2,12 @@ package com.mrebollob.loteria.android.presentation.platform.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+// https://colorhunt.co/palette/fd5e53f9fcfbb0eacd21bf73
+val PrimaryColor = Color(0xFFFD5E53)
+val AccentColor = Color(0xFFF9FCFB)
+val LightSecondaryColor = Color(0xFFB0EACD)
+val SecondaryColor = Color(0xFF21BF73)
+
 val Grey1 = Color(0xFFEBE7E5)
 val Grey2 = Color(0xffEBEBEB)
 val Grey3 = Color(0xffDBDBDB)

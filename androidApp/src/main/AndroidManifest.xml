@@ -21,9 +21,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.create.CreateActivity" />
+        <activity
+            android:name=".presentation.create.CreateActivity"
+            android:theme="@style/Theme.SplishSplash" />
 
-        <activity android:name=".presentation.settings.SettingsActivity" />
+        <activity
+            android:name=".presentation.settings.SettingsActivity"
+            android:theme="@style/Theme.SplishSplash" />
 
     </application>
 </manifest> 

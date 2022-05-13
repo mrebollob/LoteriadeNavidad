@@ -8,18 +8,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val LightThemeColors = lightColors(
-    primary = Grey8,
+    primary = PrimaryColor,
     primaryVariant = Color.Black,
-    secondary = Grey2,
-    secondaryVariant = Grey3,
+    secondary = SecondaryColor,
+    secondaryVariant = LightSecondaryColor,
     background = BackgroundLight,
     surface = BackgroundLight,
     error = SystemRed,
-    onPrimary = Color.White,
-    onSecondary = Grey7,
+    onPrimary = AccentColor,
+    onSecondary = AccentColor,
     onBackground = OnSurfaceLight,
     onSurface = OnSurfaceLight,
-    onError = Grey7
+    onError = AccentColor
 )
 
 private val DarkThemeColors = darkColors(
