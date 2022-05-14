@@ -23,7 +23,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mrebollob.loteria.android.R
 import com.mrebollob.loteria.android.presentation.platform.ui.components.TicketShape
-import com.mrebollob.loteria.android.presentation.platform.ui.theme.Grey1
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.Grey4
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 import com.mrebollob.loteria.domain.entity.Ticket
@@ -39,7 +38,7 @@ fun TicketItemView(
     ) {
         Card(
             modifier = Modifier.fillMaxWidth(),
-            backgroundColor = Grey1,
+            backgroundColor = MaterialTheme.colors.primaryVariant,
             elevation = 4.dp,
         ) {
             Column(
@@ -103,7 +102,7 @@ fun TicketItemView(
                         modifier = Modifier
                             .padding(bottom = 24.dp)
                             .fillMaxWidth()
-                            .background(Grey1)
+                            .background(MaterialTheme.colors.primaryVariant)
                             .weight(1f)
                     ) {
                         Column(

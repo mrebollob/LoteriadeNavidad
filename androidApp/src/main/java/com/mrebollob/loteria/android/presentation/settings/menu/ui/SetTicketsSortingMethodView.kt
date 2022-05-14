@@ -25,13 +25,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mrebollob.loteria.android.R
 import com.mrebollob.loteria.android.presentation.platform.extension.getNameString
-import com.mrebollob.loteria.android.presentation.platform.ui.theme.Grey7
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 import com.mrebollob.loteria.domain.entity.SortingMethod
 
@@ -73,7 +71,7 @@ fun SetTicketsSortingMethodView(
             )
             Icon(
                 imageVector = Icons.Filled.ArrowDropDown,
-                tint = MaterialTheme.colors.onSecondary,
+                tint = MaterialTheme.colors.onSurface,
                 contentDescription = null
             )
         }
@@ -108,13 +106,13 @@ fun SetTicketsSortingMethodView(
             },
             shape = RoundedCornerShape(24.dp),
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = Grey7
+                backgroundColor = MaterialTheme.colors.secondary
             )
         ) {
             Text(
                 modifier = modifier.padding(horizontal = 8.dp, vertical = 6.dp),
                 text = stringResource(R.string.settings_screen_save_action),
-                color = Color.White,
+                color = MaterialTheme.colors.onSecondary,
                 style = MaterialTheme.typography.subtitle1
             )
         }

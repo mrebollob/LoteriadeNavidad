@@ -2,16 +2,13 @@ package com.mrebollob.loteria.android.presentation.settings.share
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -31,8 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,7 +42,6 @@ import com.mrebollob.loteria.android.R
 import com.mrebollob.loteria.android.presentation.platform.extension.supportWideScreen
 import com.mrebollob.loteria.android.presentation.platform.ui.components.LotterySnackbarHost
 import com.mrebollob.loteria.android.presentation.platform.ui.layout.BaseScaffold
-import com.mrebollob.loteria.android.presentation.platform.ui.theme.Grey7
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -55,7 +49,6 @@ import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 fun ShareScreen(
     navController: NavController
 ) {
-    val configuration: Configuration = LocalConfiguration.current
     var animPlaying by remember { mutableStateOf(false) }
     val composition: LottieComposition? by rememberLottieComposition(
         LottieCompositionSpec.RawRes(R.raw.love_explosion)
@@ -69,7 +62,6 @@ fun ShareScreen(
     }
 
     ShareScreen(
-        configuration = configuration,
         composition = composition,
         progress = progress,
         onOpenGooglePlayClick = {
@@ -87,7 +79,6 @@ fun ShareScreen(
 fun ShareScreen(
     modifier: Modifier = Modifier,
     scaffoldState: ScaffoldState = rememberScaffoldState(),
-    configuration: Configuration,
     composition: LottieComposition?,
     progress: Float,
     onOpenGooglePlayClick: () -> Unit,
@@ -104,82 +95,27 @@ fun ShareScreen(
             toolbarText = stringResource(id = R.string.share_screen_title),
             onBackClick = onBackClick,
             content = {
-                if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    LandscapeSection(
+                Column(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .padding(
+                            horizontal = 16.dp
+                        )
+                ) {
+                    QrSection(
+                        modifier = modifier
+                            .height(200.dp),
                         composition = composition,
-                        progress = progress,
-                        onOpenGooglePlayClick = onOpenGooglePlayClick,
-                        onShareClick = onShareClick
+                        progress = progress
                     )
-                } else {
-                    PortraitSection(
-                        composition = composition,
-                        progress = progress,
+
+                    ShareButtonSection(
+                        modifier = modifier.padding(top = 32.dp),
                         onOpenGooglePlayClick = onOpenGooglePlayClick,
                         onShareClick = onShareClick
                     )
                 }
             }
-        )
-    }
-}
-
-@Composable
-private fun PortraitSection(
-    modifier: Modifier = Modifier,
-    composition: LottieComposition?,
-    progress: Float,
-    onOpenGooglePlayClick: () -> Unit,
-    onShareClick: () -> Unit,
-) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(
-                horizontal = 16.dp
-            )
-    ) {
-        QrSection(
-            modifier = modifier
-                .height(200.dp),
-            composition = composition,
-            progress = progress
-        )
-
-        ShareButtonSection(
-            onOpenGooglePlayClick = onOpenGooglePlayClick,
-            onShareClick = onShareClick
-        )
-    }
-}
-
-@Composable
-private fun LandscapeSection(
-    modifier: Modifier = Modifier,
-    composition: LottieComposition?,
-    progress: Float,
-    onOpenGooglePlayClick: () -> Unit,
-    onShareClick: () -> Unit,
-) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        QrSection(
-            modifier = Modifier
-                .weight(1f)
-                .wrapContentHeight(),
-            composition = composition,
-            progress = progress,
-
-            )
-
-        ShareButtonSection(
-            modifier = Modifier
-                .weight(1f)
-                .wrapContentHeight(),
-            onOpenGooglePlayClick = onOpenGooglePlayClick,
-            onShareClick = onShareClick
         )
     }
 }
@@ -226,15 +162,15 @@ private fun ShareButtonSection(
             onClick = { onOpenGooglePlayClick() },
             shape = RoundedCornerShape(24.dp),
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = Grey7
+                backgroundColor = MaterialTheme.colors.primary
             )
         ) {
             Text(
-                modifier = modifier
+                modifier = Modifier
                     .padding(horizontal = 8.dp, vertical = 6.dp)
                     .align(Alignment.CenterVertically),
                 text = stringResource(R.string.share_screen_app_url_label),
-                color = Color.White,
+                color = MaterialTheme.colors.onPrimary,
                 style = MaterialTheme.typography.subtitle1
             )
         }
@@ -246,23 +182,23 @@ private fun ShareButtonSection(
             onClick = { onShareClick() },
             shape = RoundedCornerShape(24.dp),
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = Grey7
+                backgroundColor = MaterialTheme.colors.secondary
             )
         ) {
             Icon(
-                modifier = modifier
+                modifier = Modifier
                     .padding(horizontal = 8.dp, vertical = 6.dp)
                     .align(Alignment.CenterVertically),
                 imageVector = Icons.Filled.Share,
-                tint = Color.White,
+                tint = MaterialTheme.colors.onSecondary,
                 contentDescription = stringResource(R.string.share_screen_title)
             )
             Text(
-                modifier = modifier
+                modifier = Modifier
                     .padding(horizontal = 8.dp, vertical = 6.dp)
                     .align(Alignment.CenterVertically),
                 text = stringResource(R.string.share_screen_title),
-                color = Color.White,
+                color = MaterialTheme.colors.onSecondary,
                 style = MaterialTheme.typography.subtitle1
             )
         }
@@ -275,7 +211,6 @@ private fun ShareButtonSection(
 @Composable
 fun PreviewShareScreen() {
     LotteryTheme {
-        val configuration: Configuration = LocalConfiguration.current
         val composition: LottieComposition? by rememberLottieComposition(
             LottieCompositionSpec.JsonString(
                 "love_explosion.json"
@@ -284,7 +219,6 @@ fun PreviewShareScreen() {
         val progress: Float by animateLottieCompositionAsState(composition)
 
         ShareScreen(
-            configuration = configuration,
             composition = composition,
             progress = progress,
             onOpenGooglePlayClick = {},

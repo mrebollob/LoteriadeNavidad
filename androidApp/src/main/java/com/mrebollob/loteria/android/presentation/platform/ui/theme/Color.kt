@@ -17,7 +17,9 @@ val Grey7 = Color(0xff1F1F1F)
 val Grey8 = Color(0xff050605)
 
 val BackgroundLight = Color(0xFFFFFFFF)
-val BackgroundDark = Color(0xFF050727)
+val SurfaceLight = Color(0xFFFFFFFF)
+val BackgroundDark = Color(0xFF141A1F)
+val SurfaceDark= Color(0xFF202934)
 
 val OnSurfaceLight = Color(0xFF393836)
 val OnSurfaceDark = Color(0xFFE6E7ED)

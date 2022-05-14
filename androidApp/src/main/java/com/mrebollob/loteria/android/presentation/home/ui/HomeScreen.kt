@@ -70,7 +70,7 @@ fun HomeScreen(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    tint = MaterialTheme.colors.onBackground,
+                    tint = MaterialTheme.colors.primary,
                     contentDescription = stringResource(R.string.home_screen_menu_new_ticket)
                 )
             }
@@ -128,7 +128,7 @@ fun HomeScreen(
                             item {
                                 TicketItemView(
                                     ticket = ticket,
-                                    totalPrize = 20000000f
+                                    totalPrize = null
                                 )
                             }
                         }
