@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "961856246704",
+    "project_id": "lottery-c5fe6",
+    "storage_bucket": "lottery-c5fe6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961856246704:android:304d2b6683256db5edbc75",
+        "android_client_info": {
+          "package_name": "com.mrb.loteriadenavidad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961856246704-rpoulv8m2i7l3rprd9pbn31ldl3gg3rs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATH730oXg6MFa79vna25R96uV7JBcfVBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961856246704-rpoulv8m2i7l3rprd9pbn31ldl3gg3rs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

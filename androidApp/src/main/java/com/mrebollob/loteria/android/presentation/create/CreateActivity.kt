@@ -10,15 +10,22 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.mrebollob.loteria.android.analytics.AnalyticsEvent
+import com.mrebollob.loteria.android.analytics.AnalyticsManager
+import com.mrebollob.loteria.android.analytics.AnalyticsParameter
+import com.mrebollob.loteria.android.analytics.AnalyticsScreen
 import com.mrebollob.loteria.android.presentation.create.ui.CreateScreen
 import com.mrebollob.loteria.android.presentation.platform.BaseActivity
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 import kotlinx.coroutines.flow.consumeAsFlow
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateActivity : BaseActivity() {
 
     private val createViewModel: CreateViewModel by viewModel()
+
+    private val analyticsManager: AnalyticsManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +49,12 @@ class CreateActivity : BaseActivity() {
 
                 CreateScreen(
                     createViewModel = createViewModel,
+                    onSaveTicketClick = {
+                        analyticsManager.trackEvent(
+                            AnalyticsEvent.SAVE_NEW_TICKET_CLICK,
+                            AnalyticsParameter.CURRENT_LOCATION.withScreenValue(AnalyticsScreen.TICKET_FORM)
+                        )
+                    },
                     onBackClick = { onBackPressed() }
                 )
             }

@@ -18,6 +18,10 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.mrebollob.loteria.android.BuildConfig
 import com.mrebollob.loteria.android.R
+import com.mrebollob.loteria.android.analytics.AnalyticsEvent
+import com.mrebollob.loteria.android.analytics.AnalyticsManager
+import com.mrebollob.loteria.android.analytics.AnalyticsParameter
+import com.mrebollob.loteria.android.analytics.AnalyticsScreen
 import com.mrebollob.loteria.android.presentation.create.CreateActivity
 import com.mrebollob.loteria.android.presentation.platform.extension.loadCustomTabs
 import com.mrebollob.loteria.android.presentation.platform.extension.sendEmail
@@ -27,11 +31,14 @@ import com.mrebollob.loteria.android.presentation.settings.manageticket.ui.Manag
 import com.mrebollob.loteria.android.presentation.settings.menu.SettingItemId
 import com.mrebollob.loteria.android.presentation.settings.menu.ui.SettingsScreen
 import com.mrebollob.loteria.android.presentation.settings.share.ShareScreen
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsActivity : AppCompatActivity() {
 
     private val manageTicketsViewModel: ManageTicketsViewModel by viewModel()
+
+    private val analyticsManager: AnalyticsManager by inject()
 
     private val createTicketResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -67,6 +74,17 @@ class SettingsActivity : AppCompatActivity() {
                                 onSettingClick(
                                     navController = navController,
                                     id = it
+                                )
+                            },
+                            onSortingMethodSelected = { method ->
+                                analyticsManager.trackEvent(
+                                    AnalyticsEvent.UPDATE_TICKETS_SORTING_METHOD,
+                                    AnalyticsParameter.CURRENT_LOCATION.withScreenValue(
+                                        AnalyticsScreen.SETTINGS
+                                    ),
+                                    AnalyticsParameter.SORTING_METHOD.withStringValue(
+                                        method.name
+                                    )
                                 )
                             },
                             onBackClick = { onBackPressed() }

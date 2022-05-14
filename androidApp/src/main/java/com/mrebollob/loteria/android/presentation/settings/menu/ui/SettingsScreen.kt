@@ -55,6 +55,7 @@ import org.koin.androidx.compose.getViewModel
 fun SettingsScreen(
     settingsViewModel: SettingsViewModel = getViewModel(),
     onSettingClick: (id: SettingItemId) -> Unit,
+    onSortingMethodSelected: (SortingMethod) -> Unit,
     onBackClick: (() -> Unit)
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -68,7 +69,6 @@ fun SettingsScreen(
         onErrorDismiss = { settingsViewModel.errorShown(it) },
         onRefreshData = { settingsViewModel.refreshData() },
         onSettingClick = {
-
             onSettingClick(it)
         },
         onBackClick = onBackClick,
@@ -78,6 +78,7 @@ fun SettingsScreen(
             }
         },
         onSortingMethodSelected = { method ->
+            onSortingMethodSelected(method)
             settingsViewModel.setTicketSortingMethod(method)
             coroutineScope.launch {
                 modalBottomSheetState.hide()

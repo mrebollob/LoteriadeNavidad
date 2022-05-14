@@ -8,16 +8,23 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.mrebollob.loteria.android.analytics.AnalyticsEvent
+import com.mrebollob.loteria.android.analytics.AnalyticsManager
+import com.mrebollob.loteria.android.analytics.AnalyticsParameter
+import com.mrebollob.loteria.android.analytics.AnalyticsScreen
 import com.mrebollob.loteria.android.presentation.create.CreateActivity
 import com.mrebollob.loteria.android.presentation.home.ui.HomeScreen
 import com.mrebollob.loteria.android.presentation.platform.BaseActivity
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 import com.mrebollob.loteria.android.presentation.settings.SettingsActivity
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
 
     private val homeViewModel: HomeViewModel by viewModel()
+
+    private val analyticsManager: AnalyticsManager by inject()
 
     private val createTicketResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -44,8 +51,20 @@ class MainActivity : BaseActivity() {
 
                 HomeScreen(
                     homeViewModel = homeViewModel,
-                    onCreateTicketClick = { openCreateTicketScreen() },
-                    onSettingsClick = { SettingsActivity.open(this) }
+                    onCreateTicketClick = {
+                        analyticsManager.trackEvent(
+                            AnalyticsEvent.NAVIGATE_TO_TICKET_FORM_CLICK,
+                            AnalyticsParameter.CURRENT_LOCATION.withScreenValue(AnalyticsScreen.HOME)
+                        )
+                        openCreateTicketScreen()
+                    },
+                    onSettingsClick = {
+                        analyticsManager.trackEvent(
+                            AnalyticsEvent.NAVIGATE_TO_SETTINGS_CLICK,
+                            AnalyticsParameter.CURRENT_LOCATION.withScreenValue(AnalyticsScreen.HOME)
+                        )
+                        SettingsActivity.open(this)
+                    }
                 )
             }
         }

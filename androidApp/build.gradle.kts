@@ -1,5 +1,7 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     kotlin("android")
 }
 
@@ -55,6 +57,11 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
 
+    // firebase
+    implementation(platform("com.google.firebase:firebase-bom:30.0.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+
     // Compose
     implementation("androidx.compose.ui:ui:1.1.1")
     implementation("androidx.compose.material:material:1.1.1")
@@ -75,7 +82,7 @@ dependencies {
     implementation("com.airbnb.android:lottie:4.1.0")
     implementation("com.airbnb.android:lottie-compose:4.1.0")
     implementation("com.valentinilk.shimmer:compose-shimmer:1.0.1")
-    implementation( "androidx.core:core-splashscreen:1.0.0-beta02" )
+    implementation("androidx.core:core-splashscreen:1.0.0-beta02")
 
     // Koin
     implementation("io.insert-koin:koin-core:3.1.6")
