@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.mrebollob.loteria.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,7 +16,9 @@
 
         <activity
             android:name=".presentation.home.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,11 +27,15 @@
 
         <activity
             android:name=".presentation.create.CreateActivity"
-            android:theme="@style/Theme.SplishSplash" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.SplishSplash"
+            tools:ignore="LockedOrientationActivity" />
 
         <activity
             android:name=".presentation.settings.SettingsActivity"
-            android:theme="@style/Theme.SplishSplash" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.SplishSplash"
+            tools:ignore="LockedOrientationActivity" />
 
     </application>
 </manifest> 
