@@ -1,3 +1,5 @@
+import java.io.ByteArrayOutputStream
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -11,10 +13,15 @@ android {
         applicationId = "com.mrb.loteriadenavidad"
         minSdk = 24
         targetSdk = 32
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = computeVersionCode()
+        versionName = "2022.0"
     }
     buildTypes {
+        getByName("debug") {
+            applicationIdSuffix = ".debug"
+            isDebuggable = true
+            isMinifyEnabled = false
+        }
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -93,4 +100,13 @@ dependencies {
 
     // utils
     implementation("androidx.browser:browser:1.4.0")
+}
+
+fun computeVersionCode(): Int {
+    val stdout = ByteArrayOutputStream()
+    exec {
+        commandLine("git", "rev-list", "--count", "HEAD")
+        standardOutput = stdout
+    }
+    return stdout.toString().trim().toInt()
 }

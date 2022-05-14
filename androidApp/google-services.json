@@ -33,6 +33,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961856246704:android:fb30936eb79d2512edbc75",
+        "android_client_info": {
+          "package_name": "com.mrb.loteriadenavidad.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961856246704-rpoulv8m2i7l3rprd9pbn31ldl3gg3rs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATH730oXg6MFa79vna25R96uV7JBcfVBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961856246704-rpoulv8m2i7l3rprd9pbn31ldl3gg3rs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

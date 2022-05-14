@@ -2,7 +2,6 @@ package com.mrebollob.loteria.android.presentation.platform
 
 import android.app.Application
 import co.touchlab.kermit.Logger
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.mrebollob.loteria.android.BuildConfig
 import com.mrebollob.loteria.android.analytics.AnalyticsManager
 import com.mrebollob.loteria.android.di.appModule
@@ -26,16 +25,10 @@ class LotteryApplication : Application() {
         }
 
         initAnalytics()
-        initCrashlytics()
         Logger.d { "LotteryApplication" }
     }
 
     private fun initAnalytics() {
         analyticsManager.setUserData()
-    }
-
-    private fun initCrashlytics() {
-//        FirebaseCrashlytics.getInstance().setCustomKey("GIT_SHA", BuildConfig.GIT_SHA)
-//        FirebaseCrashlytics.getInstance().setCustomKey("BUILD_TIME", BuildConfig.BUILD_TIME)
     }
 }
