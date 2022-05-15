@@ -1,0 +1,19 @@
+CREATE TABLE DbTicket(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  number INTEGER NOT NULL,
+  bet REAL NOT NULL
+);
+
+insertItem:
+INSERT OR REPLACE INTO DbTicket(id, name, number, bet)VALUES(?,?,?,?);
+
+selectAll:
+SELECT * FROM DbTicket;
+
+deleteAll:
+DELETE FROM DbTicket;
+
+deleteById:
+DELETE FROM DbTicket
+WHERE id = (:id);

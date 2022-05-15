@@ -1,0 +1,84 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="108dp"
+            android:height="108dp"
+            android:viewportWidth="108"
+            android:viewportHeight="108">
+            <group
+                android:name="back"
+                android:pivotX="54"
+                android:pivotY="54"
+                android:scaleX="0"
+                android:scaleY="0">
+                <path
+                    android:name="path"
+                    android:fillColor="@color/animated_icon_color"
+                    android:pathData="M 0.064 54 C 0.064 24.177 24.241 0 54.064 0 C 83.888 0 108.064 24.177 108.064 54 C 108.064 83.823 83.888 108 54.064 108 C 24.241 108 0.064 83.823 0.064 54 Z"
+                    android:strokeWidth="1" />
+            </group>
+            <group
+                android:name="front"
+                android:pivotX="54"
+                android:pivotY="54"
+                android:scaleX="0"
+                android:scaleY="0">
+                <path
+                    android:name="path_1"
+                    android:fillColor="#FD5E53"
+                    android:pathData="M 0.064 54 C 0.064 24.177 24.241 0 54.064 0 C 83.888 0 108.064 24.177 108.064 54 C 108.064 83.823 83.888 108 54.064 108 C 24.241 108 0.064 83.823 0.064 54 Z"
+                    android:strokeWidth="1" />
+
+                <path
+                    android:name="path_2"
+                    android:fillColor="#f9fcfb"
+                    android:pathData="M53.992,29A25.031,24.218 0,0 0,29 52.209H79A25.031,24.218 0,0 0,53.992 29ZM29,54.227a25.031,24.218 0,0 0,15.539 21.404v3.369h18.921v-3.376a25.031,24.218 0,0 0,15.524 -21.397z"
+                    android:strokeWidth="1" />
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="back">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="250"
+                    android:interpolator="@android:interpolator/linear_out_slow_in"
+                    android:propertyName="scaleX"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType" />
+                <objectAnimator
+                    android:duration="250"
+                    android:interpolator="@android:interpolator/linear_out_slow_in"
+                    android:propertyName="scaleY"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="front">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="300"
+                    android:interpolator="@android:interpolator/linear_out_slow_in"
+                    android:propertyName="scaleX"
+                    android:startOffset="200"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType" />
+                <objectAnimator
+                    android:duration="300"
+                    android:interpolator="@android:interpolator/linear_out_slow_in"
+                    android:propertyName="scaleY"
+                    android:startOffset="200"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>

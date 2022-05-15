@@ -1,0 +1,157 @@
+package com.mrebollob.loteria.android.presentation.settings
+
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.mrebollob.loteria.android.BuildConfig
+import com.mrebollob.loteria.android.R
+import com.mrebollob.loteria.android.analytics.AnalyticsEvent
+import com.mrebollob.loteria.android.analytics.AnalyticsManager
+import com.mrebollob.loteria.android.analytics.AnalyticsParameter
+import com.mrebollob.loteria.android.analytics.AnalyticsScreen
+import com.mrebollob.loteria.android.presentation.create.CreateActivity
+import com.mrebollob.loteria.android.presentation.platform.extension.loadCustomTabs
+import com.mrebollob.loteria.android.presentation.platform.extension.sendEmail
+import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
+import com.mrebollob.loteria.android.presentation.settings.manageticket.ManageTicketsViewModel
+import com.mrebollob.loteria.android.presentation.settings.manageticket.ui.ManageTicketsScreen
+import com.mrebollob.loteria.android.presentation.settings.menu.SettingItemId
+import com.mrebollob.loteria.android.presentation.settings.menu.ui.SettingsScreen
+import com.mrebollob.loteria.android.presentation.settings.share.ShareScreen
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
+class SettingsActivity : AppCompatActivity() {
+
+    private val manageTicketsViewModel: ManageTicketsViewModel by viewModel()
+
+    private val analyticsManager: AnalyticsManager by inject()
+
+    private val createTicketResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            manageTicketsViewModel.refreshData()
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContent {
+            val navController = rememberNavController()
+
+            LotteryTheme {
+                val systemUiController = rememberSystemUiController()
+                val darkIcons = MaterialTheme.colors.isLight
+                SideEffect {
+                    systemUiController.setStatusBarColor(
+                        Color.Transparent,
+                        darkIcons = darkIcons
+                    )
+                }
+
+                NavHost(
+                    navController = navController,
+                    startDestination = SettingsRoute.Menu.route
+                ) {
+                    composable(route = SettingsRoute.Menu.route) {
+                        SettingsScreen(
+                            onSettingClick = {
+                                onSettingClick(
+                                    navController = navController,
+                                    id = it
+                                )
+                            },
+                            onSortingMethodSelected = { method ->
+                                analyticsManager.trackEvent(
+                                    AnalyticsEvent.UPDATE_TICKETS_SORTING_METHOD,
+                                    AnalyticsParameter.CURRENT_LOCATION.withScreenValue(
+                                        AnalyticsScreen.SETTINGS
+                                    ),
+                                    AnalyticsParameter.SORTING_METHOD.withStringValue(
+                                        method.name
+                                    )
+                                )
+                            },
+                            onBackClick = { onBackPressed() }
+                        )
+                    }
+                    composable(route = SettingsRoute.Share.route) {
+                        ShareScreen(
+                            navController = navController
+                        )
+                    }
+                    composable(route = SettingsRoute.ManageTickets.route) {
+                        ManageTicketsScreen(
+                            manageTicketsViewModel = manageTicketsViewModel,
+                            navController = navController,
+                            onCreateTicketClick = { openCreateTicketScreen() },
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun openCreateTicketScreen() {
+        createTicketResult.launch(CreateActivity.newIntent(this))
+    }
+
+    private fun onSettingClick(
+        navController: NavController,
+        id: SettingItemId
+    ): Unit = when (id) {
+        SettingItemId.PRIVACY -> openWebViewScreen(getString(R.string.about_screen_url_privacy))
+        SettingItemId.TERMS -> openWebViewScreen(getString(R.string.about_screen_url_terms))
+        SettingItemId.EMAIL_ME -> {
+            val success = sendEmail(
+                listOf(getString(R.string.about_screen_contact_email)).toTypedArray(),
+                "${getString(R.string.app_name)} v${BuildConfig.VERSION_NAME}",
+                ""
+            )
+            if (success.not()) {
+                showEmailInfo()
+            } else {
+                Unit
+            }
+        }
+        SettingItemId.SHARE -> navController.navigate(SettingsRoute.Share.route)
+        SettingItemId.MANAGE_TICKETS -> navController.navigate(SettingsRoute.ManageTickets.route)
+    }
+
+    private fun showEmailInfo() {
+        val alertDialog: AlertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.about_screen_item_email_me))
+        alertDialog.setMessage("${getString(R.string.about_screen_item_email_me_text)} ${getString(R.string.about_screen_contact_email)}")
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEUTRAL,
+            getString(R.string.about_screen_item_email_me_action)
+        ) { dialog, _ -> dialog.dismiss() }
+        alertDialog.show()
+    }
+
+    private fun openWebViewScreen(url: String) {
+        loadCustomTabs(Uri.parse(url))
+    }
+
+    companion object {
+        fun open(context: Context) {
+            val intent = Intent(context, SettingsActivity::class.java)
+            context.startActivity(intent)
+        }
+    }
+}
