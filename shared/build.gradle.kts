@@ -32,6 +32,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1") {
                     isForce = true
                 }
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
 
                 // SqlDelight
                 implementation("com.squareup.sqldelight:runtime:1.5.3")
