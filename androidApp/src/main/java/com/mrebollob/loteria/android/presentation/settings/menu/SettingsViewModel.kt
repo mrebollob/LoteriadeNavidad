@@ -12,7 +12,8 @@ import com.mrebollob.loteria.android.BuildConfig
 import com.mrebollob.loteria.android.R
 import com.mrebollob.loteria.android.presentation.platform.ErrorMessage
 import com.mrebollob.loteria.domain.entity.SortingMethod
-import com.mrebollob.loteria.domain.repository.SettingsRepository
+import com.mrebollob.loteria.domain.usecase.settings.GetSortingMethod
+import com.mrebollob.loteria.domain.usecase.settings.SaveSortingMethod
 import java.util.UUID
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,7 +23,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(
-    private val settingsRepository: SettingsRepository,
+    private val getSortingMethod: GetSortingMethod,
+    private val saveSortingMethod: SaveSortingMethod
 ) : ViewModel() {
 
     private val viewModelState = MutableStateFlow(SettingsViewModelState())
@@ -42,7 +44,7 @@ class SettingsViewModel(
     fun refreshData() {
         viewModelState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            settingsRepository.getSortingMethod()
+            getSortingMethod.execute()
                 .onSuccess { sortingMethod ->
                     viewModelState.update {
                         it.copy(
@@ -61,7 +63,7 @@ class SettingsViewModel(
     fun setTicketSortingMethod(method: SortingMethod) {
         viewModelState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            settingsRepository.saveSortingMethod(method)
+            saveSortingMethod.execute(method)
                 .onSuccess {
                     refreshData()
                 }.onFailure {

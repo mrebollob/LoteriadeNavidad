@@ -4,11 +4,13 @@ import com.mrebollob.loteria.data.mapper.TicketMapper
 import com.mrebollob.loteria.di.LotteryDatabaseWrapper
 import com.mrebollob.loteria.domain.entity.Ticket
 import com.mrebollob.loteria.domain.repository.TicketsRepository
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class TicketsRepositoryImp(
-    lotteryDatabaseWrapper: LotteryDatabaseWrapper,
-    private val ticketMapper: TicketMapper
-) : TicketsRepository {
+class TicketsRepositoryImp : KoinComponent, TicketsRepository {
+
+    private val lotteryDatabaseWrapper: LotteryDatabaseWrapper by inject()
+    private val ticketMapper: TicketMapper by inject()
 
     private val lotteryQueries = lotteryDatabaseWrapper.instance?.lotteryQueries
 
