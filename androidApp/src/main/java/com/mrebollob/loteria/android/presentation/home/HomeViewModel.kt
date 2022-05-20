@@ -2,8 +2,6 @@ package com.mrebollob.loteria.android.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mrebollob.loteria.domain.entity.SortingMethod
-import com.mrebollob.loteria.domain.entity.Ticket
 import com.mrebollob.loteria.domain.usecase.draw.GetDaysToLotteryDraw
 import com.mrebollob.loteria.domain.usecase.settings.GetSortingMethod
 import com.mrebollob.loteria.domain.usecase.ticket.GetTickets
@@ -34,9 +32,8 @@ class HomeViewModel(
 
         viewModelScope.launch {
             val daysToLotteryDraw = getDaysToLotteryDraw.execute()
-            val tickets: List<Ticket> = getTickets.execute().getOrElse { emptyList() }
-            val sortingMethod =
-                getSortingMethod.execute().getOrElse { SortingMethod.NAME }
+            val tickets = getTickets.execute()
+            val sortingMethod = getSortingMethod.execute()
 
             viewModelState.update {
                 it.copy(

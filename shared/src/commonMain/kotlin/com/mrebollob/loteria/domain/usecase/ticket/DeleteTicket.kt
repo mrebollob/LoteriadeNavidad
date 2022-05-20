@@ -9,9 +9,7 @@ class DeleteTicket(
 
     suspend fun execute(
         ticket: Ticket
-    ): Result<Unit> {
-        return ticketsRepository.deleteTicket(
-            ticket = ticket
-        )
-    }
+    ) = ticketsRepository.deleteTicket(
+        ticket = ticket
+    )
 }

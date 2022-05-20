@@ -10,11 +10,9 @@ class CreateTicket(
         name: String,
         number: Int,
         bet: Float
-    ): Result<Unit> {
-        return ticketsRepository.createTicket(
-            name = name,
-            number = number,
-            bet = bet
-        )
-    }
+    ) = ticketsRepository.createTicket(
+        name = name,
+        number = number,
+        bet = bet
+    )
 }

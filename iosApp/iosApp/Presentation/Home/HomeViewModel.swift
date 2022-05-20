@@ -27,19 +27,16 @@ class HomeViewModel: ObservableObject {
     func refreshData() async {
         homeUiState.isLoading = true
 
+        do {
+            let sortingMethod = try await getSortingMethod.execute()
+            let daysToLotteryDraw = getDaysToLotteryDraw.execute()
+            let tickets = try await getTickets.execute()
 
-        
-
-//        fetchPeopleTask = Task {
-//            do {
-//                let stream = asyncStream(for: getTickets.executeNative())
-//                for try await data in stream {
-//              let hola: Result<[Ticket]>  = data
-//                }
-//            } catch {
-//                print("Failed with error: \(error)")
-//            }
-//        }
-
+            homeUiState.daysToLotteryDraw = Int(daysToLotteryDraw)
+            homeUiState.tickets = tickets
+            homeUiState.isLoading = false
+        } catch {
+            homeUiState.errorMessages = ["Error"]
+        }
     }
 }

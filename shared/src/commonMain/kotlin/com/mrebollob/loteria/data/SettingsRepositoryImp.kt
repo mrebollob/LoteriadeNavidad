@@ -10,14 +10,13 @@ class SettingsRepositoryImp : KoinComponent, SettingsRepository {
 
     private val preferences: Preferences by inject()
 
-    override suspend fun getSortingMethod(): Result<SortingMethod> {
+    override suspend fun getSortingMethod(): SortingMethod {
         val sortingMethodValue = preferences.getString(SORTING_METHOD_KEY, SortingMethod.NAME.name)
-        return Result.success(SortingMethod.valueOf(sortingMethodValue))
+        return SortingMethod.valueOf(sortingMethodValue)
     }
 
-    override suspend fun saveSortingMethod(sortingMethod: SortingMethod): Result<Unit> {
+    override suspend fun saveSortingMethod(sortingMethod: SortingMethod) {
         preferences.setString(SORTING_METHOD_KEY, sortingMethod.name)
-        return Result.success(Unit)
     }
 
     companion object {

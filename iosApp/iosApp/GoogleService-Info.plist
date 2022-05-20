@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>560463497269-3454hndhek4q200nu4nlecksot7orj9i.apps.googleusercontent.com</string>
+	<string>961856246704-sjeskfpo8l0ann33gbho7ejuu4u0sfdb.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.560463497269-3454hndhek4q200nu4nlecksot7orj9i</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>560463497269-9p15366sjf6fvdsle8b10ic3k5j5e4kh.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.961856246704-sjeskfpo8l0ann33gbho7ejuu4u0sfdb</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBpmv6VBFcoBvGpBF1koa2B1703Y4xkboM</string>
+	<string>AIzaSyCkv9F9EphKsuCl_yQF4fpkDfFJaKiWMh8</string>
 	<key>GCM_SENDER_ID</key>
-	<string>560463497269</string>
+	<string>961856246704</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mrebollob.tabits</string>
+	<string>com.mrb.loteriadenavidad</string>
 	<key>PROJECT_ID</key>
-	<string>tabata-timer-31425</string>
+	<string>lottery-c5fe6</string>
 	<key>STORAGE_BUCKET</key>
-	<string>tabata-timer-31425.appspot.com</string>
+	<string>lottery-c5fe6.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:560463497269:ios:b28068594a6e0f30ef897c</string>
-	<key>DATABASE_URL</key>
-	<string>https://tabata-timer-31425.firebaseio.com</string>
+	<string>1:961856246704:ios:25f0c046b9e4dbb4edbc75</string>
 </dict>
 </plist>

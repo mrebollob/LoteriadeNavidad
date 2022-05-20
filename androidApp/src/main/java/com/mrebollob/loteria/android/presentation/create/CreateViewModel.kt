@@ -58,11 +58,7 @@ class CreateViewModel(
                     name = viewModelState.value.name,
                     number = number,
                     bet = bet
-                ).onSuccess {
-                    onTicketCreated.trySend(Unit)
-                }.onFailure {
-                    showError(R.string.create_screen_error_save)
-                }
+                )
             } else {
                 viewModelState.update { it.copy(isLoading = false) }
                 delay(200)

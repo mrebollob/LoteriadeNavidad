@@ -14,28 +14,25 @@ class TicketsRepositoryImp : KoinComponent, TicketsRepository {
 
     private val lotteryQueries = lotteryDatabaseWrapper.instance?.lotteryQueries
 
-    override suspend fun getTickets(): Result<List<Ticket>> {
+    override suspend fun getTickets(): List<Ticket> {
         val dbTickets = lotteryQueries?.selectAll()?.executeAsList() ?: emptyList()
-        return Result.success(dbTickets.map { ticketMapper.toDomain(it) })
+        return dbTickets.map { ticketMapper.toDomain(it) }
     }
 
     override suspend fun createTicket(
         name: String,
         number: Int,
         bet: Float
-    ): Result<Unit> {
+    ) {
         lotteryQueries?.insertItem(
             id = null,
             name = name,
             number = number.toLong(),
             bet = bet.toDouble()
         )
-
-        return Result.success(Unit)
     }
 
-    override suspend fun deleteTicket(ticket: Ticket): Result<Unit> {
+    override suspend fun deleteTicket(ticket: Ticket) {
         lotteryQueries?.deleteById(id = ticket.id)
-        return Result.success(Unit)
     }
 }

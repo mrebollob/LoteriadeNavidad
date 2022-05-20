@@ -7,7 +7,5 @@ class GetSortingMethod(
     private val settingsRepository: SettingsRepository
 ) {
 
-    suspend fun execute(): Result<SortingMethod> {
-        return settingsRepository.getSortingMethod()
-    }
+    suspend fun execute(): SortingMethod = settingsRepository.getSortingMethod()
 }

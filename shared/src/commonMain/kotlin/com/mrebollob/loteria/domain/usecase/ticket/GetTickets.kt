@@ -7,7 +7,5 @@ class GetTickets(
     private val ticketsRepository: TicketsRepository
 ) {
 
-    suspend fun execute(): Result<List<Ticket>> {
-        return ticketsRepository.getTickets()
-    }
+    suspend fun execute(): List<Ticket> = ticketsRepository.getTickets()
 }

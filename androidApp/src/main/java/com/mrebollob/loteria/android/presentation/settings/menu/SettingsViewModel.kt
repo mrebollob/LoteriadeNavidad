@@ -44,19 +44,16 @@ class SettingsViewModel(
     fun refreshData() {
         viewModelState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            getSortingMethod.execute()
-                .onSuccess { sortingMethod ->
-                    viewModelState.update {
-                        it.copy(
-                            sortingMethod = sortingMethod,
-                            settings = getSettings(),
-                            appVersion = "v${BuildConfig.VERSION_NAME}",
-                            isLoading = false
-                        )
-                    }
-                }.onFailure {
-                    showError(R.string.load_error)
-                }
+            val sortingMethod = getSortingMethod.execute()
+
+            viewModelState.update {
+                it.copy(
+                    sortingMethod = sortingMethod,
+                    settings = getSettings(),
+                    appVersion = "v${BuildConfig.VERSION_NAME}",
+                    isLoading = false
+                )
+            }
         }
     }
 
@@ -64,11 +61,7 @@ class SettingsViewModel(
         viewModelState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             saveSortingMethod.execute(method)
-                .onSuccess {
-                    refreshData()
-                }.onFailure {
-                    showError(R.string.load_error)
-                }
+            refreshData()
         }
     }
 

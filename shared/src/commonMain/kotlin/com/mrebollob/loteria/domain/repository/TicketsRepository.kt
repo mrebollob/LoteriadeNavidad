@@ -4,13 +4,13 @@ import com.mrebollob.loteria.domain.entity.Ticket
 
 interface TicketsRepository {
 
-    suspend fun getTickets(): Result<List<Ticket>>
+    suspend fun getTickets(): List<Ticket>
 
     suspend fun createTicket(
         name: String,
         number: Int,
         bet: Float
-    ): Result<Unit>
+    )
 
-    suspend fun deleteTicket(ticket: Ticket): Result<Unit>
+    suspend fun deleteTicket(ticket: Ticket)
 }

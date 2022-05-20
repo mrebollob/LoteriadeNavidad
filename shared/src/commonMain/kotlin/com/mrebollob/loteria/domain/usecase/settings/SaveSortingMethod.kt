@@ -7,11 +7,6 @@ class SaveSortingMethod(
     private val settingsRepository: SettingsRepository
 ) {
 
-    suspend fun execute(
-        sortingMethod: SortingMethod
-    ): Result<Unit> {
-        return settingsRepository.saveSortingMethod(
-            sortingMethod = sortingMethod
-        )
-    }
+    suspend fun execute(sortingMethod: SortingMethod) =
+        settingsRepository.saveSortingMethod(sortingMethod = sortingMethod)
 }
