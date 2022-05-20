@@ -24,19 +24,13 @@ class HomeViewModel: ObservableObject {
             errorMessages: []
     )
 
-    func refreshData() async {
+    func refreshData() {
         homeUiState.isLoading = true
+        let daysToLotteryDraw = getDaysToLotteryDraw.execute()
+        homeUiState.daysToLotteryDraw = Int(daysToLotteryDraw)
 
-        do {
-            let sortingMethod = try await getSortingMethod.execute()
-            let daysToLotteryDraw = getDaysToLotteryDraw.execute()
-            let tickets = try await getTickets.execute()
+        getTickets.execute { (tickets: [Ticket]?, error: Error?) in
 
-            homeUiState.daysToLotteryDraw = Int(daysToLotteryDraw)
-            homeUiState.tickets = tickets
-            homeUiState.isLoading = false
-        } catch {
-            homeUiState.errorMessages = ["Error"]
         }
     }
 }

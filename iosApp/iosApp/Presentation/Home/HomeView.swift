@@ -8,8 +8,10 @@ struct HomeView: View {
 
     var body: some View {
         let uiState = viewModel.homeUiState
-
-        Text("Hole \(uiState.daysToLotteryDraw)")
+        ScrollView {
+            Text("Dias \(uiState.daysToLotteryDraw)")
+        }
+                .onAppear(perform: viewModel.refreshData)
     }
 }
 
