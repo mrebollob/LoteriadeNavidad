@@ -44,7 +44,6 @@ import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 @Composable
 fun CreateScreen(
     createViewModel: CreateViewModel,
-    onSaveTicketClick: (() -> Unit),
     onBackClick: (() -> Unit)
 ) {
     val uiState by createViewModel.uiState.collectAsState()

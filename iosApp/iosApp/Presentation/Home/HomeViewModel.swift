@@ -12,9 +12,7 @@ class HomeViewModel: ObservableObject {
     @ForceInject<GetSortingMethod>()
     var getSortingMethod: GetSortingMethod
 
-    private var fetchPeopleTask: Task<(), Never>? = nil
-
-    @Published var homeUiState: HomeUiState = HomeUiState(
+    @Published var uiState: HomeUiState = HomeUiState(
             today: Date(),
             daysToLotteryDraw: 0,
             totalBet: 0,
@@ -25,9 +23,9 @@ class HomeViewModel: ObservableObject {
     )
 
     func refreshData() {
-        homeUiState.isLoading = true
+        uiState.isLoading = true
         let daysToLotteryDraw = getDaysToLotteryDraw.execute()
-        homeUiState.daysToLotteryDraw = Int(daysToLotteryDraw)
+        uiState.daysToLotteryDraw = Int(daysToLotteryDraw)
 
         getTickets.execute { (tickets: [Ticket]?, error: Error?) in
 

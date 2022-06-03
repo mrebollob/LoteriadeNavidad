@@ -13,13 +13,17 @@
 		B3A6F222F9C59B07CE46A3A8 /* InjectPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F675DF73729DDEF4EA12 /* InjectPropertyWrapper.swift */; };
 		B3A6F2D535C4580F5029D3A2 /* UseCaseAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F885ACAD701912256CAC /* UseCaseAssembly.swift */; };
 		B3A6F4B47B1E0B884B9E9E01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F4D88F35CA0D8317D3FC /* AppDelegate.swift */; };
+		B3A6F4F8C758FDA264ACF51B /* CreateUiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F0A9843E758835B630B8 /* CreateUiState.swift */; };
 		B3A6F52D9996BB3A9BB0C56B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6FD7C62DEF15C2A5FA443 /* HomeViewModel.swift */; };
 		B3A6F57B08F449BCB21FBA0E /* ForceInjectPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F0AE02C151F3E402A20A /* ForceInjectPropertyWrapper.swift */; };
 		B3A6F849B0B44FA67D6AA5BA /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F8FCFC8C977796904577 /* iOSApp.swift */; };
 		B3A6F98B279E407DDA27351D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3A6FE5AE7DDBAB7C1200374 /* GoogleService-Info.plist */; };
+		B3A6FAEC66F7D07B36D8EBD8 /* CreateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6FDBC31AE5A1E9C634CFF /* CreateScreen.swift */; };
 		B3A6FBC8C774693AC476AAA1 /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F74A3D74B2D9F42E1407 /* AppAssembly.swift */; };
 		B3A6FDC0112541EE03A9BD20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6FBBCEB75BBDF8F446E1B /* ContentView.swift */; };
 		B3A6FE361FEE64FAA7AF6EB0 /* HomeUiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6FBBEC028E56CAA0AB0D9 /* HomeUiState.swift */; };
+		B3A6FE67EF1747B04BD20F2B /* TicketItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F9753E3DD49CA24AC8AB /* TicketItemView.swift */; };
+		B3A6FF85133D63BB8DEE943B /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F9AB1BA3EB1231AC8635 /* CreateViewModel.swift */; };
 		B3A6FFADD011B1EA4C2D466A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F00D500240BAEB4A1F9F /* HomeView.swift */; };
 		BBE9C3CB77E1771292632886 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C1D56813F4C28B7D20BE48 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
@@ -32,16 +36,20 @@
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3A6F00D500240BAEB4A1F9F /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B3A6F0A9843E758835B630B8 /* CreateUiState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUiState.swift; sourceTree = "<group>"; };
 		B3A6F0AE02C151F3E402A20A /* ForceInjectPropertyWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceInjectPropertyWrapper.swift; sourceTree = "<group>"; };
 		B3A6F4D88F35CA0D8317D3FC /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3A6F675DF73729DDEF4EA12 /* InjectPropertyWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectPropertyWrapper.swift; sourceTree = "<group>"; };
 		B3A6F74A3D74B2D9F42E1407 /* AppAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
 		B3A6F885ACAD701912256CAC /* UseCaseAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCaseAssembly.swift; sourceTree = "<group>"; };
 		B3A6F8FCFC8C977796904577 /* iOSApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		B3A6F9753E3DD49CA24AC8AB /* TicketItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketItemView.swift; sourceTree = "<group>"; };
+		B3A6F9AB1BA3EB1231AC8635 /* CreateViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
 		B3A6FBBCEB75BBDF8F446E1B /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B3A6FBBEC028E56CAA0AB0D9 /* HomeUiState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeUiState.swift; sourceTree = "<group>"; };
 		B3A6FCDE46AE47D2ADB3D26D /* DependencyProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyProvider.swift; sourceTree = "<group>"; };
 		B3A6FD7C62DEF15C2A5FA443 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		B3A6FDBC31AE5A1E9C634CFF /* CreateScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateScreen.swift; sourceTree = "<group>"; };
 		B3A6FE5AE7DDBAB7C1200374 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BC661C6E59263650147D8954 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +136,7 @@
 		B3A6F2868C91046C90C63B17 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B3A6F9753E3DD49CA24AC8AB /* TicketItemView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -164,6 +173,9 @@
 		B3A6F7C975B15F1F20D3516A /* Create */ = {
 			isa = PBXGroup;
 			children = (
+				B3A6FDBC31AE5A1E9C634CFF /* CreateScreen.swift */,
+				B3A6F9AB1BA3EB1231AC8635 /* CreateViewModel.swift */,
+				B3A6F0A9843E758835B630B8 /* CreateUiState.swift */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -306,6 +318,10 @@
 				B3A6F57B08F449BCB21FBA0E /* ForceInjectPropertyWrapper.swift in Sources */,
 				B3A6F222F9C59B07CE46A3A8 /* InjectPropertyWrapper.swift in Sources */,
 				B3A6F2D535C4580F5029D3A2 /* UseCaseAssembly.swift in Sources */,
+				B3A6FE67EF1747B04BD20F2B /* TicketItemView.swift in Sources */,
+				B3A6FAEC66F7D07B36D8EBD8 /* CreateScreen.swift in Sources */,
+				B3A6FF85133D63BB8DEE943B /* CreateViewModel.swift in Sources */,
+				B3A6F4F8C758FDA264ACF51B /* CreateUiState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

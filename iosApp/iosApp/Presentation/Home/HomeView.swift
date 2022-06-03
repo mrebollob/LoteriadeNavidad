@@ -7,11 +7,30 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
 
     var body: some View {
-        let uiState = viewModel.homeUiState
-        ScrollView {
-            Text("Dias \(uiState.daysToLotteryDraw)")
+        let uiState = viewModel.uiState
+        NavigationView {
+            ScrollView {
+                Text("Dias \(uiState.daysToLotteryDraw)")
+            }
+                    .onAppear(perform: viewModel.refreshData)
+                    .navigationTitle("Lotería 2022")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink(destination: CreateScreen()) {
+                                Image(systemName: "plus")
+                            }
+                        }
+
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+
+                            }, label: {
+                                Image(systemName: "gearshape")
+                            })
+                        }
+                    }
         }
-                .onAppear(perform: viewModel.refreshData)
     }
 }
 
