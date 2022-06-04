@@ -10,7 +10,12 @@ struct HomeView: View {
         let uiState = viewModel.uiState
         NavigationView {
             VStack {
-                Text("Dias \(uiState.daysToLotteryDraw)")
+                Spacer()
+                
+                CountdownSectionView(
+                    today: uiState.today,
+                    daysToLotteryDraw: uiState.daysToLotteryDraw
+                )
                 
                 Spacer()
                 
