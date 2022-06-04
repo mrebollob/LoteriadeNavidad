@@ -6,6 +6,7 @@
 //  Copyright © 2022 orgName. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
 
 struct CountdownSectionView: View {
@@ -29,15 +30,17 @@ struct CountdownSectionView: View {
     }
     
     var body: some View {
-        VStack{
-            Text("4 June, 2022")
-                .font(Font.custom("montserrat_semibold", size: 24))
-//                .foregroundColor(Color("Grey7"))
+        VStack(alignment: .leading, spacing: 0){
+            Text(today.formatDate())
+                .font(Font.custom("montserrat_medium", size: 14))
+                .foregroundColor(Color("Grey4"))
             
             Text(getCountDownText())
                 .font(Font.custom("montserrat_semibold", size: 24))
-//                .foregroundColor(Color("Grey7"))
+                .foregroundColor(Color("OnBackground"))
         }
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(.horizontal)
     }
 }
 
