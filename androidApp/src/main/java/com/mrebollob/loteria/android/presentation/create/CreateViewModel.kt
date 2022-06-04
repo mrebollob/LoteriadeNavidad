@@ -59,6 +59,7 @@ class CreateViewModel(
                     number = number,
                     bet = bet
                 )
+                onTicketCreated.trySend(Unit)
             } else {
                 viewModelState.update { it.copy(isLoading = false) }
                 delay(200)

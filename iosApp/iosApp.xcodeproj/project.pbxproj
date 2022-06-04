@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0325671D284BA63600355970 /* TicketItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0325671C284BA63600355970 /* TicketItemView.swift */; };
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		B3A6F21205820EC20F9ABED9 /* DependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6FCDE46AE47D2ADB3D26D /* DependencyProvider.swift */; };
@@ -22,13 +23,14 @@
 		B3A6FBC8C774693AC476AAA1 /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F74A3D74B2D9F42E1407 /* AppAssembly.swift */; };
 		B3A6FDC0112541EE03A9BD20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6FBBCEB75BBDF8F446E1B /* ContentView.swift */; };
 		B3A6FE361FEE64FAA7AF6EB0 /* HomeUiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6FBBEC028E56CAA0AB0D9 /* HomeUiState.swift */; };
-		B3A6FE67EF1747B04BD20F2B /* TicketItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F9753E3DD49CA24AC8AB /* TicketItemView.swift */; };
+		B3A6FE67EF1747B04BD20F2B /* TicketsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F9753E3DD49CA24AC8AB /* TicketsListView.swift */; };
 		B3A6FF85133D63BB8DEE943B /* CreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F9AB1BA3EB1231AC8635 /* CreateViewModel.swift */; };
 		B3A6FFADD011B1EA4C2D466A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A6F00D500240BAEB4A1F9F /* HomeView.swift */; };
 		BBE9C3CB77E1771292632886 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C1D56813F4C28B7D20BE48 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0325671C284BA63600355970 /* TicketItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketItemView.swift; sourceTree = "<group>"; };
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		35C1D56813F4C28B7D20BE48 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,7 +45,7 @@
 		B3A6F74A3D74B2D9F42E1407 /* AppAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
 		B3A6F885ACAD701912256CAC /* UseCaseAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCaseAssembly.swift; sourceTree = "<group>"; };
 		B3A6F8FCFC8C977796904577 /* iOSApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
-		B3A6F9753E3DD49CA24AC8AB /* TicketItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketItemView.swift; sourceTree = "<group>"; };
+		B3A6F9753E3DD49CA24AC8AB /* TicketsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketsListView.swift; sourceTree = "<group>"; };
 		B3A6F9AB1BA3EB1231AC8635 /* CreateViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateViewModel.swift; sourceTree = "<group>"; };
 		B3A6FBBCEB75BBDF8F446E1B /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B3A6FBBEC028E56CAA0AB0D9 /* HomeUiState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeUiState.swift; sourceTree = "<group>"; };
@@ -135,7 +137,8 @@
 		B3A6F2868C91046C90C63B17 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				B3A6F9753E3DD49CA24AC8AB /* TicketItemView.swift */,
+				B3A6F9753E3DD49CA24AC8AB /* TicketsListView.swift */,
+				0325671C284BA63600355970 /* TicketItemView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -154,10 +157,10 @@
 		B3A6F48689FE6DF8369AA181 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B3A6FBBEC028E56CAA0AB0D9 /* HomeUiState.swift */,
-				B3A6FD7C62DEF15C2A5FA443 /* HomeViewModel.swift */,
 				B3A6F2868C91046C90C63B17 /* Components */,
+				B3A6FBBEC028E56CAA0AB0D9 /* HomeUiState.swift */,
 				B3A6F00D500240BAEB4A1F9F /* HomeView.swift */,
+				B3A6FD7C62DEF15C2A5FA443 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -317,8 +320,9 @@
 				B3A6F57B08F449BCB21FBA0E /* ForceInjectPropertyWrapper.swift in Sources */,
 				B3A6F222F9C59B07CE46A3A8 /* InjectPropertyWrapper.swift in Sources */,
 				B3A6F2D535C4580F5029D3A2 /* UseCaseAssembly.swift in Sources */,
-				B3A6FE67EF1747B04BD20F2B /* TicketItemView.swift in Sources */,
+				B3A6FE67EF1747B04BD20F2B /* TicketsListView.swift in Sources */,
 				B3A6FAEC66F7D07B36D8EBD8 /* CreateScreen.swift in Sources */,
+				0325671D284BA63600355970 /* TicketItemView.swift in Sources */,
 				B3A6FF85133D63BB8DEE943B /* CreateViewModel.swift in Sources */,
 				B3A6F4F8C758FDA264ACF51B /* CreateUiState.swift in Sources */,
 			);

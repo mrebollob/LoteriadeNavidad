@@ -9,8 +9,12 @@ struct HomeView: View {
     var body: some View {
         let uiState = viewModel.uiState
         NavigationView {
-            ScrollView {
+            VStack {
                 Text("Dias \(uiState.daysToLotteryDraw)")
+                
+                Spacer()
+                
+                TicketsListView(tickets: uiState.tickets)
             }
                     .onAppear(perform: viewModel.refreshData)
                     .navigationTitle("Lotería 2022")
