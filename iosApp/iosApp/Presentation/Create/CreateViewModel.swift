@@ -9,20 +9,36 @@ import shared
 import KMPNativeCoroutinesAsync
 
 class CreateViewModel: ObservableObject {
-
+    
     @ForceInject<CreateTicket>()
     var createTicket: CreateTicket
-
+    
     @Published var uiState: CreateUiState = CreateUiState()
-
-    func onSaveTicketClick(name: String, number: String, bet: String) {
-        createTicket.execute(
+    
+    func onSaveTicketClick(name: String, numberText: String, betText: String) {
+        let number = Int32(numberText)
+        if number == nil {
+            uiState.errorMessages = "Introduce un número válido"
+            uiState.showError = true
+            return
+        }
+        
+        let bet = Float(betText)
+        if bet == nil || (bet ?? 0) <= 0 {
+            uiState.errorMessages = "Introduce una cantidad válida"
+            uiState.showError = true
+            return
+        }
+        
+        if number != nil && bet != nil {
+            createTicket.execute(
                 name: name,
-                number: Int32(number) ?? 0,
-                bet: Float(bet) ?? 20.0
-        ) { _, error in
-            if error == nil {
-                self.uiState.isCreated = true
+                number: number!,
+                bet: bet!
+            ) { _, error in
+                if error == nil {
+                    self.uiState.isCreated = true
+                }
             }
         }
     }

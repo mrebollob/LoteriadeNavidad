@@ -7,4 +7,6 @@ import Foundation
 
 struct CreateUiState {
     var isCreated: Bool = false
+    var showError: Bool = false
+    var errorMessages: String = ""
 }

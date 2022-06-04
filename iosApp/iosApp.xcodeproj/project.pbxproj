@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -119,7 +119,6 @@
 				BC661C6E59263650147D8954 /* Pods-iosApp.debug.xcconfig */,
 				37CB659E75A0F89A26FE883F /* Pods-iosApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -174,8 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				B3A6FDBC31AE5A1E9C634CFF /* CreateScreen.swift */,
-				B3A6F9AB1BA3EB1231AC8635 /* CreateViewModel.swift */,
 				B3A6F0A9843E758835B630B8 /* CreateUiState.swift */,
+				B3A6F9AB1BA3EB1231AC8635 /* CreateViewModel.swift */,
 			);
 			path = Create;
 			sourceTree = "<group>";
