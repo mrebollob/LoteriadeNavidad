@@ -14,26 +14,83 @@ struct TicketItemView: View {
     var ticket: Ticket
     var totalPrize: Float?
     
-    var body: some View {
-        VStack {
-            VStack {
-                Text(ticket.name)
-                    .font(.headline)
-                    .lineLimit(2)
-                Text(ticket.name)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-            .padding()
-            Spacer()
+    func getPriceText() -> String {
+        if totalPrize == nil {
+            return "-"
+        } else {
+            return String(format: "%.2f", totalPrize!)
         }
-        .frame(height: 400)
+    }
+    
+    var body: some View {
+        VStack{
+            LREdgeCutShapeView(cornerRadius: 16)
+//                .foregroundColor(Color("Grey4"))
+                .fill(
+                    Color("Grey4"),
+                    style: FillStyle(eoFill: false, antialiased: false)
+                )
+                .frame(maxWidth: .infinity)
+                .frame(height: 24.0)
+            
+            HStack {
+                VStack(alignment: .leading, spacing: 0){
+                    Text("Nombre")
+                        .font(Font.custom("montserrat_medium", size: 14))
+                        .foregroundColor(Color("Grey4"))
+                    
+                    Text(ticket.name)
+                        .font(Font.custom("montserrat_semibold", size: 24))
+                        .foregroundColor(Color("OnBackground"))
+                }
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+                .padding()
+                
+                VStack(alignment: .trailing, spacing: 0){
+                    Text("Número")
+                        .font(Font.custom("montserrat_medium", size: 14))
+                        .foregroundColor(Color("Grey4"))
+                    
+                    Text(String(format: "%05d", ticket.number))
+                        .font(Font.custom("montserrat_semibold", size: 24))
+                        .foregroundColor(Color("OnBackground"))
+                }
+                .frame(maxWidth: .infinity, alignment: .topTrailing)
+                .padding()
+            }
+            
+            HStack {
+                VStack(alignment: .leading, spacing: 0){
+                    Text("Jugado")
+                        .font(Font.custom("montserrat_medium", size: 14))
+                        .foregroundColor(Color("Grey4"))
+                    
+                    Text( String(format: "%.2f", ticket.bet))
+                        .font(Font.custom("montserrat_semibold", size: 24))
+                        .foregroundColor(Color("OnBackground"))
+                }
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+                .padding()
+                
+                VStack(alignment: .trailing, spacing: 0){
+                    Text("Ganado")
+                        .font(Font.custom("montserrat_medium", size: 14))
+                        .foregroundColor(Color("Grey4"))
+                    
+                    Text(getPriceText())
+                        .font(Font.custom("montserrat_semibold", size: 24))
+                        .foregroundColor(Color("OnBackground"))
+                }
+                .frame(maxWidth: .infinity, alignment: .topTrailing)
+                .padding()
+            }
+        }
+        .frame(maxWidth: .infinity)
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(.sRGB, red: 150 / 255, green: 150 / 255, blue: 150 / 255, opacity: 0.1), lineWidth: 1)
+                .stroke(Color("Grey4"), lineWidth: 1)
         )
-        .shadow(radius: 1)
     }
 }
 

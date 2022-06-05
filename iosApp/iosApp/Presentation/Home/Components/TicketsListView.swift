@@ -11,9 +11,15 @@ struct TicketsListView: View {
     var tickets: [Ticket]
     
     var body: some View {
-        List(tickets, id: \.id) { ticket in
-            TicketItemView(ticket: ticket, totalPrize: 0)
+        LazyVStack {
+            ForEach(tickets, id: \.self) { ticket in
+                TicketItemView(
+                    ticket: ticket,
+                    totalPrize: nil
+                )
+            }
         }
+        .padding(.horizontal)
     }
 }
 
