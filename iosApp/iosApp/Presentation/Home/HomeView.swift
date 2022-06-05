@@ -18,6 +18,14 @@ struct HomeView: View {
                 )
                 
                 Spacer()
+                    .frame(height: 24)
+                
+                StatsSectionView(
+                    totalBet: 20,
+                    totalPrize: nil
+                )
+                
+                Spacer()
                 
                 TicketsListView(tickets: uiState.tickets)
             }
