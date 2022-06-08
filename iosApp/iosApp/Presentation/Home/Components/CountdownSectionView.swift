@@ -32,11 +32,11 @@ struct CountdownSectionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0){
             Text(today.formatDate())
-                .font(Font.custom("montserrat_medium", size: 14))
+                .font(Font.custom("Montserrat-Medium", size: 14))
                 .foregroundColor(Color("Grey4"))
             
             Text(getCountDownText())
-                .font(Font.custom("montserrat_semibold", size: 24))
+                .font(Font.custom("Montserrat-SemiBold", size: 24))
                 .foregroundColor(Color("OnBackground"))
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)

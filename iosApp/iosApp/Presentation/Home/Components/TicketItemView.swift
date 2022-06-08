@@ -36,11 +36,11 @@ struct TicketItemView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 0){
                     Text("Nombre")
-                        .font(Font.custom("montserrat_medium", size: 14))
+                        .font(Font.custom("Montserrat-Medium", size: 14))
                         .foregroundColor(Color("Grey4"))
                     
                     Text(ticket.name)
-                        .font(Font.custom("montserrat_semibold", size: 24))
+                        .font(Font.custom("Montserrat-SemiBold", size: 24))
                         .foregroundColor(Color("OnBackground"))
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -48,11 +48,11 @@ struct TicketItemView: View {
                 
                 VStack(alignment: .trailing, spacing: 0){
                     Text("Número")
-                        .font(Font.custom("montserrat_medium", size: 14))
+                        .font(Font.custom("Montserrat-Medium", size: 14))
                         .foregroundColor(Color("Grey4"))
                     
                     Text(String(format: "%05d", ticket.number))
-                        .font(Font.custom("montserrat_semibold", size: 24))
+                        .font(Font.custom("Montserrat-SemiBold", size: 24))
                         .foregroundColor(Color("OnBackground"))
                 }
                 .frame(maxWidth: .infinity, alignment: .topTrailing)
@@ -62,11 +62,11 @@ struct TicketItemView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 0){
                     Text("Jugado")
-                        .font(Font.custom("montserrat_medium", size: 14))
+                        .font(Font.custom("Montserrat-Medium", size: 14))
                         .foregroundColor(Color("Grey4"))
                     
                     Text( String(format: "%.2f", ticket.bet))
-                        .font(Font.custom("montserrat_semibold", size: 24))
+                        .font(Font.custom("Montserrat-SemiBold", size: 24))
                         .foregroundColor(Color("OnBackground"))
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -74,11 +74,11 @@ struct TicketItemView: View {
                 
                 VStack(alignment: .trailing, spacing: 0){
                     Text("Ganado")
-                        .font(Font.custom("montserrat_medium", size: 14))
+                        .font(Font.custom("Montserrat-Medium", size: 14))
                         .foregroundColor(Color("Grey4"))
                     
                     Text(getPriceText())
-                        .font(Font.custom("montserrat_semibold", size: 24))
+                        .font(Font.custom("Montserrat-SemiBold", size: 24))
                         .foregroundColor(Color("OnBackground"))
                 }
                 .frame(maxWidth: .infinity, alignment: .topTrailing)

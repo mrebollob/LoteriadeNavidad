@@ -11,9 +11,6 @@
 		0325671F284BB05200355970 /* CountdownSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0325671E284BB05200355970 /* CountdownSectionView.swift */; };
 		03256728284BB64800355970 /* montserrat_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03256722284BB64800355970 /* montserrat_medium.ttf */; };
 		03256729284BB64800355970 /* montserrat_semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03256723284BB64800355970 /* montserrat_semibold.ttf */; };
-		0325672A284BB64800355970 /* domine_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03256724284BB64800355970 /* domine_bold.ttf */; };
-		0325672B284BB64800355970 /* domine_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03256725284BB64800355970 /* domine_regular.ttf */; };
-		0325672C284BB64800355970 /* comfortaa_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03256726284BB64800355970 /* comfortaa_regular.ttf */; };
 		0325672D284BB64800355970 /* montserrat_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03256727284BB64800355970 /* montserrat_regular.ttf */; };
 		03256730284BC1E600355970 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0325672F284BC1E600355970 /* DateUtils.swift */; };
 		03FD40CA284CCDB8005C615F /* StatsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD40C9284CCDB8005C615F /* StatsSectionView.swift */; };
@@ -44,9 +41,6 @@
 		0325671E284BB05200355970 /* CountdownSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownSectionView.swift; sourceTree = "<group>"; };
 		03256722284BB64800355970 /* montserrat_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = montserrat_medium.ttf; sourceTree = "<group>"; };
 		03256723284BB64800355970 /* montserrat_semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = montserrat_semibold.ttf; sourceTree = "<group>"; };
-		03256724284BB64800355970 /* domine_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = domine_bold.ttf; sourceTree = "<group>"; };
-		03256725284BB64800355970 /* domine_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = domine_regular.ttf; sourceTree = "<group>"; };
-		03256726284BB64800355970 /* comfortaa_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = comfortaa_regular.ttf; sourceTree = "<group>"; };
 		03256727284BB64800355970 /* montserrat_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = montserrat_regular.ttf; sourceTree = "<group>"; };
 		0325672F284BC1E600355970 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		03FD40C9284CCDB8005C615F /* StatsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsSectionView.swift; sourceTree = "<group>"; };
@@ -99,9 +93,6 @@
 		03256721284BB5E700355970 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				03256726284BB64800355970 /* comfortaa_regular.ttf */,
-				03256724284BB64800355970 /* domine_bold.ttf */,
-				03256725284BB64800355970 /* domine_regular.ttf */,
 				03256722284BB64800355970 /* montserrat_medium.ttf */,
 				03256727284BB64800355970 /* montserrat_regular.ttf */,
 				03256723284BB64800355970 /* montserrat_semibold.ttf */,
@@ -311,11 +302,8 @@
 				03256728284BB64800355970 /* montserrat_medium.ttf in Resources */,
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
-				0325672A284BB64800355970 /* domine_bold.ttf in Resources */,
-				0325672B284BB64800355970 /* domine_regular.ttf in Resources */,
 				03256729284BB64800355970 /* montserrat_semibold.ttf in Resources */,
 				0325672D284BB64800355970 /* montserrat_regular.ttf in Resources */,
-				0325672C284BB64800355970 /* comfortaa_regular.ttf in Resources */,
 				B3A6F98B279E407DDA27351D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

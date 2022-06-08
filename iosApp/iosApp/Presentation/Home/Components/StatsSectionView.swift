@@ -25,11 +25,11 @@ struct StatsSectionView: View {
         HStack {
             VStack{
                 Text("Total jugado")
-                    .font(Font.custom("montserrat_medium", size: 14))
+                    .font(Font.custom("Montserrat-Medium", size: 14))
                     .foregroundColor(Color("Grey4"))
                 
                 Text( String(format: "%.2f", totalBet))
-                    .font(Font.custom("montserrat_semibold", size: 24))
+                    .font(Font.custom("Montserrat-SemiBold", size: 24))
                     .foregroundColor(Color("OnBackground"))
             }
             .frame(maxWidth: .infinity)
@@ -37,11 +37,11 @@ struct StatsSectionView: View {
             
             VStack{
                 Text("Total ganado")
-                    .font(Font.custom("montserrat_medium", size: 14))
+                    .font(Font.custom("Montserrat-Medium", size: 14))
                     .foregroundColor(Color("Grey4"))
                 
                 Text(getTotalPriceText())
-                    .font(Font.custom("montserrat_semibold", size: 24))
+                    .font(Font.custom("Montserrat-SemiBold", size: 24))
                     .foregroundColor(Color("OnBackground"))
             }
             .frame(maxWidth: .infinity)
