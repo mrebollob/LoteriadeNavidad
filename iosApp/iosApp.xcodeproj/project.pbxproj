@@ -13,6 +13,7 @@
 		03256729284BB64800355970 /* montserrat_semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03256723284BB64800355970 /* montserrat_semibold.ttf */; };
 		0325672D284BB64800355970 /* montserrat_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03256727284BB64800355970 /* montserrat_regular.ttf */; };
 		03256730284BC1E600355970 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0325672F284BC1E600355970 /* DateUtils.swift */; };
+		034ABEEC285140370063819A /* CardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034ABEEB285140370063819A /* CardModifier.swift */; };
 		03FD40CA284CCDB8005C615F /* StatsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD40C9284CCDB8005C615F /* StatsSectionView.swift */; };
 		03FD40CC284CD8D3005C615F /* LREdgeCutShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD40CB284CD8D3005C615F /* LREdgeCutShapeView.swift */; };
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		03256723284BB64800355970 /* montserrat_semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = montserrat_semibold.ttf; sourceTree = "<group>"; };
 		03256727284BB64800355970 /* montserrat_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = montserrat_regular.ttf; sourceTree = "<group>"; };
 		0325672F284BC1E600355970 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		034ABEEB285140370063819A /* CardModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModifier.swift; sourceTree = "<group>"; };
 		03FD40C9284CCDB8005C615F /* StatsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsSectionView.swift; sourceTree = "<group>"; };
 		03FD40CB284CD8D3005C615F /* LREdgeCutShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LREdgeCutShapeView.swift; sourceTree = "<group>"; };
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				03256721284BB5E700355970 /* Fonts */,
+				034ABEEB285140370063819A /* CardModifier.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				B3A6FDC0112541EE03A9BD20 /* ContentView.swift in Sources */,
 				B3A6FE361FEE64FAA7AF6EB0 /* HomeUiState.swift in Sources */,
 				B3A6F52D9996BB3A9BB0C56B /* HomeViewModel.swift in Sources */,
+				034ABEEC285140370063819A /* CardModifier.swift in Sources */,
 				B3A6FFADD011B1EA4C2D466A /* HomeView.swift in Sources */,
 				B3A6F849B0B44FA67D6AA5BA /* iOSApp.swift in Sources */,
 				B3A6FBC8C774693AC476AAA1 /* AppAssembly.swift in Sources */,

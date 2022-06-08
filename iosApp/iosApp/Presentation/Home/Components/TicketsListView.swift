@@ -19,7 +19,6 @@ struct TicketsListView: View {
                 )
             }
         }
-        .padding(.horizontal)
     }
 }
 

@@ -52,7 +52,7 @@ struct HomeView: View {
                     })
                 }
             }
-        }
+        }.background(Color("Background"))
     }
 }
 

@@ -24,14 +24,14 @@ struct TicketItemView: View {
     
     var body: some View {
         VStack{
-            LREdgeCutShapeView(cornerRadius: 16)
-//                .foregroundColor(Color("Grey4"))
-                .fill(
-                    Color("Grey4"),
-                    style: FillStyle(eoFill: false, antialiased: false)
-                )
-                .frame(maxWidth: .infinity)
-                .frame(height: 24.0)
+//            LREdgeCutShapeView(cornerRadius: 16)
+////                .foregroundColor(Color("Grey4"))
+//                .fill(
+//                    Color("Grey4"),
+//                    style: FillStyle(eoFill: false, antialiased: false)
+//                )
+//                .frame(maxWidth: .infinity)
+//                .frame(height: 24.0)
             
             HStack {
                 VStack(alignment: .leading, spacing: 0){
@@ -86,11 +86,10 @@ struct TicketItemView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .cornerRadius(8)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color("Grey4"), lineWidth: 1)
-        )
+        .background(Color("Surface"))
+        .modifier(CardModifier())
+        .padding(.horizontal, 16)
+        .padding(.vertical, 4)
     }
 }
 

@@ -48,12 +48,9 @@ struct StatsSectionView: View {
             .padding()
         }
         .frame(maxWidth: .infinity)
-        .cornerRadius(8)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color("Grey4"), lineWidth: 1)
-        )
-        .padding(.horizontal)
+        .background(Color("Surface"))
+        .modifier(CardModifier())
+        .padding(.horizontal, 16)
     }
 }
 
