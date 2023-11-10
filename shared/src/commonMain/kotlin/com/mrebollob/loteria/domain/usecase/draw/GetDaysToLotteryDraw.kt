@@ -11,7 +11,7 @@ class GetDaysToLotteryDraw {
 
     fun execute(): Int {
         val today = Clock.System.todayAt(TimeZone.currentSystemDefault())
-        val lotteryDrawDate = LocalDate(2022, Month.DECEMBER, 22)
+        val lotteryDrawDate = LocalDate(2023, Month.DECEMBER, 22)
 
         return today.daysUntil(lotteryDrawDate)
     }
