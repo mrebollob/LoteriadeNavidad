@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrebollob.loteria.android.R
 import com.mrebollob.loteria.android.presentation.platform.ErrorMessage
-import com.mrebollob.loteria.domain.repository.TicketsRepository
+import com.mrebollob.loteria.domain.usecase.ticket.CreateTicket
 import java.util.UUID
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CreateViewModel(
-    private val ticketsRepository: TicketsRepository
+    private val createTicket: CreateTicket
 ) : ViewModel() {
 
     val onTicketCreated = Channel<Unit>(Channel.CONFLATED)
@@ -54,15 +54,12 @@ class CreateViewModel(
             val number = viewModelState.value.number.toIntOrNull()
             val bet = viewModelState.value.bet.replace(",", ".").toFloatOrNull()
             if (number != null && bet != null && bet > 0) {
-                ticketsRepository.createTicket(
+                createTicket.execute(
                     name = viewModelState.value.name,
                     number = number,
                     bet = bet
-                ).onSuccess {
-                    onTicketCreated.trySend(Unit)
-                }.onFailure {
-                    showError(R.string.create_screen_error_save)
-                }
+                )
+                onTicketCreated.trySend(Unit)
             } else {
                 viewModelState.update { it.copy(isLoading = false) }
                 delay(200)

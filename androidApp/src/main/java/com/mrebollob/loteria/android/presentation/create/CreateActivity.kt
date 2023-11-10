@@ -10,10 +10,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.mrebollob.loteria.android.analytics.AnalyticsEvent
 import com.mrebollob.loteria.android.analytics.AnalyticsManager
-import com.mrebollob.loteria.android.analytics.AnalyticsParameter
-import com.mrebollob.loteria.android.analytics.AnalyticsScreen
 import com.mrebollob.loteria.android.presentation.create.ui.CreateScreen
 import com.mrebollob.loteria.android.presentation.platform.BaseActivity
 import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
@@ -49,12 +46,7 @@ class CreateActivity : BaseActivity() {
 
                 CreateScreen(
                     createViewModel = createViewModel,
-                    onSaveTicketClick = {
-                        analyticsManager.trackEvent(
-                            AnalyticsEvent.SAVE_NEW_TICKET_CLICK,
-                            AnalyticsParameter.CURRENT_LOCATION.withScreenValue(AnalyticsScreen.TICKET_FORM)
-                        )
-                    },
+                    analyticsManager = analyticsManager,
                     onBackClick = { onBackPressed() }
                 )
             }

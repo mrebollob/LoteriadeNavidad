@@ -3,7 +3,7 @@ package com.mrebollob.loteria.data.mapper
 import com.mrb.loteria.db.DbTicket
 import com.mrebollob.loteria.domain.entity.Ticket
 
-class TicketMapper constructor() {
+class TicketMapper {
 
     fun toDomain(dbTicket: DbTicket): Ticket {
         return Ticket(

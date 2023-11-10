@@ -33,6 +33,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mrebollob.loteria.android.R
+import com.mrebollob.loteria.android.analytics.AnalyticsEvent
+import com.mrebollob.loteria.android.analytics.AnalyticsManager
+import com.mrebollob.loteria.android.analytics.AnalyticsParameter
+import com.mrebollob.loteria.android.analytics.AnalyticsScreen
 import com.mrebollob.loteria.android.presentation.create.CreateUiState
 import com.mrebollob.loteria.android.presentation.create.CreateViewModel
 import com.mrebollob.loteria.android.presentation.platform.extension.supportWideScreen
@@ -44,7 +48,7 @@ import com.mrebollob.loteria.android.presentation.platform.ui.theme.LotteryTheme
 @Composable
 fun CreateScreen(
     createViewModel: CreateViewModel,
-    onSaveTicketClick: (() -> Unit),
+    analyticsManager: AnalyticsManager,
     onBackClick: (() -> Unit)
 ) {
     val uiState by createViewModel.uiState.collectAsState()
@@ -54,7 +58,13 @@ fun CreateScreen(
         onNameValueChange = { createViewModel.onNameValueChange(it) },
         onNumberValueChange = { createViewModel.onNumberValueChange(it) },
         onBetValueChange = { createViewModel.onBetValueChange(it) },
-        onSaveTicketClick = { createViewModel.onSaveTicketClick() },
+        onSaveTicketClick = {
+            analyticsManager.trackEvent(
+                AnalyticsEvent.SAVE_NEW_TICKET_CLICK,
+                AnalyticsParameter.CURRENT_LOCATION.withScreenValue(AnalyticsScreen.TICKET_FORM)
+            )
+            createViewModel.onSaveTicketClick()
+        },
         onErrorDismiss = { createViewModel.errorShown(it) },
         onBackClick = onBackClick
     )

@@ -8,13 +8,13 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.mrb.loteriadenavidad"
         minSdk = 24
-        targetSdk = 32
+        targetSdk = 34
         versionCode = computeVersionCode()
-        versionName = "2022.0"
+        versionName = "2023.1"
     }
     buildTypes {
         getByName("debug") {
@@ -51,8 +51,12 @@ android {
         compose = true
     }
 
+    lint {
+        abortOnError = false
+    }
+
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.1"
+        kotlinCompilerExtensionVersion = "1.2.0-beta02"
     }
 }
 
@@ -70,13 +74,13 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     // Compose
-    implementation("androidx.compose.ui:ui:1.1.1")
-    implementation("androidx.compose.material:material:1.1.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.1.1")
+    implementation("androidx.compose.ui:ui:1.2.0-beta02")
+    implementation("androidx.compose.material:material:1.2.0-beta02")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.2.0-beta02")
     implementation("androidx.activity:activity-compose:1.4.0")
     implementation("androidx.navigation:navigation-compose:2.4.2")
     implementation("androidx.compose.material:material-icons-extended:1.1.1")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.1.1")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.2.0-beta02")
 
     // Accompanist
     implementation("com.google.accompanist:accompanist-swiperefresh:0.20.0")

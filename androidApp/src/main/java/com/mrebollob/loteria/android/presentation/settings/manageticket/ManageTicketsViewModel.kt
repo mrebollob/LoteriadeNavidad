@@ -2,11 +2,9 @@ package com.mrebollob.loteria.android.presentation.settings.manageticket
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mrebollob.loteria.android.R
-import com.mrebollob.loteria.android.presentation.platform.ErrorMessage
 import com.mrebollob.loteria.domain.entity.Ticket
-import com.mrebollob.loteria.domain.repository.TicketsRepository
-import java.util.UUID
+import com.mrebollob.loteria.domain.usecase.ticket.DeleteTicket
+import com.mrebollob.loteria.domain.usecase.ticket.GetTickets
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -15,7 +13,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ManageTicketsViewModel(
-    private val ticketsRepository: TicketsRepository
+    private val getTickets: GetTickets,
+    private val deleteTicket: DeleteTicket
 ) : ViewModel() {
 
     private val viewModelState = MutableStateFlow(ManageTicketsViewModelState())
@@ -35,38 +34,20 @@ class ManageTicketsViewModel(
     fun refreshData() {
         viewModelState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            ticketsRepository.getTickets().onSuccess { tickets ->
-                viewModelState.update {
-                    it.copy(
-                        tickets = tickets,
-                        isLoading = false
-                    )
-                }
-            }.onFailure {
-                viewModelState.update {
-                    val errorMessages = it.errorMessages + ErrorMessage(
-                        id = UUID.randomUUID().mostSignificantBits,
-                        messageId = R.string.load_error
-                    )
-                    it.copy(errorMessages = errorMessages)
-                }
+            val tickets = getTickets.execute()
+            viewModelState.update {
+                it.copy(
+                    tickets = tickets,
+                    isLoading = false
+                )
             }
         }
     }
 
     fun onDeleteTicketClick(ticket: Ticket) {
         viewModelScope.launch {
-            ticketsRepository.deleteTicket(ticket).onSuccess {
-                refreshData()
-            }.onFailure {
-                viewModelState.update {
-                    val errorMessages = it.errorMessages + ErrorMessage(
-                        id = UUID.randomUUID().mostSignificantBits,
-                        messageId = R.string.load_error
-                    )
-                    it.copy(errorMessages = errorMessages)
-                }
-            }
+            deleteTicket.execute(ticket)
+            refreshData()
         }
     }
 

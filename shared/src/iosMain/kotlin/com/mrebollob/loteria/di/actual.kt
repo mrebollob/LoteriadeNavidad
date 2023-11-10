@@ -7,7 +7,7 @@ import org.koin.dsl.module
 
 actual fun platformModule() = module {
     single {
-        val driver = NativeSqliteDriver(LotteryDatabase.Schema, "loteria.db")
+        val driver = NativeSqliteDriver(LotteryDatabase.Schema, "lottery.db")
         LotteryDatabaseWrapper(LotteryDatabase(driver))
     }
 }

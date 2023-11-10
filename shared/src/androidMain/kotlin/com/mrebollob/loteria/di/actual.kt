@@ -8,8 +8,7 @@ import org.koin.dsl.module
 actual fun platformModule() = module {
     single {
         val driver =
-            AndroidSqliteDriver(LotteryDatabase.Schema, get(), "loteria.db")
-
+            AndroidSqliteDriver(LotteryDatabase.Schema, get(), "lottery.db")
         LotteryDatabaseWrapper(LotteryDatabase(driver))
     }
 }

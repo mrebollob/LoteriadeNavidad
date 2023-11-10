@@ -2,10 +2,9 @@ package com.mrebollob.loteria.android.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mrebollob.loteria.domain.entity.SortingMethod
-import com.mrebollob.loteria.domain.repository.SettingsRepository
-import com.mrebollob.loteria.domain.repository.TicketsRepository
-import com.mrebollob.loteria.domain.usecase.GetDaysToLotteryDraw
+import com.mrebollob.loteria.domain.usecase.draw.GetDaysToLotteryDraw
+import com.mrebollob.loteria.domain.usecase.settings.GetSortingMethod
+import com.mrebollob.loteria.domain.usecase.ticket.GetTickets
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -15,8 +14,8 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getDaysToLotteryDraw: GetDaysToLotteryDraw,
-    private val ticketsRepository: TicketsRepository,
-    private val settingsRepository: SettingsRepository,
+    private val getTickets: GetTickets,
+    private val getSortingMethod: GetSortingMethod
 ) : ViewModel() {
 
     private val viewModelState = MutableStateFlow(HomeViewModelState())
@@ -33,9 +32,8 @@ class HomeViewModel(
 
         viewModelScope.launch {
             val daysToLotteryDraw = getDaysToLotteryDraw.execute()
-            val tickets = ticketsRepository.getTickets().getOrElse { emptyList() }
-            val sortingMethod =
-                settingsRepository.getSortingMethod().getOrElse { SortingMethod.NAME }
+            val tickets = getTickets.execute()
+            val sortingMethod = getSortingMethod.execute()
 
             viewModelState.update {
                 it.copy(

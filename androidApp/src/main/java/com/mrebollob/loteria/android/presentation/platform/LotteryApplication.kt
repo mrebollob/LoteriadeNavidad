@@ -5,6 +5,7 @@ import co.touchlab.kermit.Logger
 import com.mrebollob.loteria.android.BuildConfig
 import com.mrebollob.loteria.android.analytics.AnalyticsManager
 import com.mrebollob.loteria.android.di.appModule
+import com.mrebollob.loteria.android.di.dataModule
 import com.mrebollob.loteria.di.initKoin
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
@@ -22,6 +23,7 @@ class LotteryApplication : Application() {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@LotteryApplication)
             modules(appModule)
+            modules(dataModule)
         }
 
         initAnalytics()

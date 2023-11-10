@@ -3,19 +3,20 @@ package com.mrebollob.loteria.data
 import com.mrebollob.loteria.data.preferences.Preferences
 import com.mrebollob.loteria.domain.entity.SortingMethod
 import com.mrebollob.loteria.domain.repository.SettingsRepository
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class SettingsRepositoryImp(
-    private val preferences: Preferences
-) : SettingsRepository {
+class SettingsRepositoryImp : KoinComponent, SettingsRepository {
 
-    override suspend fun getSortingMethod(): Result<SortingMethod> {
+    private val preferences: Preferences by inject()
+
+    override suspend fun getSortingMethod(): SortingMethod {
         val sortingMethodValue = preferences.getString(SORTING_METHOD_KEY, SortingMethod.NAME.name)
-        return Result.success(SortingMethod.valueOf(sortingMethodValue))
+        return SortingMethod.valueOf(sortingMethodValue)
     }
 
-    override suspend fun saveSortingMethod(sortingMethod: SortingMethod): Result<Unit> {
+    override suspend fun saveSortingMethod(sortingMethod: SortingMethod) {
         preferences.setString(SORTING_METHOD_KEY, sortingMethod.name)
-        return Result.success(Unit)
     }
 
     companion object {

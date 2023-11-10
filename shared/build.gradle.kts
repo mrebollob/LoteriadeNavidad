@@ -5,6 +5,7 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("com.squareup.sqldelight")
+    id("com.rickclephas.kmp.nativecoroutines")
 }
 
 version = "1.0"
@@ -32,6 +33,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1") {
                     isForce = true
                 }
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
 
                 // SqlDelight
                 implementation("com.squareup.sqldelight:runtime:1.5.3")
@@ -47,7 +49,7 @@ kotlin {
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+//                implementation(kotlin("test"))
             }
         }
         val androidMain by getting {

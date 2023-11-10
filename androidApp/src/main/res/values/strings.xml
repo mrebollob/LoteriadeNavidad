@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- General -->
-    <string name="app_name" translatable="false">Lotería de Navidad 2022</string>
-    <string name="app_name_sort" translatable="false">Lotería 2022</string>
+    <string name="app_name" translatable="false">Lotería de Navidad 2023</string>
+    <string name="app_name_sort" translatable="false">Lotería 2023</string>
     <string name="load_error">Error al actualizar</string>
     <string name="back">Atrás</string>
     <string name="retry">Reintentar</string>

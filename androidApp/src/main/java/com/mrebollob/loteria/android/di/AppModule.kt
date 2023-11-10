@@ -15,9 +15,9 @@ val appModule = module {
 
     viewModel { CreateViewModel(get()) }
 
-    viewModel { SettingsViewModel(get()) }
+    viewModel { SettingsViewModel(get(), get()) }
 
-    viewModel { ManageTicketsViewModel(get()) }
+    viewModel { ManageTicketsViewModel(get(), get()) }
 
     single { FirebaseAnalytics.getInstance(get()) }
 
