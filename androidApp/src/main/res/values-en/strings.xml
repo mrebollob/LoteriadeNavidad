@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- General -->
+    <string name="app_name">Christmas Lottery 2023</string>
+    <string name="app_name_sort">Lottery 2023</string>
+    <string name="load_error">Error updating</string>
+    <string name="back">Back</string>
+    <string name="retry">Retry</string>
+    <string name="ok_text">OK</string>
+
+    <!-- Home Screen -->
+    <string name="home_screen_menu_new_ticket">Add new coupon</string>
+    <string name="home_screen_menu_sort">Sort coupons</string>
+    <string name="home_screen_menu_settings">Settings</string>
+    <string name="lottery_countdown_today">Today is the draw day</string>
+    <string name="lottery_countdown_end">The draw has ended</string>
+    <plurals name="lottery_countdown_days">
+        <item quantity="one">%1$d day until the draw</item>
+        <item quantity="other">%1$d days until the draw</item>
+    </plurals>
+    <string name="lottery_stats_total_bet">Total played</string>
+    <string name="lottery_stats_total_prize">Total won</string>
+    <string name="lottery_stats_total_prize_empty">-</string>
+    <string name="lottery_stats_money_format">%.2f €</string>
+    <string name="lottery_ticket_number_format">%05d</string>
+    <string name="lottery_ticket_name">Name</string>
+    <string name="lottery_ticket_number">Number</string>
+    <string name="lottery_ticket_bet">Played</string>
+    <string name="lottery_ticket_prize">Won</string>
+    <string name="home_screen_empty_title">Start by adding your first coupon</string>
+    <string name="home_screen_empty_ticket_sample_name">Family</string>
+    <string name="home_screen_empty_cta">Add new coupon</string>
+
+    <!-- Create Screen -->
+    <string name="create_screen_title">New coupon</string>
+    <string name="create_screen_ticket_name">Name</string>
+    <string name="create_screen_ticket_number">Number</string>
+    <string name="create_screen_ticket_bet">Played (€)</string>
+    <string name="create_screen_ticket_save">Save coupon</string>
+    <string name="create_screen_error_save">Error saving the coupon</string>
+    <string name="create_screen_error_number">Enter a valid number</string>
+    <string name="create_screen_error_bet">Enter a valid amount</string>
+
+    <!-- Settings screen -->
+    <string name="settings_screen_title">Settings</string>
+    <string name="settings_screen_item_manage_tickets">Manage Your Coupons</string>
+    <string name="settings_screen_item_privacy">Privacy Policy</string>
+    <string name="settings_screen_item_terms">Terms and Conditions</string>
+    <string name="settings_screen_item_email_me">Contact Me</string>
+    <string name="settings_screen_item_email_me_text">You can contact me at</string>
+    <string name="settings_screen_item_email_me_action">OK</string>
+    <string name="settings_screen_tickets_sorting_method">Sort coupons by</string>
+    <string name="settings_screen_tickets_sorting_method_name">Name</string>
+    <string name="settings_screen_tickets_sorting_method_number">Number</string>
+    <string name="settings_screen_save_action">Save</string>
+
+    <!-- About screen -->
+    <string name="about_screen_item_email_me">Contact Me</string>
+    <string name="about_screen_item_email_me_text">You can contact me at</string>
+    <string name="about_screen_item_email_me_action">OK</string>
+
+    <!-- Share screen -->
+    <string name="share_screen_title">Share the App</string>
+    <string name="share_screen_app_url_label">Open Google Play</string>
+
+    <!-- Manage tickets screen -->
+    <string name="manage_tickets_screen_title">Your Coupons</string>
+    <string name="manage_tickets_screen_delete_action">Delete</string>
+
+    <!-- Config -->
+    <string name="about_screen_url_privacy" translatable="false">https://mrebollob.com/loteria/privacy</string>
+    <string name="about_screen_url_terms" translatable="false">https://mrebollob.com/loteria/terms</string>
+    <string name="about_screen_contact_email" translatable="false">hi@mrebollob.com</string>
+</resources>

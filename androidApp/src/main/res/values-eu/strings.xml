@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- General -->
+    <string name="app_name">Gabon Loteria 2023</string>
+    <string name="app_name_sort">Loteria 2023</string>
+    <string name="load_error">Errorea eguneratzerakoan</string>
+    <string name="back">Atzera</string>
+    <string name="retry">Birsaiatu</string>
+    <string name="ok_text">Ados</string>
+
+    <!-- Home Screen -->
+    <string name="home_screen_menu_new_ticket">Gehitu kupon berria</string>
+    <string name="home_screen_menu_sort">Kopiatu kuponak</string>
+    <string name="home_screen_menu_settings">Ezarpenak</string>
+    <string name="lottery_countdown_today">Gaur da zozketa eguna</string>
+    <string name="lottery_countdown_end">Zozketa amaitu da</string>
+    <plurals name="lottery_countdown_days">
+        <item quantity="one">%1$d egun zozketara</item>
+        <item quantity="other">%1$d egun zozketara</item>
+    </plurals>
+    <string name="lottery_stats_total_bet">Guztira jokatutakoa</string>
+    <string name="lottery_stats_total_prize">Guztira irabazitakoa</string>
+    <string name="lottery_stats_total_prize_empty">-</string>
+    <string name="lottery_stats_money_format">%.2f €</string>
+    <string name="lottery_ticket_number_format">%05d</string>
+    <string name="lottery_ticket_name">Izena</string>
+    <string name="lottery_ticket_number">Zenbakia</string>
+    <string name="lottery_ticket_bet">Jokatutakoa</string>
+    <string name="lottery_ticket_prize">Irabazitakoa</string>
+    <string name="home_screen_empty_title">Has ezazu zure lehen kuponarekin</string>
+    <string name="home_screen_empty_ticket_sample_name">Familia</string>
+    <string name="home_screen_empty_cta">Gehitu kupon berria</string>
+
+    <!-- Create Screen -->
+    <string name="create_screen_title">Kupon berria</string>
+    <string name="create_screen_ticket_name">Izena</string>
+    <string name="create_screen_ticket_number">Zenbakia</string>
+    <string name="create_screen_ticket_bet">Jokatutakoa (€)</string>
+    <string name="create_screen_ticket_save">Gorde kupon</string>
+    <string name="create_screen_error_save">Errorea kupon goratzerakoan</string>
+    <string name="create_screen_error_number">Sartu zenbaki baliogarria</string>
+    <string name="create_screen_error_bet">Sartu zenbateko baliogarria</string>
+
+    <!-- Settings screen -->
+    <string name="settings_screen_title">Ezarpenak</string>
+    <string name="settings_screen_item_manage_tickets">Zure Kuponak Kudeatu</string>
+    <string name="settings_screen_item_privacy">Pribatutasun politika</string>
+    <string name="settings_screen_item_terms">Eskakizunak eta Baldintzak</string>
+    <string name="settings_screen_item_email_me">Kontaktatu nirekin</string>
+    <string name="settings_screen_item_email_me_text">Nirekin harremanetan jartzeko</string>
+    <string name="settings_screen_item_email_me_action">Ados</string>
+    <string name="settings_screen_tickets_sorting_method">Kopiatu kuponak honela</string>
+    <string name="settings_screen_tickets_sorting_method_name">Izena</string>
+    <string name="settings_screen_tickets_sorting_method_number">Zenbakia</string>
+    <string name="settings_screen_save_action">Gorde</string>
+
+    <!-- About screen -->
+    <string name="about_screen_item_email_me">Kontaktatu nirekin</string>
+    <string name="about_screen_item_email_me_text">Nirekin harremanetan jartzeko</string>
+    <string name="about_screen_item_email_me_action">Ados</string>
+
+    <!-- Share screen -->
+    <string name="share_screen_title">Partekatu aplikazioa</string>
+    <string name="share_screen_app_url_label">Ireki Google Play</string>
+
+    <!-- Manage tickets screen -->
+    <string name="manage_tickets_screen_title">Zure Kuponak</string>
+    <string name="manage_tickets_screen_delete_action">Ezabatu</string>
+
+    <!-- Config -->
+    <string name="about_screen_url_privacy" translatable="false">https://mrebollob.com/loteria/privacy</string>
+    <string name="about_screen_url_terms" translatable="false">https://mrebollob.com/loteria/terms</string>
+    <string name="about_screen_contact_email" translatable="false">hi@mrebollob.com</string>
+</resources>

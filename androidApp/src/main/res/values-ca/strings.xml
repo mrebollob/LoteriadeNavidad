@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- General -->
+    <string name="app_name">Loteria de Nadal 2023</string>
+    <string name="app_name_sort">Loteria 2023</string>
+    <string name="load_error">Error en actualitzar</string>
+    <string name="back">Enrere</string>
+    <string name="retry">Tornar a intentar</string>
+    <string name="ok_text">D\'acord</string>
+
+    <!-- Home Screen -->
+    <string name="home_screen_menu_new_ticket">Afegir nou cupó</string>
+    <string name="home_screen_menu_sort">Ordenar cupons</string>
+    <string name="home_screen_menu_settings">Configuració</string>
+    <string name="lottery_countdown_today">Avui és el dia del sorteig</string>
+    <string name="lottery_countdown_end">El sorteig ha finalitzat</string>
+    <plurals name="lottery_countdown_days">
+        <item quantity="one">%1$d dia fins al sorteig</item>
+        <item quantity="other">%1$d dies fins al sorteig</item>
+    </plurals>
+    <string name="lottery_stats_total_bet">Total jugat</string>
+    <string name="lottery_stats_total_prize">Total guanyat</string>
+    <string name="lottery_stats_total_prize_empty">-</string>
+    <string name="lottery_stats_money_format">%.2f €</string>
+    <string name="lottery_ticket_number_format">%05d</string>
+    <string name="lottery_ticket_name">Nom</string>
+    <string name="lottery_ticket_number">Número</string>
+    <string name="lottery_ticket_bet">Jugat</string>
+    <string name="lottery_ticket_prize">Guanyat</string>
+    <string name="home_screen_empty_title">Comença afegint el teu primer cupó</string>
+    <string name="home_screen_empty_ticket_sample_name">Família</string>
+    <string name="home_screen_empty_cta">Afegir nou cupó</string>
+
+    <!-- Create Screen -->
+    <string name="create_screen_title">Nou cupó</string>
+    <string name="create_screen_ticket_name">Nom</string>
+    <string name="create_screen_ticket_number">Número</string>
+    <string name="create_screen_ticket_bet">Jugat (€)</string>
+    <string name="create_screen_ticket_save">Desa cupó</string>
+    <string name="create_screen_error_save">Error en desar el cupó</string>
+    <string name="create_screen_error_number">Introdueix un número vàlid</string>
+    <string name="create_screen_error_bet">Introdueix una quantitat vàlida</string>
+
+    <!-- Settings screen -->
+    <string name="settings_screen_title">Configuració</string>
+    <string name="settings_screen_item_manage_tickets">Gestiona els teus Cupons</string>
+    <string name="settings_screen_item_privacy">Política de privacitat</string>
+    <string name="settings_screen_item_terms">Termes i Condicions</string>
+    <string name="settings_screen_item_email_me">Contacta amb mi</string>
+    <string name="settings_screen_item_email_me_text">Pots contactar amb mi a</string>
+    <string name="settings_screen_item_email_me_action">D\'acord</string>
+    <string name="settings_screen_tickets_sorting_method">Ordena cupons per</string>
+    <string name="settings_screen_tickets_sorting_method_name">Nom</string>
+    <string name="settings_screen_tickets_sorting_method_number">Número</string>
+    <string name="settings_screen_save_action">Desa</string>
+
+    <!-- About screen -->
+    <string name="about_screen_item_email_me">Contacta amb mi</string>
+    <string name="about_screen_item_email_me_text">Pots contactar amb mi a</string>
+    <string name="about_screen_item_email_me_action">D\'acord</string>
+
+    <!-- Share screen -->
+    <string name="share_screen_title">Comparteix l\'aplicació</string>
+    <string name="share_screen_app_url_label">Obre Google Play</string>
+
+    <!-- Manage tickets screen -->
+    <string name="manage_tickets_screen_title">Els teus Cupons</string>
+    <string name="manage_tickets_screen_delete_action">Esborra</string>
+
+    <!-- Config -->
+    <string name="about_screen_url_privacy" translatable="false">https://mrebollob.com/loteria/privacy</string>
+    <string name="about_screen_url_terms" translatable="false">https://mrebollob.com/loteria/terms</string>
+    <string name="about_screen_contact_email" translatable="false">hi@mrebollob.com</string>
+</resources>
