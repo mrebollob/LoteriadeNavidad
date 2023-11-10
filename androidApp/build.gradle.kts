@@ -8,13 +8,13 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.mrb.loteriadenavidad"
         minSdk = 24
-        targetSdk = 32
+        targetSdk = 34
         versionCode = computeVersionCode()
-        versionName = "2023.0"
+        versionName = "2023.1"
     }
     buildTypes {
         getByName("debug") {
